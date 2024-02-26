@@ -8,7 +8,8 @@
 import {defineAsyncComponent, provide} from 'vue'
 import * as baseLayerUtils from '@/GIS/mapUtils/baselayer'
 import {useStore} from 'vuex'
-
+import {useRoute} from "vue-router"
+const route = useRoute()
 const store = useStore();
 const type = $computed(() => store.state.layerInf?.values_?.typeid)
 const typeid = $computed(() => store.state.layerInf?.values_?.attributes?.typeid)
@@ -16,12 +17,19 @@ const typeid = $computed(() => store.state.layerInf?.values_?.attributes?.typeid
 // 创建组件
 const Station_component = defineAsyncComponent(() => {
   console.log(type);
-  ///////////////////////////////////大气////////////////////////////////////////////
-  if (type == 'sx_dqzdid') {
-    // 大气
-    return import('../station_dq')
+  // 一张图
+ if(route.path==="/yzt"){
+   if (type == 'sx_dqzdid') {
+      // 大气
+      return import('../station_dq')
+    }
+    // 驾驶舱
+  }else if(route.path==="/jsc"){
+    if (type == 'sx_dqzdid') {
+      // 大气
+      return import('../kq')
+    }
   }
-  
 
   store.commit('setLayerInfo', null)
   // 空页面

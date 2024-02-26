@@ -26,36 +26,33 @@ const addEvent = () => {
     let features = [];
     window.$olMap.forEachFeatureAtPixel(evt.pixel, function (feature, layer) {
       if (layer && layer.values_ && layer.values_.id) {
-        feature.set("id", layer.values_.id);
+        feature.set("typeid", layer.values_.id);
         features.push(feature);
       }
     });
     if (features.length > 0) {
       let marklayer = baseLayerUtils.getLayerByid("mark");
       marklayer.getSource().clear();
-      console.log("获取空间数据信息：" + features[0].values_.id);
+      console.log("获取空间数据信息：" + features[0].values_.typeid);
       console.log(features[0]);
       if (features[0].getGeometry().getType().toLowerCase() === "point" && ["mark", "tmpid"].indexOf(features[0].values_.id) == -1
       ) {
          marklayer.getSource().addFeature(
               new Feature({
-                attributes: features[0].values_.attribute,
+                // attributes: features[0].values_.attributes,
                 geometry: features[0].getGeometry(),
-                fromid: features[0].values_.id,
+                fromid: features[0].values_.typeid,
               })
           );
-        if (features[0].values_.id.indexOf("_buffer") == -1) {
-          store.commit("setLayerInfo", {
-            id: features[0].values_.id,
-            value: features[0],
-          });
+        if (features[0].values_.typeid.indexOf("_buffer") == -1) {
+          store.commit("setLayerInfo", features[0]);
 
         }else{
            console.log("缓冲数据属性弹窗");
-          store.commit("setsubStation", {
-              id: features[0].values_.id,
-              value: features[0],
-            });
+          // store.commit("setsubStation", {
+          //     id: features[0].values_.typeid,
+          //     value: features[0],
+          //   });
         }
          let coordinate = features[0].getGeometry().getCoordinates();
           window.$olMap.getView().animate({

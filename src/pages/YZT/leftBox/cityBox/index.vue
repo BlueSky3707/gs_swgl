@@ -92,7 +92,22 @@ const state = reactive({
         }
       ]
     },
-   
+   {
+      layerid: "qsdid",
+      name: '取水点',
+      active: false,
+    },
+    {
+      layerid: "ysqyid",
+      name: '用水企业',
+      active: false,
+    },
+    
+    {
+      layerid: "jczid",
+      name: '监测站',
+      active: false,
+    }
   ]
 })
 const change = (e) => {

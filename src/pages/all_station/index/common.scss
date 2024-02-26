@@ -1,0 +1,295 @@
+@mixin flex(){
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+@mixin title(){
+  font-size: 13px;
+  font-family: PingFang SC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #799DE5;
+  -webkit-background-clip: text;
+}
+@mixin text(){
+  font-size: 14px;
+  font-family: PingFang SC-Regular, PingFang SC;
+  font-weight: 400;
+  color: #DBE7FF;
+  -webkit-background-clip: text;
+}
+.title{
+  font-size: 14px;
+  margin-top:16px;
+  @include flex();
+  .timepoint{
+    font-size: 13px;
+    font-family: PingFang SC-Regular, PingFang SC;
+    font-weight: 400;
+    color: #8BB5FF;
+    -webkit-background-clip: text;
+  }
+}
+.wrw{
+  width: 456px;
+  min-height: 160px;
+  background: rgba(94, 134, 213, 0.2);
+  padding: 13px 10px;
+  display: grid;
+  grid-template-columns:repeat(3,1fr);
+  .wrw_item{
+    padding: 15px 20px;
+    border-right: 0.5px dashed rgba(80, 141, 233, 0.8);
+    border-bottom: 0.5px dashed rgba(80, 141, 233, 0.8);
+    background-size: 152px 80px;
+    background-repeat: no-repeat;
+    background-position: center;
+    &:nth-child(3n){
+      border-right:none;
+    }
+    &:nth-child(4),&:nth-child(5),&:nth-child(6),{
+      border-bottom:none;
+    }
+    .item_tit{
+      @include flex();
+      .tit_1{
+        font-size: 14px;
+        font-family: PingFang SC-Regular, PingFang SC;
+        font-weight: 400;
+        color: #8BB5FF;
+        -webkit-background-clip: text;
+      }
+      .tit_2{
+        font-size: 12px;
+        font-family: PingFang SC-Regular, PingFang SC;
+        font-weight: 400;
+        color: #8BB5FF;
+        -webkit-background-clip: text;
+        opacity: 0.4;
+      }
+    }
+    .item_dw {
+      font-size: 18px;
+      font-family: DINPro-Medium, DINPro;
+      font-weight: 500;
+      color: #FFFFFF;
+      -webkit-background-clip: text;
+      margin-top: 4px;
+    }
+  }
+}
+.jbxx{
+  .jbxx_1{
+    @include flex();
+    .jbxx1_item{
+      width: 224px;
+      height: 64px;
+      background: rgba(94, 134, 213, 0.2);
+      padding:11px 12px;
+      position: relative;
+      &:before{
+        content: attr(tit);
+        @include title();
+      }
+      &:after{
+        position: absolute;
+        top: 34px;
+        left: 12px;
+        content: attr(num);
+        @include text();
+      }
+    }
+  }
+  .jbxx_2{
+    width: 100%;
+    background: rgba(94, 134, 213, 0.2);
+    height: 64px;
+    margin: 8px 0;
+    @include flex();
+    .jbxx2_item {
+      text-align: center;
+      border-right: 0.5px dashed rgba(80, 141, 233, 0.8);
+      padding: 0 22px;
+      flex: 1;
+      &:first-child {
+        width: 174px;
+        flex: 2;
+      }
+
+      &:last-child {
+        border-right: none;
+      }
+
+      .j2_tit {
+        @include title();
+        margin-bottom: 9px;
+      }
+
+      .AQI {
+        width: 48px;
+        height: 20px;
+        border-radius: 8px 0px 4px 0px;
+        background-size: 100%;
+        background-repeat: no-repeat;
+        background-position: center;
+        font-size: 13px;
+        font-weight: 400;
+        color: #FFFFFF;
+        margin: 0 auto;
+      }
+    }
+  }
+  .jbxx_3{
+    @include flex();
+    background: rgba(94, 134, 213, 0.2);
+    height: 32px;
+    padding: 0 39px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #3D6BC8;
+  }
+
+}
+.jbxxbox {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 8px;
+
+  .jbxxboxtop {
+    background-color: rgba(94, 134, 213, 0.2);
+    box-sizing: border-box;
+    padding: 11px 12px 10px 12px;
+  }
+}
+
+.jbxxboxcenter {
+  margin-top: 8px;
+  text-align: center;
+  background-color: rgba(94, 134, 213, 0.2);
+  display: grid;
+  grid-template-columns: 174px 96px 96px 96px;
+  box-sizing: border-box;
+  padding-top: 10px;
+  padding-bottom: 9px;
+  font-size: 13px;
+  color: #799DE5
+}
+
+.jbxxbottombox {
+  background-color: rgba(94, 134, 213, 0.2);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 8px;
+  height: 32px;
+  line-height: 32px;
+  position: relative;
+
+  .jwdbox {
+    color: #799DE5;
+    box-sizing: border-box;
+    padding-left: 55px;
+    display: flex;
+  }
+}
+
+.jbxxbottombox::after {
+  display: block;
+  width: 1px;
+  height: 13px;
+  content: "";
+  background-color: rgba(61, 107, 200, 0.7);
+  left: 50%;
+  position: absolute;
+  top: 9px;
+}
+.bj_content{
+  width: 456px;
+  margin-bottom: 8px;
+  background: rgba(94, 134, 213, 0.1);
+  padding:12px 0;
+  .con_item{
+    display: grid;
+    grid-template-columns: 82px auto;
+    align-items: center;
+    padding: 8px;
+    margin-bottom: 8px;
+    min-height: 36px;
+    .con_tit{
+      font-size: 14px;
+      font-family: PingFang SC-Regular, PingFang SC;
+      font-weight: 400;
+      color: #8BB5FF;
+      -webkit-background-clip: text;
+    }
+    .con_txt{
+      font-size: 14px;
+      font-family: PingFang SC-Regular, PingFang SC;
+      font-weight: 400;
+      color: #FFFFFF;
+      -webkit-background-clip: text;
+    }
+  }
+  .gbbj {
+    width: 222px;
+    height: 36px;
+    margin: 16px auto 0;
+    background-image: url("@/assets/image/gb.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    @include flex();
+    justify-content: center;
+    position: relative;
+    &:before {
+      position: absolute;
+      content: '';
+      top: -16px;
+      width: 436px;
+      height: 1px;
+      background-image: url("@/assets/image/dashline.png");
+      background-size: 100%;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    &:hover {
+      background-image: url("@/assets/image/gba.png");
+      cursor: pointer;
+    }
+  }
+
+}
+.button{
+  @include flex();
+  margin-top: 24px;
+  margin-bottom: 14px;
+  width: 456px;
+  flex-wrap: wrap;
+  .btn_item{
+    width: 222px;
+    height: 36px;
+    background-image: url("@/assets/dq/btn.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    @include flex();
+    justify-content: center;
+    padding: 0 24px;
+    cursor: pointer;
+    margin-bottom: 12px;
+
+    font-size: 14px;
+    font-weight: 400;
+    color: #FFFFFF;
+    img{
+      width: 14px;
+      height: 14px;
+      margin-right: 6px;
+    }
+    &:hover{
+      width: 222px;
+      height: 36px;
+      background-image: url("@/assets/dq/btna.png");
+      background-repeat: no-repeat;
+      background-size: 100%;
+    }
+  }
+}
