@@ -1,0 +1,123 @@
+@keyframes ping {
+  0% {
+    transform: scale(1);
+  }
+  80% {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+@keyframes turn {
+  0% {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+  25% {
+    opacity: 1;
+    transform: rotate(90deg) scale(1.4);
+  }
+  50% {
+    opacity: 1;
+    transform: rotate(180deg) scale(1);
+  }
+  75% {
+    opacity: 0;
+    transform: rotate(270deg) scale(1.4);
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+@keyframes shan {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@mixin beforeAndAffter{
+  position: absolute;
+  left: calc(50% - 40px);
+  top: calc(50% - 40px);
+  content: '';
+  width: 80px;
+  height: 80px;
+}
+
+.yjsj_point {
+  user-select: none;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .fg {
+    width: 80px;
+    height: 80px;
+    animation: turn 2s linear infinite;
+    background-image: url("@/assets/sg/fg.png");
+  }
+}
+
+.qi{
+  &:before {
+    @include beforeAndAffter();
+    background-image: url("@/assets/sg/qi1.png");
+  }
+  &:after {
+    @include beforeAndAffter();
+    animation: shan 2s ease infinite both;
+    background-image: url("@/assets/sg/qi2.png");
+  }
+}
+
+.shui{
+  &:before {
+    @include beforeAndAffter();
+    background-image: url("@/assets/sg/shui1.png");
+  }
+  &:after {
+    @include beforeAndAffter();
+    animation: shan 2s ease infinite both;
+    background-image: url("@/assets/sg/shui2.png");
+  }
+}
+
+.wry{
+  &:before {
+    @include beforeAndAffter();
+    background-image: url("@/assets/sg/wry1.png");
+  }
+  &:after {
+    @include beforeAndAffter();
+    animation: shan 2s ease infinite both;
+    background-image: url("@/assets/sg/wry2.png");
+  }
+}
+
+.ygjc{
+  &:before {
+    @include beforeAndAffter();
+    background-image: url("@/assets/sg/wry1.png");
+  }
+  &:after {
+    @include beforeAndAffter();
+    animation: shan 2s ease infinite both;
+    background-image: url("@/assets/sg/wry2.png");
+  }
+}

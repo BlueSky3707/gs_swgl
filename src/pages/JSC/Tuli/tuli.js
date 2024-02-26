@@ -1,0 +1,78 @@
+export function getImageUrl(name) {
+  const path = `../../../assets/TuLi/${name}.png`;
+  const modules = import.meta.globEager("@/assets/TuLi/*.png");
+  return modules[path].default;
+}
+export const Tuli = [
+  {
+    name:'水质自动站',
+    List:[
+      {
+        name:'Ⅰ类',
+      },
+      {
+        name:'Ⅱ类',
+      },
+      {
+        name:'Ⅲ类',
+      },
+      {
+        name:'Ⅳ类',
+      },
+      {
+        name:'Ⅴ类',
+      },
+      {
+        name:'劣Ⅴ类',
+      },
+    ]
+  },
+  {
+    name:'大气测站',
+    List:[
+      {
+        name:'优',
+      },
+      {
+        name:'良',
+      },
+      {
+        name:'轻度污染',
+      },
+      {
+        name:'中度污染',
+      },
+      {
+        name:'严重污染',
+      },
+      {
+        name:'重度污染',
+      },
+    ]
+  },
+  {
+    name:'污染源',
+    List:[
+      {
+        name:'气污染源',
+      },{
+        name:'水污染源',
+      },
+      {
+        name:'污水处理厂',
+      }
+    ]
+  },
+  {
+    name:'报警点位',
+    List:[
+      {
+        name:'水质自动站报警',
+      },{
+        name:'空气自动站报警',
+      },{
+        name:'污染源报警',
+      },
+    ]
+  }
+]
