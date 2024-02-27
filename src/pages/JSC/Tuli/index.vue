@@ -58,7 +58,7 @@ const showTuli = $ref(true)
   bottom: 20px;
   left: 20px;
   width: 360px;
-  height: 480px;
+height: 120px;
   background-image: url("@/assets/image/tuliBg.png");
   .tuli_tit{
     width: 100%;

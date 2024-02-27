@@ -49,7 +49,7 @@ const getStyle = (feature) => {
 }
 
 export const addCssLayer = (layerid, datas, lon, lat, type) => {
-    let imgsrc = new URL("/img/yj/wg.png", import.meta.url).href
+
     datas.forEach(item => {
         let doc = document.createElement("div");
         doc.className = `yjsj_point ${type}`;
@@ -75,10 +75,11 @@ export const addCssLayer = (layerid, datas, lon, lat, type) => {
 
                 var item = e.currentTarget;
                 console.log("获取空间数据信息：" + layerid);
-                console.log(item.attribute)
+                console.log()
+                
                 store.commit('setLayerInfo', {
-                    id: layerid,
-                    value: {value: {attributes: item.attribute}, values_: {attributes: item.attribute}}
+                   
+                    values: {attributes: item.attribute,typeid:layerid}, values_: {attributes: item.attribute,typeid:layerid}
                 })
                 marklayer.getSource().addFeature(
                     new Feature({

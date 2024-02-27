@@ -12,14 +12,14 @@ import Feature from "ol/Feature";
 import { layers } from "../config/layerConfig";
 
 import {useStore} from "vuex";
-
+import {addYjLayer  } from "../mapUtils/loadYjdw";
 const store = useStore();
 
 onMounted(async () => {
   intMap("mapid");
   addEvent();
-   initLayers([layers.yzt[0]], null);
-
+  //  initLayers([layers.yzt[0]], null);
+  addYjLayer()
 });
 const addEvent = () => {
   window.$olMap.on("click", async (evt) => {

@@ -1,20 +1,20 @@
 <template>
-  <Box class="box" title="基本信息" @close="emit('close')">
-    <div class="jbxx_grid" >
+   <div class="jbxx_grid" >
       <div class="grid_tit">站点名称</div>
-      <div >{{ attributes.positionname }}</div>
+      <div >{{ attributes.name }}</div>
       <div class="grid_tit">站点编号</div>
-      <div >{{ attributes.stationcode }}</div>
+      <div >{{ attributes.address }}</div>
       <div class="grid_tit">站点类型</div>
-      <div > {{ type[attributes.type] }}</div>
+      <div > {{attributes.lxr }}</div>
       <div class="grid_tit">所属区域</div>
-      <div >{{ attributes.area }}</div>
+      <div >{{ attributes.phone }}</div>
+       <div class="grid_tit">经度</div>
+      <div >{{ attributes.jd }}</div>
+       <div class="grid_tit">纬度</div>
+      <div >{{ attributes.wd }}</div>
     </div>
-    <div class="pos">
-      <span>经度 {{ attributes.longitude }} </span>
-      <span>纬度 {{ attributes.latitude }}</span>
-    </div>
-  </Box>
+ 
+ 
 </template>
 
 <script setup>
@@ -31,8 +31,7 @@ const type = {
 </script>
 
 <style scoped lang="scss">
-.box{
-  top: 525px;
+
   .jbxx_grid{
     display: grid;
     grid-template-columns: 1fr 2fr;
@@ -60,5 +59,5 @@ const type = {
     display: flex;
     justify-content: space-between;
   }
-}
+
 </style>
