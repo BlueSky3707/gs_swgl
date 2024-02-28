@@ -73,43 +73,23 @@
 </template>
 
 <script setup>
-import {wryQyCbBjData} from './server.js'
+
 import {onMounted, reactive} from "vue";
 import dayjs from 'dayjs'
-
-onMounted(() => {
-  // wryQyCbBjData({
-  //   startTime:dayjs().subtract(1,'day').format("YYYY-MM-DD"),
-  //   endTime: dayjs().format("YYYY-MM-DD"),
-  // }).then(res => {
-  //   state.tableList = [
-  //     ...res[0].data.data.map(e => {
-  //       e.name = e.QYMC
-  //       e.time = e.MONITORTIME
-  //       e.nr = e.WRWMC
-  //       return e
-  //     }),
-  //     ...res[1].data.data.map(e => {
-  //       e.name = e.STATIONNAME
-  //       e.time = e.BJTIME
-  //       e.nr = e.CONTENT
-  //       return e
-  //     }),
-  //     ...res[2].data.data.map(e => {
-  //       e.name = e.STATIONNAME
-  //       e.time = e.BJTIME
-  //       e.nr = e.CONTENT
-  //       return e
-  //     })
-  //   ]
-  // })
-})
-
 const state = reactive({
   openType: false, // 列表显示
   // 列表数据
   tableList: []
 })
+onMounted(() => {
+  state.tableList=[
+     {name:"asa",time:"2024-02-28",nr:"ghjg" },
+     {name:"ds",time:"2024-02-27",nr:"asa" }
+     ]
+  
+})
+
+
 
 // 打开列表
 const openList = () => {

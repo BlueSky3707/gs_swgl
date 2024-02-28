@@ -1,12 +1,12 @@
 <template>
-  <JscBox :title="attributes.STATIONNAME" v-if="showIndex == 0" @close="$emit('close')">
+  <JscBox :title="attributes.name" v-if="showIndex == 0" @close="emit('close')">
     <div class="title">
       <span>报警信息</span>
     </div>
     <div class="bj_content">
       <div class="con_item">
         <div class="con_tit">报警时间：</div>
-        <div class="con_txt">{{ attributes.BJTIME }}</div>
+        <div class="con_txt">1111</div>
       </div>
       <div class="con_item">
         <div class="con_tit">报警类型：</div>
@@ -17,7 +17,7 @@
       <div class="con_item">
         <div class="con_tit">报警详情：</div>
         <div class="con_tit">
-          <div class="con_txt">{{ attributes.CONTENT }}</div>
+          <div class="con_txt">111</div>
         </div>
       </div>
       <div class="con_item">
@@ -36,7 +36,7 @@
     <div class="title">
       <span>最新数据</span>
       <div class="timepoint">
-        <span>{{ attributes.BJTIME }}</span>
+        <span>1111</span>
         <el-icon @click="upDateDw" style="transform: translateY(3px);margin-left: 8px;cursor: pointer" :size="20"
                  color="#8BB5FF">
           <RefreshRight/>
@@ -115,8 +115,8 @@ import * as baseLayerUtils from "@/GIS/mapUtils/baselayer";
 
 const store = useStore()
 const attributes = inject('attributes')
+const emit = defineEmits(['close'])
 console.log(attributes);
-console.log(store.state);
 import cbbg from "@/assets/image/cbbg.png";
 
 const state = reactive({

@@ -11,7 +11,7 @@ export const mapConfig = {
   imageL:`${ip99}TDTsximageLable/MapServer`,
  
   //矢量底图
-  hxVect2: `${ip84}/HXMAP/mapboxblue/MapServer`,
+  hxVect2: `${ip84}HXMAP/mapboxblue/MapServer`,
   // 矢量外围
   sxOuterCityVectorhx:`${ip99}/sxyj_Outercity/MapServer`,
 }

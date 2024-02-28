@@ -1,6 +1,3 @@
-// import { getDQZdata} from "../api/server";
-
-let getZDdata = null; //大气匹配数据
 
 //根据要素和后台数据动态匹配
 export const getFeaturesBydata = (pfeatrues, pdata, field, dfiled) => {

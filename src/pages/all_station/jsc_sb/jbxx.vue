@@ -1,5 +1,5 @@
 <template>
-  <JscBox :title="attributes.name" @back="$emit('close')"  @close="$emit('close')" >
+  <JscBox :title="attributes.name" @back="emit('close')"  @close="emit('close')" >
     <div class="title">基本信息</div>
     <div class="jbxx" v-if="state.loading" >
       <div class="jbxx_1">
@@ -31,10 +31,10 @@
 
 <script setup>
 import {onMounted, reactive, inject} from "vue";
+
 const attributes = inject('attributes')
-import {getImageUrl} from "./imgUrl"
-import {useStore} from 'vuex'
-const store = useStore()
+const emit = defineEmits(['close'])
+
 const state = reactive({
 
   loading:false
@@ -43,7 +43,7 @@ const state = reactive({
 
 
 onMounted(() => {
- 
+   state.loading=true
 })
 </script>
 
