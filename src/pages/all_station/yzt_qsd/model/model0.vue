@@ -5,8 +5,7 @@
       <div class="grid_tit">单位编号</div>
       <div >{{ attributes.dwbh }}</div>
       <div class="grid_tit">单位地址</div>
-      <div > {{ type[attributes.dwdz] }}</div>
-   
+      <div > {{attributes.dwdz }}</div>
        <div class="grid_tit">经度</div>
       <div >{{ attributes.ddjd }}</div>
        <div class="grid_tit">纬度</div>
@@ -20,12 +19,7 @@
 import {inject, onMounted} from "vue";
 const emit = defineEmits(['close'])
 const attributes = inject('attributes')
-const type = {
-  0:' 国控',
-  1:'省控',
-  2:'市控',
-  9:'微站',
-}
+
 
 </script>
 

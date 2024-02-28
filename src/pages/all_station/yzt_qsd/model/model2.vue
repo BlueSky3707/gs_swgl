@@ -1,5 +1,5 @@
 <template>
-<div class="jbxx2"></div>
+<div class="jbxx3"></div>
  
 </template>
 
@@ -13,7 +13,7 @@ const attributes = inject('attributes')
 
 <style scoped lang="scss">
 
-  .jbxx2{
+  .jbxx3{
     width: 320px;
     height: 300px;
   }

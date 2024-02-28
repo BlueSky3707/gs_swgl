@@ -1,5 +1,10 @@
 <template>
   <div class="header">
+     <img
+      src="@/assets/common/logo.png"
+     
+      style="cursor: pointer"
+    />
     <div class="leftNavs">
       <div
         v-for="item in leftNavs"
@@ -12,27 +17,8 @@
         <div>{{ item.title }}</div>
       </div>
     </div>
-    <img
-      src="@/assets/common/logo.png"
-     
-      style="cursor: pointer"
-    />
-    <div class="rightNavs">
-      <div
-        v-for="item in rightNavs"
-        class="item"
-        :class="$route.path == item.router ? 'active' : ''"
-        :key="item.title"
-        @click="changeRouter(item)"
-      >
-        <img v-if="isIcon" :src="item.icon" alt="" />
-        <div>{{ item.title }}</div>
-      </div>
-      <div class="item" style="opacity: 0; cursor: unset">
-        <img :src="kq" alt="" />
-        <div>暂未</div>
-      </div>
-    </div>
+   
+   
     <img src="@/assets/common/back.png" class="back" />
   </div>
 </template>
@@ -52,7 +38,7 @@ window.addEventListener("resize", () => {
 });
 
 const leftNavs = [
-  { title: "气环境", router: "/yzt", icon: kq }
+  { title: "一张图", router: "/yzt", icon: kq }
 
 ];
 const rightNavs = [
@@ -66,9 +52,7 @@ const store = useStore();
 const changeRouter = (item) => {
 
     store.commit("setNavIndex", 1);
-  store.commit("setShowRightBox", false);
-  store.state.isQhzt=true;
-   store.commit("setShowZhuanTi", false);
+
   if(item.router){
     router.push(item.router)
   }else{
@@ -90,7 +74,7 @@ const changeRouter = (item) => {
   color: #fff;
   display: flex;
   align-items: center;
-  justify-content: center;
+
 
   .back {
     position: absolute;

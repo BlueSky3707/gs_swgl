@@ -19,10 +19,7 @@ const Station_component = defineAsyncComponent(() => {
   console.log(type);
   // 一张图
  if(route.path==="/yzt"){
-    if (type == 'sx_dqzdid') {
-      // 大气
-      return import('../yzt_dq')
-    }
+  
     if (type == 'qsdid') {
       // 取水点
       return import('../yzt_qsd')
@@ -31,17 +28,14 @@ const Station_component = defineAsyncComponent(() => {
       // 用水企业
       return import('../yzt_ysqy')
     }
-    if (type == 'jcdid') {
+    if (type == 'jczid') {
       //监测点
       return import('../yzt_jcd')
     }
 
     // 驾驶舱
   }else if(route.path==="/jsc"){
-    if (type == 'sx_dqzdid') {
-      // 大气
-      return import('../jsc_dq')
-    }
+   
     if (type == 'yj_jczid') {
       // 监测站预警
       return import('../jsc_jcz')

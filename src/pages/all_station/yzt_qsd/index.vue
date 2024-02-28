@@ -12,24 +12,34 @@
     <keep-alive>
       <component :is="componentList[navIndex]"></component>
     </keep-alive>
+  <div class="buttonlist">
+        
+        <el-button class="buttonbox"  @click="state.isHistory=true">历史数据</el-button>
+       
+      </div>
   </div>
+ <LSSJ v-if="state.isHistory" @close="state.isHistory=false"/>
 </template>
 
 <script setup>
 import { reMoveLayerById } from '@/GIS/mapUtils/baselayer'
 import model0 from './model/model0'
 import model1 from './model/model1'
-
-const componentList = [model0, model1]
+import model2 from './model/model2'
+import LSSJ from './model/LSSJ'
+import { reactive,inject  } from "vue";
+const componentList = [model0, model1,model2]
 
 const emit = defineEmits(['close'])
-const navs = ['基本信息', '历史数据']
+const attributes = inject('attributes')
+const navs = ['基本信息', '基本信息2','基本信息3']
 let navIndex = $ref(0)
+const state=reactive({
+isHistory:false
+})
 const tabClick=(index)=>{
   navIndex = index
-  if(index!==3){
-    reMoveLayerById("sx_zwrqxid")
-  }
+
 }
 </script>
 
@@ -44,7 +54,22 @@ const tabClick=(index)=>{
   opacity: 1;
   border-radius: 4px;
  z-index: 99;
+ .buttonlist {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 15px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 12px;
+    background-color: rgba(248, 251, 255, 1);
 
+    .buttonbox {
+      width: 128px;
+      height: 32px;
+      margin-left: 0px !important;
+    }
+
+  }
   .navs {
     width: 100%;
     height: 36px;
@@ -63,7 +88,7 @@ const tabClick=(index)=>{
     }
 
     .item {
-      padding: 0 20px;
+      padding: 0 10px;
       cursor: pointer;
     }
 

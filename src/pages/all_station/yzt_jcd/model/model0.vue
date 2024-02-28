@@ -21,12 +21,7 @@
 import {inject, onMounted} from "vue";
 const emit = defineEmits(['close'])
 const attributes = inject('attributes')
-const type = {
-  0:' 国控',
-  1:'省控',
-  2:'市控',
-  9:'微站',
-}
+
 
 </script>
 
@@ -41,7 +36,7 @@ const type = {
     font-size: 14px;
     font-family: PingFang SC;
     font-weight: 400;
-    width: 309px;
+    width: 320px;
 
     .grid_tit{
       color: #2173E9;

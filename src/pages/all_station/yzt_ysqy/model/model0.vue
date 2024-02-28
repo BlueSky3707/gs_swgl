@@ -20,12 +20,7 @@
 import {inject, onMounted} from "vue";
 const emit = defineEmits(['close'])
 const attributes = inject('attributes')
-const type = {
-  0:' 国控',
-  1:'省控',
-  2:'市控',
-  9:'微站',
-}
+
 
 </script>
 

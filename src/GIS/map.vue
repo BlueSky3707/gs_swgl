@@ -55,7 +55,7 @@ const changeLayer = (xzq) => {
   let r = router.currentRoute.value.name;
   let curlayers=[]
 
-    if(xzq==="陕西省"){
+    if(xzq==="陕西省"&&layers[r]){
        clearAllLayer();
        curlayers = layers[r].filter(item=>(item.default));
       

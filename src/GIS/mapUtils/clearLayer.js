@@ -4,7 +4,7 @@ import { layers } from '../config/layerConfig'
 import router from '@/common/router'
 import store from '@/common/store'
 import { list as searchlist } from "../mapview/searchConfig";
-
+import {close} from "./loadYjdw"
 //清空所有图层
 export const clearAllLayer = () => {
     store.commit("setxzq", "陕西省");
@@ -23,7 +23,7 @@ export const clearAllLayer = () => {
     bufferlayerids.forEach(ite => {
         reMoveLayerById(ite);
     })
-  
+    close()
   
     //清空其他临时图层
     clearQt()

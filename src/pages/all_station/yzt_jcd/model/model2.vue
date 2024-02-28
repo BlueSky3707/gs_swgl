@@ -1,5 +1,5 @@
 <template>
-<div class="lssj"></div>
+<div class="jbxx3"></div>
  
 </template>
 
@@ -13,9 +13,9 @@ const attributes = inject('attributes')
 
 <style scoped lang="scss">
 
-  .lssj{
-    width: 400px;
-    height: 500px;
+  .jbxx3{
+    width: 320px;
+    height: 300px;
   }
 
 </style>
