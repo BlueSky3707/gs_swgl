@@ -19,7 +19,7 @@ import * as baselayer from "./mapUtils/baselayer";
 import { layers } from "./config/layerConfig";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
-import { watch, onMounted, ref } from "vue";
+import { watch, onMounted, ref,watchEffect } from "vue";
 import { initLayers } from "./mapUtils/layersManger";
 import { clearAllLayer } from "./mapUtils/clearLayer";
 

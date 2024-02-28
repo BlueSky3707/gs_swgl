@@ -25,7 +25,7 @@
 
 <script setup>
 import kq from "@/assets/common/kq.png";
-
+import jsc from "@/assets/common/gf.png";
 import { watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useStore } from "vuex";
@@ -38,7 +38,8 @@ window.addEventListener("resize", () => {
 });
 
 const leftNavs = [
-  { title: "一张图", router: "/yzt", icon: kq }
+  { title: "驾驶舱", router: "/jsc", icon: jsc },
+   { title: "一张图", router: "/yzt", icon: kq }
 
 ];
 const rightNavs = [

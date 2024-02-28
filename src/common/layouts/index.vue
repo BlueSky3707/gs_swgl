@@ -1,9 +1,5 @@
 <template>
-
- 
-  <Header2 v-if="route.path==='/jsc'"/>
-   <Header v-else/>
-  
+  <Header />
   <JscMap v-if="route.path==='/jsc'"/>
    <Map v-else/>
   <router-view/>
@@ -11,7 +7,7 @@
 
 <script setup>
 import Header from './header'
-import Header2 from './Header2'
+
 import Map from "@/GIS/map.vue"
 import JscMap from "@/GIS/jscmap.vue"
 import {useRoute} from "vue-router"

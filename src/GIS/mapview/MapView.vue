@@ -10,11 +10,13 @@ import { useStore } from "vuex";
 import { Feature } from "ol";
 import * as baseLayerUtils from "../mapUtils/baselayer";
 import { Point } from "ol/geom";
-
-
+import { layers } from "../config/layerConfig";
+import { initLayers } from "../mapUtils/layersManger";
 const store = useStore();
 onMounted(async () => {
   intMap("mapid");
+  let curlayers = layers["yzt"].filter(item=>(item.default));
+  initLayers(curlayers, null);
   window.$olMap.on("click", function (evt) {
     let features = [];
     window.$olMap.forEachFeatureAtPixel(evt.pixel, function (feature, layer) {

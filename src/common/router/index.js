@@ -8,18 +8,19 @@ const routes = [
         children: [
             {
                 path: "/",
-                redirect:'/yzt'
-            } ,
-            {
-                path: "/yzt",
-                name: "yzt",
-                component: () => import("@/pages/YZT"),
+                redirect:'/jsc'
             },
+            
             {
                 path: "/jsc",
                 name: "jsc",
                 component: () => import("@/pages/JSC"),
             },
+            {
+                path: "/yzt",
+                name: "yzt",
+                component: () => import("@/pages/YZT"),
+            }
         ]
     },
 ]
