@@ -44,8 +44,8 @@ export const intMap = (mapid) => {
     view: new View({
       projection: projection,
       center: [108.88, 35.9],//陝西中心點
-       zoom: 7.3,
-        minZoom: 6,
+       zoom: 7,
+        minZoom: 7,
        maxZoom: 18,
     
     }),
