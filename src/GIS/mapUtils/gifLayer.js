@@ -1,52 +1,10 @@
-import VectorSource from "ol/source/Vector";
-import VectorLayer from "ol/layer/Vector";
-import {Style, Icon} from "ol/style";
-import {reMoveLayerById,getLayerByid} from "@/GIS/mapUtils/baselayer";
+
+import {getLayerByid} from "@/GIS/mapUtils/baselayer";
 import Overlay from "ol/Overlay";
 import store from "@/common/store";
 import Feature from "ol/Feature";
 import Point from "ol/geom/Point";
 
-
-export const addGif = (layerid, features) => {
-    reMoveLayerById(layerid)
-    let vectorLayer = new VectorLayer({
-        id: layerid,
-        zIndex: 100,
-        source: new VectorSource({
-            features: features
-        }),
-        style: function (feature) {
-            return getStyle(feature)
-        }
-    })
-
-    window.$olMap.addLayer(vectorLayer)
-    return vectorLayer
-}
-const getStyle = (feature) => {
-    gifler(new URL("/img/yj/yjsj2.gif", import.meta.url).href).frames(
-        document.createElement('canvas'),
-        (ctx, frame) => {
-            if (!feature.getStyle()) {
-                feature.setStyle(
-                    new Style({
-                        image: new Icon({
-                            img: ctx.canvas,
-                            imgSize: [frame.width, frame.height],
-                            opacity: 1,
-                            scale: [0.2, 0.2],
-                        })
-                    })
-                )
-            }
-            ctx.clearRect(0, 0, frame.width, frame.height)
-            ctx.drawImage(frame.buffer, frame.x, frame.y)
-            window.$olMap.render()
-        },
-        true
-    )
-}
 
 export const addCssLayer = (layerid, datas, lon, lat, type) => {
 

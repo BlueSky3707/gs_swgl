@@ -191,16 +191,7 @@ const cardClick = async(item) => {
   var point = item.geometry.split("(")[1].split(")")[0].split(" ");
   let marklayer = getLayerByid("searchtmpid");
   marklayer.getSource().clear();
-  if(item.table==="sx_gfqy"){//固废
-    if(item.type.indexOf("经营")>-1){
-      tableMLayerid[item.table].layerid= tableMLayerid[item.table].layerids["经营"]
-    }else if(item.type.indexOf("运输")>-1){
-       tableMLayerid[item.table].layerid= tableMLayerid[item.table].layerids["运输"]
-    }else if(item.type.indexOf("产生")>-1){
-       tableMLayerid[item.table].layerid= tableMLayerid[item.table].layerids["产生"]
-    }
-    
-  }
+
   let data= await getDatasByLayerid(tableMLayerid[item.table].layerid,item)
   marklayer
     .getSource()
@@ -208,7 +199,7 @@ const cardClick = async(item) => {
   marklayer.setStyle((feature) => {
     return new Style({
       image: new Icon({
-        src: new URL("/zt/dingwei.png", import.meta.url).href,
+        src: new URL("/layers/dingwei.png", import.meta.url).href,
         scale: [1.5, 1.5],
       }),
       text: new Text({

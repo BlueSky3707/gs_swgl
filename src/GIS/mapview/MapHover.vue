@@ -5,44 +5,34 @@
         {{ item.values }}
       </div>
     </div>
-    <!-- <WaterPop v-show="isShowWaterPop" :pValuew="waterPvalue"> </WaterPop>
-    <WaterRlPop v-show="isShowWaterRlPop" :pValuew="waterRlPvalue">
-    </WaterRlPop> -->
+
   </div>
 </template>
 <script>
 import { onMounted, reactive, toRefs } from "vue";
-// import WaterPop from "../components/water/popup.vue";
-// import WaterRlPop from "../components/waterRl/popup.vue";
+
 import { getLayerByid } from "../mapUtils/baselayer";
 export default {
-  // components: { WaterPop, WaterRlPop },
+
   setup() {
     const pdata = reactive({
       hoverData: [
         
       ],
       datakeys: {
-        sx_dqzdid: "positionname",
-        sx_yysydid: "name",
-        sx_qtsydid: "name",
-        sx_szdmid: "name",
-        sx_dxsid: "watername",
-        sx_hlycdmid: "section_name",
-        xzqm_pointid: "dwmc,dwdz",
+        qsdid: "positionname",
+        ysqyid: "name",
+        jczid: "name",
+        
       },
-      waterPvalue: { top: 0, left: 0 },
-      isShowWaterPop: false,
-      waterRlPvalue: { top: 0, left: 0 },
-      isShowWaterRlPop: false,
+   
     });
 
     onMounted(() => {
       addHover();
     });
     const showInf = (evt) => {
-      // pdata.hoverData[0].keys = key;
-      // pdata.hoverData[0].values = value;
+      
       document.getElementById("hoverid").style.top =
         evt.originalEvent.offsetY + "px";
       document.getElementById("hoverid").style.display = "block";

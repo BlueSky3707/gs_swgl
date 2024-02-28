@@ -60,42 +60,42 @@ watch(() => store.state.xzq, () => {
 const state = reactive({
   checkAll: 1,
   typeList: [
-    {
-      name: '大气站',
-      layerid: "sx_dqzdid",
-      active: true,
-      child: [
-        {
-          filter: "stationattri=0",
-          name: '国控',
-          active: true
-        },
-        {
-          filter: "stationattri=1",
-          name: '省控',
-          active: true
-        },
-        {
-          filter: "stationattri=2",
-          name: '市控',
-          active: true
-        },
-        {
-          filter: "stationattri=9",
-          name: '微站',
-          active: true
-        },
-        {
-          filter: "stationattri=8",
-          name: '小型站',
-          active: true
-        }
-      ]
-    },
+    // {
+    //   name: '大气站',
+    //   layerid: "sx_dqzdid",
+    //   active: true,
+    //   child: [
+    //     {
+    //       filter: "stationattri=0",
+    //       name: '国控',
+    //       active: true
+    //     },
+    //     {
+    //       filter: "stationattri=1",
+    //       name: '省控',
+    //       active: true
+    //     },
+    //     {
+    //       filter: "stationattri=2",
+    //       name: '市控',
+    //       active: true
+    //     },
+    //     {
+    //       filter: "stationattri=9",
+    //       name: '微站',
+    //       active: true
+    //     },
+    //     {
+    //       filter: "stationattri=8",
+    //       name: '小型站',
+    //       active: true
+    //     }
+    //   ]
+    // },
    {
       layerid: "qsdid",
       name: '取水点',
-      active: false,
+      active: true,
     },
     {
       layerid: "ysqyid",

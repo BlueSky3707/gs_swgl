@@ -44,15 +44,16 @@ onMounted(async () => {
           store.commit("setLayerInfo", feature);
            let bufferlayer = baseLayerUtils.getLayerByid("temp_buff_pointid");
           bufferlayer.getSource().clear();
-          baseLayerUtils.reMoveLayerById("sx_qwryid_buffer");
-           baseLayerUtils.reMoveLayerById("sx_swryid_buffer");
+          baseLayerUtils.reMoveLayerById("qsdid_buffer");
+           baseLayerUtils.reMoveLayerById("ysqyid_buffer");
+            baseLayerUtils.reMoveLayerById("jczid_buffer");
             baseLayerUtils.reMoveLayerById("buffmian");
             store.commit("setLayerInfo2", null);
         }
 
         let coordinate = feature.getGeometry().getCoordinates();
         marklayer.getSource().addFeature(feature);
-        if (["sx_dqzdid", "sx_szzdzid", "sx_jcdmid",'sx_yysydid','sx_qtsydid' ].indexOf(typeid) > -1) {
+        if (["qsdid", "ysqyid", "jczid"].indexOf(typeid) > -1) {
           //缓冲分析临时图层
           let bufferlayer = baseLayerUtils.getLayerByid("temp_buff_pointid");
           bufferlayer.getSource().clear();

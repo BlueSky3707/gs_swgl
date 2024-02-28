@@ -25,42 +25,16 @@ export const getFeaturesBydata = (pfeatrues, pdata, field, dfiled) => {
 // 实时数据匹配级添加匹配图层
 export const getFeaturesByLayerid = async (layerid, pfeatrues, style) => {
   let features = [];
-  // if (layerid === "sx_dqzdid") {
-  //   //大气实时匹配
-  //   if (!getZDdata) {
-  //     getZDdata = await getDQZdata();
-  //   }
-  //   features = getFeaturesBydata(
-  //     pfeatrues,
-  //     getZDdata,
-  //     "stationcode",
-  //     "stationcode"
-  //   );
-    // return features;
-  // }  else {
+  
     return pfeatrues;
-  // }
+
 };
 
 
 // 搜索数据匹配
 export const getDatasByLayerid = async (layerid, item) => {
   let features = [];
-  if (layerid === "sx_dqzdid") {
-    //大气实时匹配
-    if (!getZDdata) {
-      getZDdata = await getDQZdata();
-    }
-    features = getZDdata.filter(ite=>ite.stationcode===item.stationcod)
-    if(features.length>0){
-      features[0].positionname=item.positionna
-      features[0].stationattri= item.stationatt
-      features[0].stationcode=item.stationcod
-      features[0].unifiedcode_p=item.unifiedc_1
-      features[0].unifiedcode=item.unifiedcod
-    }
-    return features.length>0?{...features[0],...item}:{...item};
-  } else {
+  
     return item;
-  }
+ 
 };

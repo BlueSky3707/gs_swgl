@@ -3,12 +3,7 @@ import { getLayerByid, reMoveLayerById, hiddenLayerById } from "../mapUtils/base
 import { layers } from '../config/layerConfig'
 import router from '@/common/router'
 import store from '@/common/store'
-
-
-
-
 import { list as searchlist } from "../mapview/searchConfig";
-
 
 //清空所有图层
 export const clearAllLayer = () => {
@@ -24,7 +19,7 @@ export const clearAllLayer = () => {
     
 
     // 清空缓冲图层
-    let bufferlayerids = ["buffmian", "sx_qwryid_buffer", "sx_swryid_buffer"]
+    let bufferlayerids = ["buffmian", "qsdid_buffer", "ysqyid_buffer", "jczid_buffer"]
     bufferlayerids.forEach(ite => {
         reMoveLayerById(ite);
     })
