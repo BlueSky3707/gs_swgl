@@ -7,21 +7,7 @@ import VectorLayer from "ol/layer/Vector";
 
 import store from '@/common/store'
 
-export const layerSwitchBySel = (toolIndex, isShow) => {
-  if (toolIndex === 0) {
-    if (isShow) {
-      showLayerById("yxdt");
-      showLayerById("yxdtlabel");
-      hiddenLayerById("dzdt");
-      hiddenLayerById("dzdtlabel");
-    } else {
-      showLayerById("dzdt");
-      showLayerById("dzdtlabel");
-      hiddenLayerById("yxdt");
-      hiddenLayerById("yxdtlabel");
-    }
-  }
-};
+
 export const selCityByCode = (pCode) => {
 
   if (pCode == "610000") {

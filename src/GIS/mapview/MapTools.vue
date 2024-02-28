@@ -34,7 +34,7 @@ import {useStore} from "vuex";
 
 const store = useStore();
 const state = reactive({
-  gisShow: false,
+  gisShow: true,
   gjbShow: false,
 });
 const changeGisShow = () => {

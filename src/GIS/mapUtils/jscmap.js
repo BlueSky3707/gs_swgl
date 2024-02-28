@@ -1,34 +1,48 @@
 import { Map, View } from 'ol';
 import TileLayer from "ol/layer/Tile"
-import TileArcGISRest from 'ol/source/TileArcGISRest';
 import TileGrid from 'ol/tilegrid/TileGrid'
 import { mapConfig } from "../config/mapConfig"
-import XYZ from 'ol/source/XYZ'
 import VectorSource from 'ol/source/Vector'
 import VectorLayer from 'ol/layer/Vector'
 import { Circle as CircleStyle, Fill, Style, Icon, Stroke } from 'ol/style'
 import { defaults as defaultControls } from 'ol/control';
-import * as  proj from 'ol/proj'
-import { ImageArcGISRest } from "ol/source";
-import { Image as ImageLayer } from "ol/layer";
-import {Raster as RasterSource} from 'ol/source';
-
+import proj4 from 'proj4';
+import { register } from 'ol/proj/proj4'
+import { Projection, addProjection } from 'ol/proj';
+import WMTSTileGrid from 'ol/tilegrid/WMTS';
+import WMTS from 'ol/source/WMTS'
+proj4.defs("EPSG:4490", "GEOGCS[\"China Geodetic Coordinate System 2000\",DATUM[\"China_2000\",SPHEROID[\"CGCS2000\",6378137,298.257222101,AUTHORITY[\"EPSG\",\"1024\"]],AUTHORITY[\"EPSG\",\"1043\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4490\"]]");
+register(proj4);
+//重写projection4490，
+let projection = new Projection({
+  code: 'EPSG:4490',
+  units: 'degrees',
+  axisOrientation: 'neu'
+});
+projection.setExtent([-180, -90, 180, 90]);
+projection.setWorldExtent([-180, -90, 180, 90]);
+addProjection(projection);
 var origin = [-180.0, 90.0];
-var resolutions = [0.7031250000000002, 0.3515625000000001, 0.17578125000000006, 0.08789062500000003, 0.043945312500000014, 0.021972656250000007, 0.010986328125000003, 0.005493164062500002, 0.002746582031250001, 0.0013732910156250004, 6.866455078125002E-4, 3.433227539062501E-4, 1.7166137695312505E-4, 8.583068847656253E-5, 4.2915344238281264E-5, 2.1457672119140632E-5, 1.0728836059570316E-5, 5.364418029785158E-6];
-var fullExtent = [104.79522416831787, 31.43766039138211, 112.00713075579517, 39.90697432336191];
+var resolutions = [1.40782601571, 0.703125, 0.3515625, 0.17578125, 0.087890625, 0.0439453125, 0.02197265625, 0.010986328125, 0.005493164063, 0.002746582031, 0.001373291016, 0.000686645508, 0.000343322754, 0.000171661377, 0.000085830688, 0.000042915344, 0.000021457672, 0.000010728836, 0.000005364418, 0.000002682209, 0.000001341105]
+var fullExtent = [105.199, 31.312, 111.53, 39.979]
 var tileGrid = new TileGrid({
   tileSize: 256,
   origin: origin,
   extent: fullExtent,
   resolutions: resolutions
 });
-export const intMap = (mapid) => {
 
-  var resolutions = [0.7031250000000002, 0.3515625000000001, 0.17578125000000006, 0.08789062500000003, 0.043945312500000014, 0.021972656250000007, 0.010986328125000003, 0.005493164062500002, 0.002746582031250001, 0.0013732910156250004, 6.866455078125002E-4, 3.433227539062501E-4, 1.7166137695312505E-4, 8.583068847656253E-5, 4.2915344238281264E-5, 2.1457672119140632E-5, 1.0728836059570316E-5, 5.364418029785158E-6];
+var matrixIds = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+var tileGrid2 = new WMTSTileGrid({
+  origin: [-180.0, 90.0],
+  resolutions: resolutions,
+  matrixIds: matrixIds,
+});
+export const intMap = (mapid) => {
   let map = new Map({
     target: mapid,
     view: new View({
-      projection: proj.get('EPSG:4326'),
+      projection: projection,
       center: [108.88, 35.9],//陝西中心點
        zoom: 7.3,
         minZoom: 6,
@@ -115,57 +129,25 @@ export const loadIntLayer = () => {
 
 // 底图
 export const addBaseLayerByHx = () => {
-  let outlayer = new ImageLayer({
-    source: new RasterSource({
-      sources: [
-        //传入图层，这里是天地图矢量图或者天地图矢量注记
-        new TileArcGISRest({
-          crossOrigin: "Anonymous",
-          projection: "EPSG:4326",
-          url: mapConfig.sxOuterCityVectorhx,
-        }),
-      ],
-      operationType: 'image',
-      operation: function (pixels, data) {
-        for (var i = 0; i < pixels[0].data.length; i += 4) {
-          var r = pixels[0].data[i];
-          var g = pixels[0].data[i + 1];
-          var b = pixels[0].data[i + 2];
-          var grey = r * 0.3 + g * 0.59 + b * 0.11;
-          pixels[0].data[i] = grey;
-          pixels[0].data[i + 1] = grey;
-          pixels[0].data[i + 2] = grey;
-          pixels[0].data[i] = 255 - pixels[0].data[i] + 19;
-          pixels[0].data[i + 1] = 255 - pixels[0].data[i + 1] + 27
-          pixels[0].data[i + 2] = 255 - pixels[0].data[i + 2] + 45;
-          
-      }
-        return pixels[0];
-      },
-      threads: 10,
-      lib: {
-       
-      }
+  addWMTSLayer(mapConfig.ztimg, "yxdt", "img", true, window.$olMap)
+  addWMTSLayer(mapConfig.ztimgL , "yxdtL", "cia", true, window.$olMap)
+}
+const addWMTSLayer = (url, layerid, layer, visible, map) => {
+  let pLayer = new TileLayer({
+    id: layerid,
+    visible: visible,
+    source: new WMTS({
+      url: url,
+      layer: layer,
+      matrixSet: 'c',
+      format: 'tiles',
+      projection: projection,
+      tileGrid: tileGrid2,
+      request: "GetCapabilities",
+      style: 'default',
+      wrapX: true
     }),
-    id: "outcity",
-    visible: true
   })
-  let vlayer = new TileLayer({
-    source: new TileArcGISRest({
-      crossOrigin: "Anonymous",
-      projection: "EPSG:4326",
-      url:mapConfig.hxVect2
-    }),
-    id: "dzdt",
-    visible: true
-  })
-  
+  map.addLayer(pLayer);
 
-
-  window.$olMap.addLayer(vlayer)
-  window.$olMap.addLayer(outlayer)
-
-  // loadNginxTileLayer( mapConfig.yabjx,{
-  //   id:"yabjxid"
-  // })
 }

@@ -20,17 +20,8 @@ module.exports = {
                 target: "http://10.61.5.84:9001",
                 changeOrigin: true,
                 rewrite: (path) => path.replace("/sapi", ""),
-            },
-            "/arcgis99": {
-                target: "http://10.61.5.99:6080/arcgis/rest/services/",
-                changeOrigin: true,
-                rewrite: (path) => path.replace("/arcgis99", ""),
-            },
-            "/arcgis84": {
-                target: "http://10.61.5.84:6080/arcgis/rest/services/",
-                changeOrigin: true,
-                rewrite: (path) => path.replace("/arcgis84", ""),
             }
+           
          
          
 
