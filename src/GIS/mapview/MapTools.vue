@@ -17,27 +17,6 @@
       <img src="/tool/bag.png" v-else @click="changToolShow"/>
     </el-tooltip>
 
-    <div class="xian"></div>
-
-    <!-- 图例 -->
-    <el-tooltip content="图例" effect="light" placement="left">
-      <img
-          alt="图例"
-          title="图例"
-          src="/tool/tuli2.png"
-          v-if="$store.state.showTuli"
-          @click="$store.commit('changeTuli', false)"
-      />
-      <img
-          src="/tool/tuli.png"
-          v-else
-          alt="图例"
-          title="图例"
-          @click="$store.commit('changeTuli', true)"
-      />
-    </el-tooltip>
-
-
   </div>
   <div v-show="state.gjbShow" class="tool">
     <img src="/tool/bag_0.png" @click="Draw('Point')"/>
@@ -105,7 +84,7 @@ const Draw = (type) => {
   top: 60px;
   right: 16px;
   width: 44px;
-  height: 155px;
+  height: 114px;
   background: #fff;
   border: 1px solid #8db0f0;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.17);

@@ -173,18 +173,9 @@ const openGlobe = () => {
   state.conditions = false;
   state.resultList = false;
   state.resultData = [];
-  if (router.currentRoute.value.name === "main") {
-    store.commit("setNavIndex", 1);
-  } else {
-    if (store.state.xzq == "陕西省" || store.state.xzq == "") {
-      store.commit(
-        "setNavIndex",
-        window.$olMap.getView().getZoom() > 7 ? 2 : 1
-      );
-    } else {
-      store.commit("setNavIndex", 2);
-    }
-  }
+ 
+  store.commit("setNavIndex", 2);
+
 };
 // 搜索内容点击
 const cardClick = async(item) => {

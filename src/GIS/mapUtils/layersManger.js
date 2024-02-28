@@ -114,7 +114,7 @@ export const changeLayerSj = (layerids) => {
   initLayers(curlayers, null);
 };
 
-// main图层树及地级市图层监听
+// 图层监听
 export const changeTree = (active, list) => {
   const rname = router.currentRoute.value.name;
   if (typeof active === "object" && active.layerid) {
@@ -122,13 +122,9 @@ export const changeTree = (active, list) => {
     if (active.active) {
       //选中
       let allLayers = [];
-      if (rname === "main") {
-        Object.keys(layers).forEach((route) => {
-          allLayers = allLayers.concat(layers[route]);
-        });
-      } else {
+
         allLayers = layers[rname];
-      }
+      
       let curlayers = JSON.parse(
         JSON.stringify(
           allLayers.filter((item) => item.layerId === active.layerid)
@@ -156,13 +152,7 @@ export const changeTree = (active, list) => {
           }
         }
       }
-      // 添加聚合图层
-      if (rname === "main") {
-         if (curlayers[0].renderStyle.minZoom) {
-          //设置级别
-          curlayers[0].renderStyle.minZoom = 0;
-        }
-      }
+
    
       initLayers(
        [curlayers[0]],
@@ -180,13 +170,9 @@ export const changeTree = (active, list) => {
     if (active) {
       //全选
       let allLayers = [];
-      if (rname === "main") {
-        Object.keys(layers).forEach((route) => {
-          allLayers = allLayers.concat(layers[route]);
-        });
-      } else {
+   
         allLayers = layers[rname];
-      }
+      
       let curlayers = [];
       list.forEach((ite) => {
         if (ite.layerid) {
@@ -196,14 +182,7 @@ export const changeTree = (active, list) => {
             )
           );
           if (curlayer.length > 0) {
-            // 添加聚合图层
-            if (rname === "main") {
-              if (curlayer[0].renderStyle.minZoom) {
-                //设置级别
-                curlayer[0].renderStyle.minZoom = 0;
-              }
-            }
-          
+
             curlayers.push(curlayer[0]);
           }
         }

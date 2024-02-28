@@ -10,9 +10,9 @@
 
 <script setup>
 
-// import Tuli from "./tools/tuli/tuli";
 
-import cityBox from './leftBox/cityBox'
+
+import cityBox from './leftBox'
 import {useStore} from "vuex";
 
 const store = useStore()
