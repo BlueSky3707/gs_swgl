@@ -2,9 +2,24 @@
  <div class="max">
       <div class="rows">
         <div class="rows_left">名称</div>
-        <div>递放到</div>
+        <div>{{attributes.name}}</div>
       </div>
-   
+    <div class="rows">
+        <div class="rows_left">地址</div>
+        <div>{{attributes.address}}</div>
+      </div>
+       <div class="rows">
+        <div class="rows_left">区域</div>
+        <div>{{attributes.city}}</div>
+      </div>
+       <div class="rows">
+        <div class="rows_left">经度</div>
+        <div>{{attributes.lon}}</div>
+      </div>
+        <div class="rows">
+        <div class="rows_left">纬度</div>
+        <div>{{attributes.lat}}</div>
+      </div>
   </div>
 
  
