@@ -33,7 +33,7 @@ const componentList = [JBXX, model1,model2,model3]
 
 const emit = defineEmits(['close'])
 const attributes = inject('attributes')
-const navs = ['基本信息', '企业信息1','企业信息2','企业信息3']
+const navs = ['基本信息', '产能管理','水表管理','定额管理']
 let navIndex = $ref(0)
 const state=reactive({
 isHistory:false

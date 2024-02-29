@@ -10,7 +10,7 @@ import store from '@/common/store'
 
 export const selCityByCode = (pCode) => {
 
-  if (pCode == "610000") {
+  if (pCode == "620400") {
     window.$olMap.getView().setCenter([104.17425,36.545649])
     window.$olMap.getView().setZoom(9)
     return;
