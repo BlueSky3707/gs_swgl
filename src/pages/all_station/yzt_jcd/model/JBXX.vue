@@ -1,18 +1,11 @@
 <template>
-   <div class="jbxx_grid" >
-      <div class="grid_tit">站点名称</div>
-      <div >{{ attributes.name }}</div>
-      <div class="grid_tit">站点编号</div>
-      <div >{{ attributes.address }}</div>
-      <div class="grid_tit">站点类型</div>
-      <div > {{attributes.lxr }}</div>
-      <div class="grid_tit">所属区域</div>
-      <div >{{ attributes.phone }}</div>
-       <div class="grid_tit">经度</div>
-      <div >{{ attributes.jd }}</div>
-       <div class="grid_tit">纬度</div>
-      <div >{{ attributes.wd }}</div>
-    </div>
+ <div class="max">
+      <div class="rows">
+        <div class="rows_left">名称</div>
+        <div>递放到</div>
+      </div>
+   
+  </div>
  
  
 </template>
@@ -27,32 +20,27 @@ const attributes = inject('attributes')
 
 <style scoped lang="scss">
 
-  .jbxx_grid{
+ .max{
+  width: 300px;
+
+  .rows{
+    width: 100%;
+    min-height: 36px;
     display: grid;
-    grid-template-columns: 1fr 2fr;
     align-items: center;
-    grid-row-gap: 16px;
-    padding: 8px;
+    grid-template-columns: 1fr 2.5fr;
+    box-sizing: border-box;
+    padding: 8px 14px;
     font-size: 14px;
-    font-family: PingFang SC;
-    font-weight: 400;
-    width: 320px;
+    color: $text-color;
 
-    .grid_tit{
-      color: #2173E9;
-    }
-    .grid_text{
-      color: #333333;
+    // &:nth-child(2n){
+    //   background-color: #F8FBFF;
+    // }
+
+    .rows_left{
+      color: $title-color;
     }
   }
-  .pos{
-    padding: 8px 13px;
-    font-size: 14px;
-    font-family: PingFang SC;
-    font-weight: 400;
-    color: #666666;
-    display: flex;
-    justify-content: space-between;
-  }
-
+}
 </style>

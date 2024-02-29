@@ -98,28 +98,26 @@ const initEchart = () => {
 </script>
 
 <style scoped lang="scss">
-.box {
+.box{
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
-
-  .main {
-    width: 1040px;
+  transform: translate(-50%,-50%);
+  .main{
+    width: 800px;
     font-size: 14px;
     font-family: PingFang SC;
     font-weight: 400;
-    color: #666666;
+    color: $text-color;
     padding: 15px 12px;
     position: relative;
     box-sizing: border-box;
-
-    .switch {
+    .switch{
       display: flex;
       align-items: center;
       width: 48px;
       height: 24px;
       background: rgba(255, 255, 255, 0.39);
-      border: 1px solid #c1cedf;
+      border: 1px solid #C1CEDF;
       box-sizing: border-box;
       opacity: 1;
       border-radius: 2px;
@@ -127,19 +125,16 @@ const initEchart = () => {
       right: 28px;
       top: 60px;
       z-index: 99;
-
-      &:hover {
+      &:hover{
         cursor: pointer;
       }
-
-      .item {
+      .item{
         width: 24px;
         height: 24px;
         line-height: 27px;
         text-align: center;
       }
-
-      .active {
+      .active{
         width: 24px;
         height: 24px;
         line-height: 27px;
@@ -147,25 +142,22 @@ const initEchart = () => {
         background: rgba(58, 131, 239, 1);
       }
     }
-
-    .echart {
+    .echart{
       width: 100%;
       height: 400px;
     }
-
-    .list {
+    .list{
       width: 100%;
       height: 400px;
 
-      .titles {
+      .titles{
         width: 100%;
         height: 30px;
         line-height: 30px;
       }
 
-      .tables {
+      .tables{
         width: 100%;
-
         .table {
           width: 100%;
           font-size: 14px;
@@ -184,35 +176,23 @@ const initEchart = () => {
 
           .table-header {
             color: #3e8bec;
-            background-color: #ebf0fc;
           }
 
           .table-body {
-            color: #000000;
-            border-bottom: 1px #efefef solid;
+            color: rgba(0,0,0,0.6);
+            border-bottom: 1px #666 solid;
             font-size: 14px;
             font-family: PingFang SC;
             font-weight: 400;
             height: 32px;
-
-            .tr:nth-child(1) {
-              color: #333333;
-            }
-
-            .tr:nth-child(2) {
-              color: #666666;
-            }
-
-            .tr:nth-child(3) {
-              color: #333333;
-            }
-
+            .tr:nth-child(1),
+            .tr:nth-child(2),
+            .tr:nth-child(3),
             .tr:nth-child(4) {
-              color: #666666;
+              color: #ffffff;
             }
-
             .tr:nth-child(5) {
-              background: rgba(145, 210, 102, 1);
+              background:rgba(145, 210, 102, 1);
               opacity: 1;
               border-radius: 50px;
               margin: 0 auto;
@@ -222,7 +202,7 @@ const initEchart = () => {
               line-height: 18px;
               font-family: PingFang SC;
               font-weight: 400;
-              color: #ffffff;
+              color: #FFFFFF;
             }
           }
         }
@@ -231,3 +211,4 @@ const initEchart = () => {
   }
 }
 </style>
+

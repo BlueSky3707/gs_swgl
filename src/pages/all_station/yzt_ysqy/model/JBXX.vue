@@ -1,17 +1,12 @@
 <template>
-   <div class="jbxx_grid" >
-      <div class="grid_tit">名称</div>
-      <div >{{ attributes.teststation }}</div>
-      <div class="grid_tit">法人</div>
-      <div >{{ attributes.legalperson }}</div>
-      <div class="grid_tit">地址</div>
-      <div > {{ attributes.testaddress }}</div>
-      <div class="grid_tit">电话</div>
-      <div >{{ attributes.testtel }}</div>
-      <div class="grid_tit">状态</div>
-      <div >{{ attributes.status }}</div>
+ <div class="max">
+      <div class="rows">
+        <div class="rows_left">名称</div>
+        <div>递放到</div>
+      </div>
    
-    </div>
+  </div>
+
  
  
 </template>
@@ -25,33 +20,27 @@ const attributes = inject('attributes')
 </script>
 
 <style scoped lang="scss">
+.max{
+  width: 300px;
 
-  .jbxx_grid{
+  .rows{
+    width: 100%;
+    min-height: 36px;
     display: grid;
-    grid-template-columns: 1fr 2fr;
     align-items: center;
-    grid-row-gap: 16px;
-    padding: 8px;
+    grid-template-columns: 1fr 2.5fr;
+    box-sizing: border-box;
+    padding: 8px 14px;
     font-size: 14px;
-    font-family: PingFang SC;
-    font-weight: 400;
-    width: 309px;
+    color: $text-color;
 
-    .grid_tit{
-      color: #2173E9;
-    }
-    .grid_text{
-      color: #333333;
+    // &:nth-child(2n){
+    //   background-color: #F8FBFF;
+    // }
+
+    .rows_left{
+      color: $title-color;
     }
   }
-  .pos{
-    padding: 8px 13px;
-    font-size: 14px;
-    font-family: PingFang SC;
-    font-weight: 400;
-    color: #666666;
-    display: flex;
-    justify-content: space-between;
-  }
-
+}
 </style>

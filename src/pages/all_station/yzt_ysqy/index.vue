@@ -112,7 +112,7 @@ const tabClick=(index)=>{
     }
 
     .active {
-      color: rgba(33, 115, 233, 1);
+      color: $title-color;
     }
   }
   }
