@@ -1,29 +1,29 @@
 <template>
-  <JscBox :title="attributes.name" v-if="showIndex == 0" @close="emit('close')">
+  <JscBox :title="state.tiles" v-if="showIndex == 0" @close="emit('close')">
     <div class="title">
       <span>报警信息</span>
     </div>
     <div class="bj_content">
       <div class="con_item">
         <div class="con_tit">报警时间：</div>
-        <div class="con_txt">1255</div>
+        <div class="con_txt">2024-02-25 09:00:00</div>
       </div>
       <div class="con_item">
         <div class="con_tit">报警类型：</div>
         <div class="con_tit">
-          <img src="@/assets/image/cb.png"/>
+          <img src="@/assets/image/cb.png" />
         </div>
       </div>
       <div class="con_item">
         <div class="con_tit">报警详情：</div>
         <div class="con_tit">
-          <div class="con_txt">555</div>
+          <div class="con_txt">数据传输异常</div>
         </div>
       </div>
       <div class="con_item">
         <div class="con_tit">报警通知：</div>
         <div class="con_tit">
-          <div class="con_txt">已发送通知，通知人数为12。</div>
+          <div class="con_txt">以短信方式通知相关人员。</div>
         </div>
       </div>
       <!-- <div class="gbbj" @click="closeBj">
@@ -32,130 +32,168 @@
       </div> -->
     </div>
 
-
     <div class="title">
       <span>最新数据</span>
       <div class="timepoint">
-        <span>225</span>
-        <el-icon @click="upDateDw" style="transform: translateY(3px);margin-left: 8px;cursor: pointer" :size="20"
-                 color="#8BB5FF">
-          <RefreshRight/>
+        <span>刷新</span>
+        <el-icon
+          @click="initEchart()"
+          style="transform: translateY(3px); margin-left: 8px; cursor: pointer"
+          :size="20"
+          color="#8BB5FF"
+        >
+          <RefreshRight />
         </el-icon>
       </div>
     </div>
-    <div class="wrw" v-loading="state.loading" element-loading-background="rgba(0,0,0,0.4)">
-      <div class="wrw_item" :style="isCb('PM2.5')">
-        <div class="item_tit">
-          <span class="tit_1">PM₂.₅</span>
-          <span class="tit_2">μg/m³</span>
-        </div>
-        <div class="item_dw">{{  0 }}</div>
-      </div>
-      <div class="wrw_item" :style="isCb('PM10')">
-        <div class="item_tit">
-          <span class="tit_1">PM₁₀</span>
-          <span class="tit_2">μg/m³</span>
-        </div>
-        <div class="item_dw">{{  0 }}</div>
-      </div>
-      <div class="wrw_item" :style="isCb('NO2')">
-        <div class="item_tit">
-          <span class="tit_1">NO₂</span>
-          <span class="tit_2">μg/m³</span>
-        </div>
-        <div class="item_dw">{{  0 }}</div>
-      </div>
-      <div class="wrw_item" :style="isCb('O3')">
-        <div class="item_tit">
-          <span class="tit_1">O₃</span>
-          <span class="tit_2">μg/m³</span>
-        </div>
-        <div class="item_dw">{{  0 }}</div>
-      </div>
-      <div class="wrw_item" :style="isCb('CO')">
-        <div class="item_tit">
-          <span class="tit_1">CO</span>
-          <span class="tit_2">mg/m³</span>
-        </div>
-        <div class="item_dw">{{  0 }}</div>
-      </div>
-      <div class="wrw_item" :style="isCb('SO2')">
-        <div class="item_tit">
-          <span class="tit_1">SO₂</span>
-          <span class="tit_2">μg/m³</span>
-        </div>
-        <div class="item_dw">{{  0 }}</div>
-      </div>
-    </div>
+    <div
+      class="wrw"
+      id="echartRef"
+      ref="echartRef"
+      v-loading="state.loading"
+      element-loading-background="rgba(0,0,0,0.4)"
+    ></div>
     <div class="button">
-     
-      <div class="btn_item" @click="showIndex=4">
-        <img src="@/assets/common/zdxx.png"/>
+      <div class="btn_item" @click="showIndex = 4">
+        <img src="@/assets/common/zdxx.png" />
         站点信息
       </div>
     </div>
   </JscBox>
 
   <transition-group name="el-zoom-in-left">
-    
-    
-    <Jbxx v-if="showIndex == 4" @close="showIndex = 0"/>
+    <Jbxx v-if="showIndex == 4" @close="showIndex = 0" />
   </transition-group>
 </template>
 
 <script setup>
-
-import Jbxx from './jbxx'
-import {inject, onMounted, reactive} from "vue";
-import {RefreshRight} from "@element-plus/icons-vue"
-import {ElMessage} from "element-plus";
-
-import {useStore} from 'vuex'
+import Jbxx from "./jbxx";
+import { inject, onMounted, reactive } from "vue";
+import { RefreshRight } from "@element-plus/icons-vue";
+import { ElMessage } from "element-plus";
+import { useStore } from "vuex";
 import * as baseLayerUtils from "@/GIS/mapUtils/baselayer";
-
-const store = useStore()
-const attributes = inject('attributes')
+import * as echarts from "echarts";
+import markRaws from "@/common/tools/markRaws";
+const store = useStore();
+const attributes = inject("attributes");
 console.log(attributes);
-const emit = defineEmits(['close'])
+const emit = defineEmits(["close"]);
 import cbbg from "@/assets/image/cbbg.png";
-
+let chartInit = $ref(null);
+let echartRef = $ref(null);
 const state = reactive({
   loading: true,
-  data: {},
-  videoList:[]
-})
+  tiles: "报警详情",
+  data: [
+    ["2024-02-05", 116],
+    ["2024-02-06", 260],
+    ["2024-02-07", 135],
+    ["2024-02-08", 300],
+    ["2024-02-09", 73],
+    ["2024-02-10", 280],
+    ["2024-02-11", 73],
+  ],
+  dateList: null,
+  valueList: null,
+  videoList: [],
+});
 
 const upDateDw = () => {
-  state.loading = true
+  state.loading = true;
   setTimeout(() => {
-    init()
-    state.loading = false
-  }, 500)
-}
+    init();
+    state.loading = false;
+  }, 500);
+};
 
-let showIndex = $ref(0)
-const isCb = wrw =>{
-  
-    return {}
-  
-}
+let showIndex = $ref(0);
+const isCb = (wrw) => {
+  return {};
+};
 
+const getVideoList = () => {};
 
-const getVideoList = ()=>{
+const init = () => {
+  initEchart();
+};
+//历史监测数据
+const initEchart = () => {
+  state.loading = true;
+  if (chartInit) {
+    chartInit.dispose();
+  }
+  chartInit = markRaws(echarts.init(echartRef));
+  let option = {
+    // Make gradient line here
+    visualMap: [
+      {
+        show: false,
+        type: "continuous",
+        seriesIndex: 0,
+        min: 0,
+        max: 400,
+      },
+      {
+        show: false,
+        type: "continuous",
+        seriesIndex: 1,
+        dimension: 0,
+        min: 0,
+        max: state.dateList.length - 1,
+      },
+    ],
 
-}
+    title: [
+      {
+        left: "center",
+        text: "监测数据",
+      },
+    ],
+    tooltip: {
+      trigger: "axis",
+    },
+    xAxis: [
+      {
+        name: "监测时间",
 
-const init =()=>{
- upDateDw()
-}
+        data: state.dateList,
+      },
+    ],
+    yAxis: [
+      {
+        name: "监测值",
+      },
+    ],
+    grid: [
+      {
+        bottom: "10%",
+      },
+    ],
+    series: [
+      {
+        type: "line",
+        showSymbol: false,
+        data: state.valueList,
+      },
+    ],
+  };
+  chartInit.setOption(option, true);
+
+  state.loading = false;
+};
 onMounted(() => {
-  init()
-})
-const closeBj=()=>{
-
-}
+  state.dateList = state.data.map(function (item) {
+    return item[0];
+  });
+  state.valueList = state.data.map(function (item) {
+    return item[1];
+  });
+  initEchart();
+});
+const closeBj = () => {};
 </script>
 
 <style scoped lang="scss">
-@import '../index/common.scss';
+@import "../index/common.scss";
 </style>

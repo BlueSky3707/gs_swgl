@@ -59,7 +59,7 @@ export const addCity = () => {
           } else if (store.state.xzq !== feature.get("name")) {
             return new Style({
               fill: new Fill({
-                color: [255, 255, 255, 0.3],
+                color: [255, 255, 255, .5],
               })
            
             });

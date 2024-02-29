@@ -16,19 +16,6 @@ export const layers = {
       },
     },
     {
-      //水表
-      default:false,
-      layerType: 1,
-      layerId: "qskjcsbid",
-      tableName: "by_qskjcsb",
-      renderStyle: {
-        scale: [0.8, 0.8],
-        img: new URL("/layers/dq_qxz.png", import.meta.url).href,
-        type: 0,
-        
-      },
-    },
-    {
       //企业信息
       layerType: 1,
       layerId: "ysqyid",

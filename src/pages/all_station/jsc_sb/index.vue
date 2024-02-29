@@ -17,7 +17,7 @@
       <div class="con_item">
         <div class="con_tit">报警详情：</div>
         <div class="con_tit">
-          <div class="con_txt">111</div>
+          <div class="con_txt">监测站数据传输异常</div>
         </div>
       </div>
       <div class="con_item">
@@ -155,6 +155,71 @@ onMounted(() => {
 const closeBj=()=>{
 
 }
+const initEchart = () => {
+  state.loading = true;
+  if (chartInit) {
+    chartInit.dispose();
+  }
+  chartInit = markRaws(echarts.init(echartRef));
+  let option = {
+    // Make gradient line here
+    visualMap: [
+      {
+        show: false,
+        type: "continuous",
+        seriesIndex: 0,
+        min: 0,
+        max: 400,
+      },
+      {
+        show: false,
+        type: "continuous",
+        seriesIndex: 1,
+        dimension: 0,
+        min: 0,
+        max: state.dateList.length - 1,
+      },
+    ],
+
+    title: [
+      {
+        left: "center",
+        text: "监测数据",
+      },
+    ],
+    tooltip: {
+      trigger: "axis",
+    },
+    xAxis: [
+      {
+        name: "监测时间",
+
+        data: state.dateList,
+      },
+    ],
+    yAxis: [
+      {
+        name: "监测值",
+      },
+    ],
+    grid: [
+      {
+        bottom: "10%",
+      },
+    ],
+    series: [
+      {
+        type: "line",
+        showSymbol: false,
+        data: state.valueList,
+        areaStyle: {}
+      },
+    ],
+  };
+  chartInit.setOption(option, true);
+
+  state.loading = false;
+};
 </script>
 
 <style scoped lang="scss">

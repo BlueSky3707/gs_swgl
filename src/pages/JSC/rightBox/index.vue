@@ -1,7 +1,7 @@
 <template>
   <!-- 报警列表 按钮 -->
   <div class="bjlbBotton" v-if="!state.openType" @click="openList">
-    <img src="@/assets/image/botton.png">
+    <img src="@/assets/image/botton.png" />
     <span>报警列表</span>
   </div>
 
@@ -10,32 +10,32 @@
     <!-- 标题 -->
     <div class="title">
       <div class="title_left divFlex">
-        <img src="@/assets/image/botton.png">
+        <img src="@/assets/image/botton.png" />
         <span>报警列表</span>
       </div>
       <div class="title_right divFlex">
-        <img src="@/assets/image/close.png" @click="closeList">
+        <img src="@/assets/image/close.png" @click="closeList" />
       </div>
     </div>
 
     <!-- 顶部块 -->
     <div class="topCard">
       <div class="topCard_title">
-        <img src="@/assets/image/top1.png">
+        <img src="@/assets/image/top1.png" />
         <div class="topCards topCard_left_1">
           <div class="span1">当前报警站点数量</div>
           <div class="span2">
-            <span class="span2_1">{{ state.tableList.length }}</span>
-            <span class="span2_2">所</span>
+            <span class="span2_1">{{ 3 }}</span>
+            <span class="span2_2">个</span>
           </div>
         </div>
       </div>
       <div class="topCard_title">
-        <img src="@/assets/image/top2.png">
+        <img src="@/assets/image/top2.png" />
         <div class="topCards topCard_left_2">
           <div class="span1">本月报警次数</div>
           <div class="span2">
-            <span class="span2_1">{{ state.tableList.length }}</span>
+            <span class="span2_1">{{ 9 }}</span>
             <span class="span2_2">次</span>
           </div>
         </div>
@@ -47,25 +47,25 @@
       <!-- 表头 -->
       <div class="table">
         <div style="text-align: center">序号</div>
-        <div>测站名称</div>
+        <div>报警名称</div>
         <div>报警时间</div>
         <div>报警内容</div>
       </div>
       <!-- 表数据 -->
       <div class="list">
         <div
-            v-for="(item,index) in state.tableList"
-            :key="index"
-            class="list_row"
-            :class="index % 2 == 0 ? 'bjColor' : ''"
+          v-for="(item, index) in state.tableList"
+          :key="index"
+          class="list_row"
+          :class="index % 2 == 0 ? 'bjColor' : ''"
         >
           <div class="row_span1">{{ index + 1 }}</div>
           <div class="row_span2" :title="item.name">{{ item.name }}</div>
           <div class="row_span3" :title="item.time">{{ item.time }}</div>
           <div class="row_span4" :title="item.nr">{{ item.nr }}</div>
-<!--          <div class="row_span5">-->
-<!--            <img src="@/assets/image/row.png" @click="clickRow(item)">-->
-<!--          </div>-->
+          <!--          <div class="row_span5">-->
+          <!--            <img src="@/assets/image/row.png" @click="clickRow(item)">-->
+          <!--          </div>-->
         </div>
       </div>
     </div>
@@ -73,46 +73,139 @@
 </template>
 
 <script setup>
-
-import {onMounted, reactive} from "vue";
-import dayjs from 'dayjs'
+import { onMounted, reactive } from "vue";
+import dayjs from "dayjs";
+import * as echarts from "echarts";
+import markRaws from "@/common/tools/markRaws";
 const state = reactive({
   openType: false, // 列表显示
+   data: [
+    ["2024-02-05", 116],
+    ["2024-02-06", 129],
+    ["2024-02-07", 135],
+    ["2024-02-08", 86],
+    ["2024-02-09", 73],
+    ["2024-02-10", 85],
+    ["2024-02-11", 73],
+    ["2024-02-12", 68],
+    ["2024-02-13", 92],
+
+  ],
+  dateList: null,
+  valueList: null,
   // 列表数据
-  tableList: []
-})
+  tableList: [],
+});
 onMounted(() => {
-  state.tableList=[
-     {name:"asa",time:"2024-02-28",nr:"ghjg" },
-     {name:"ds",time:"2024-02-27",nr:"asa" }
-     ]
-  
-})
+   state.dateList = state.data.map(function (item) {
+    return item[0];
+  });
+  state.valueList = state.data.map(function (item) {
+    return item[1];
+  });
+  state.tableList = [
+    { name: "监测站A", time: "2024-02-28", nr: "数据异常" },
+    { name: "监测站B", time: "2024-02-27", nr: "数据异常" },
+    { name: "监测站C", time: "2024-02-27", nr: "数据异常" },
+    { name: "监测站A", time: "2024-02-01", nr: "数据异常" },
+    { name: "监测站B", time: "2024-02-10", nr: "数据异常" },
+    { name: "监测站C", time: "2024-02-09", nr: "数据异常" },
+    { name: "监测站A", time: "2024-02-08", nr: "数据异常" },
+    { name: "监测站B", time: "2024-02-07", nr: "数据异常" },
+    { name: "监测站C", time: "2024-02-03", nr: "数据异常" },
+  ];
+});
+//历史监测数据
+const initEchart = () => {
+  state.loading = true;
+  if (chartInit) {
+    chartInit.dispose();
+  }
+  chartInit = markRaws(echarts.init(echartRef));
+  let option = {
+    // Make gradient line here
+    visualMap: [
+      {
+        show: false,
+        type: "continuous",
+        seriesIndex: 0,
+        min: 0,
+        max: 400,
+      },
+      {
+        show: false,
+        type: "continuous",
+        seriesIndex: 1,
+        dimension: 0,
+        min: 0,
+        max: state.dateList.length - 1,
+      },
+    ],
 
+    title: [
+      {
+        left: "center",
+        text: "监测数据",
+      },
+    ],
+    tooltip: {
+      trigger: "axis",
+    },
+    xAxis: [
+      {
+        name: "监测时间",
 
+        data: state.dateList,
+      },
+    ],
+    yAxis: [
+      {
+        name: "监测值",
+      },
+    ],
+    grid: [
+      {
+        bottom: "10%",
+      },
+    ],
+    series: [
+      {
+        type: "line",
+        showSymbol: false,
+        data: state.valueList,
+        areaStyle: {}
+      },
+    ],
+  };
+  chartInit.setOption(option, true);
 
+  state.loading = false;
+};
 // 打开列表
 const openList = () => {
-  state.openType = true
-}
+  state.openType = true;
+};
 // 关闭列表
 const closeList = () => {
-  state.openType = false
-}
+  state.openType = false;
+};
 
 // 列表 点击
 const clickRow = (item) => {
-  console.log(item)
-}
-
+  console.log(item);
+};
 </script>
 
 <style scoped lang="scss">
 .bjlbBotton {
   width: 120px;
   height: 40px;
-  border: 1px solid #FF983E;
-  background: linear-gradient(90deg, rgba(255, 152, 62, 0.7) 0%, rgba(255, 152, 62, 0) 100%);
+  border: 1px solid #ff983e;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 152, 62, 0.7) 0%,
+    rgba(255, 152, 62, 0) 100%
+  );
   padding-left: 12px;
   box-sizing: border-box;
   position: absolute;
@@ -129,7 +222,7 @@ const clickRow = (item) => {
   }
 
   span {
-    color: #FFFFFF;
+    color: #ffffff;
     font-size: 16px;
   }
 }
@@ -146,7 +239,11 @@ const clickRow = (item) => {
   .title {
     width: 100%;
     height: 40px;
-    background: linear-gradient(90deg, rgba(255, 152, 62, 0.6) 0%, rgba(255, 152, 62, 0) 100%);
+    background: linear-gradient(
+      90deg,
+      rgba(255, 152, 62, 0.6) 0%,
+      rgba(255, 152, 62, 0) 100%
+    );
     padding-left: 12px;
     box-sizing: border-box;
     display: grid;
@@ -168,7 +265,7 @@ const clickRow = (item) => {
       }
 
       span {
-        color: #FFFFFF;
+        color: #ffffff;
         font-size: 16px;
       }
     }
@@ -231,7 +328,7 @@ const clickRow = (item) => {
           }
 
           .span2_2 {
-            color: #E3C7AF;
+            color: #e3c7af;
             font-size: 10px;
           }
         }
@@ -254,7 +351,7 @@ const clickRow = (item) => {
 
     .table {
       width: 100%;
-      color: #FFFFFF;
+      color: #ffffff;
       font-size: 13px;
       border-bottom: 1px solid rgba(255, 152, 62, 0.7);
       padding-bottom: 4px;
@@ -297,7 +394,7 @@ const clickRow = (item) => {
 
       .row_span1 {
         text-align: center;
-        color: #E3C7AF;
+        color: #e3c7af;
       }
 
       .row_span2 {
@@ -307,7 +404,7 @@ const clickRow = (item) => {
       }
 
       .row_span4 {
-        color: #FF6621;
+        color: #ff6621;
         cursor: pointer;
       }
 
@@ -341,6 +438,5 @@ const clickRow = (item) => {
       background: rgba(255, 152, 62, 0.12);
     }
   }
-
 }
 </style>

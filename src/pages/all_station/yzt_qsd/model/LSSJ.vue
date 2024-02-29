@@ -29,33 +29,7 @@
 
       <div class="con" v-loading="state.loading">
         <!-- 列表 -->
-        <div class="list">
-          <div class="titles"></div>
-          <div class="tables">
-            <div class="table">
-              <div class="table-header">
-                <div class="tr">序号</div>
-                <div class="tr">监测时间</div>
-                <div class="tr">名称</div>
-                <div class="tr">数据状态</div>
-              </div>
-              <el-scrollbar max-height="330px">
-                <div
-                  class="table-body"
-                  v-for="(item, index) in state.List"
-                  :key="index"
-                >
-                  <div class="tr">{{ index + 1 }}</div>
-                  <div class="tr">{{ item.time }}</div>
-                  <div class="tr">{{ item.name }} </div>
-                  <div class="tr" style="color: #f77f07">
-                    {{ item.staus }}
-                  </div>
-                </div>
-              </el-scrollbar>
-            </div>
-          </div>
-        </div>
+        <div class="list" id="echartRef" ref="echartRef"></div>
       </div>
     </div>
   </Box>
@@ -65,17 +39,46 @@
 import { RefreshRight } from "@element-plus/icons";
 import { inject, onMounted, onUnmounted, reactive } from "vue";
 import dayjs from "dayjs";
-
+import * as echarts from "echarts";
+import markRaws from "@/common/tools/markRaws";
 const emit = defineEmits(["close"]);
 const attributes = inject("attributes");
+let chartInit = $ref(null);
+let echartRef = $ref(null);
 console.log(attributes);
 const state = reactive({
   loading: false,
-  List: [],
+  data: [
+    ["2024-02-05", 116],
+    ["2024-02-06", 129],
+    ["2024-02-07", 135],
+    ["2024-02-08", 86],
+    ["2024-02-09", 73],
+    ["2024-02-10", 85],
+    ["2024-02-11", 73],
+    ["2024-02-12", 68],
+    ["2024-02-13", 92],
+    ["2024-02-14", 130],
+    ["2024-02-15", 245],
+    ["2024-02-16", 92],
+    ["2024-02-17", 130],
+    ["2024-02-18", 137],
+    ["2024-02-19", 120],
+    ["2024-02-20", 130],
+    ["2024-02-21", 145],
+  ],
+  dateList: null,
+  valueList: null,
   time: [],
 });
 
 onMounted(() => {
+  state.dateList = state.data.map(function (item) {
+    return item[0];
+  });
+  state.valueList = state.data.map(function (item) {
+    return item[1];
+  });
   timeformate();
   initEchart();
 });
@@ -91,18 +94,77 @@ onUnmounted(() => {});
 //历史监测数据
 const initEchart = () => {
   state.loading = true;
+  if (chartInit) {
+    chartInit.dispose();
+  }
+  chartInit = markRaws(echarts.init(echartRef));
+  let option = {
+    // Make gradient line here
+    visualMap: [
+      {
+        show: false,
+        type: "continuous",
+        seriesIndex: 0,
+        min: 0,
+        max: 400,
+      },
+      {
+        show: false,
+        type: "continuous",
+        seriesIndex: 1,
+        dimension: 0,
+        min: 0,
+        max: state.dateList.length - 1,
+      },
+    ],
 
-  state.List = [{ time: "2024-02-22", staus: "正常", name: "xxx" }];
+    title: [
+      {
+        left: "center",
+        text: "监测数据",
+      },
+    ],
+    tooltip: {
+      trigger: "axis",
+    },
+    xAxis: [
+      {
+        name: "监测时间",
+
+        data: state.dateList,
+      },
+    ],
+    yAxis: [
+      {
+        name: "监测值",
+      },
+    ],
+    grid: [
+      {
+        bottom: "10%",
+      },
+    ],
+    series: [
+      {
+        type: "line",
+        showSymbol: false,
+        data: state.valueList,
+        areaStyle: {}
+      },
+    ],
+  };
+  chartInit.setOption(option, true);
+
   state.loading = false;
 };
 </script>
 
 <style scoped lang="scss">
-.box{
+.box {
   left: 50%;
   top: 50%;
-  transform: translate(-50%,-50%);
-  .main{
+  transform: translate(-50%, -50%);
+  .main {
     width: 800px;
     font-size: 14px;
     font-family: PingFang SC;
@@ -111,13 +173,13 @@ const initEchart = () => {
     padding: 15px 12px;
     position: relative;
     box-sizing: border-box;
-    .switch{
+    .switch {
       display: flex;
       align-items: center;
       width: 48px;
       height: 24px;
       background: rgba(255, 255, 255, 0.39);
-      border: 1px solid #C1CEDF;
+      border: 1px solid #c1cedf;
       box-sizing: border-box;
       opacity: 1;
       border-radius: 2px;
@@ -125,16 +187,16 @@ const initEchart = () => {
       right: 28px;
       top: 60px;
       z-index: 99;
-      &:hover{
+      &:hover {
         cursor: pointer;
       }
-      .item{
+      .item {
         width: 24px;
         height: 24px;
         line-height: 27px;
         text-align: center;
       }
-      .active{
+      .active {
         width: 24px;
         height: 24px;
         line-height: 27px;
@@ -142,21 +204,21 @@ const initEchart = () => {
         background: rgba(58, 131, 239, 1);
       }
     }
-    .echart{
+    .echart {
       width: 100%;
       height: 400px;
     }
-    .list{
+    .list {
       width: 100%;
       height: 400px;
 
-      .titles{
+      .titles {
         width: 100%;
         height: 30px;
         line-height: 30px;
       }
 
-      .tables{
+      .tables {
         width: 100%;
         .table {
           width: 100%;
@@ -179,7 +241,7 @@ const initEchart = () => {
           }
 
           .table-body {
-            color: rgba(0,0,0,0.6);
+            color: rgba(0, 0, 0, 0.6);
             border-bottom: 1px #666 solid;
             font-size: 14px;
             font-family: PingFang SC;
@@ -192,7 +254,7 @@ const initEchart = () => {
               color: #ffffff;
             }
             .tr:nth-child(5) {
-              background:rgba(145, 210, 102, 1);
+              background: rgba(145, 210, 102, 1);
               opacity: 1;
               border-radius: 50px;
               margin: 0 auto;
@@ -202,7 +264,7 @@ const initEchart = () => {
               line-height: 18px;
               font-family: PingFang SC;
               font-weight: 400;
-              color: #FFFFFF;
+              color: #ffffff;
             }
           }
         }
@@ -211,4 +273,3 @@ const initEchart = () => {
   }
 }
 </style>
-
