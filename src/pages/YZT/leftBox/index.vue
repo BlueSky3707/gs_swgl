@@ -37,25 +37,25 @@ watch(() => props.label, () => {
   })
 })
 
-watch(() => store.state.xzq, () => {
-  if (store.state.xzq == '白银市') {
-    state.typeList.forEach((e,index) => {
-     if(index===0){
-      e.active = true
-      if (e.child) {
-        e.child.forEach(v => v.active = true)
-      }
-     }else{
-     e.active = false
-      if (e.child) {
-        e.child.forEach(v => v.active = false)
-      }
-     }
-    })
+// watch(() => store.state.xzq, () => {
+//   if (store.state.xzq == '白银市') {
+//     state.typeList.forEach((e,index) => {
+//      if(index===0){
+//       e.active = true
+//       if (e.child) {
+//         e.child.forEach(v => v.active = true)
+//       }
+//      }else{
+//      e.active = false
+//       if (e.child) {
+//         e.child.forEach(v => v.active = false)
+//       }
+//      }
+//     })
   
-  }
+//   }
 
-})
+// })
 
 const state = reactive({
   checkAll: 1,
