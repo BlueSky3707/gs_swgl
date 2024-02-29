@@ -13,7 +13,7 @@
         :key="item.title"
         @click="changeRouter(item)"
       >
-        <img v-if="isIcon" :src="item.icon" alt="" />
+        <img  :src="item.icon" alt="" />
         <div>{{ item.title }}</div>
       </div>
     </div>
@@ -31,10 +31,7 @@ import { useRoute, useRouter } from "vue-router";
 import { useStore } from "vuex";
 
 
-let isIcon = $ref(window.innerWidth > 1650);
-window.addEventListener("resize", () => {
-  isIcon = window.innerWidth > 1650;
-});
+
 
 const leftNavs = [
   { title: "驾驶舱", router: "/jsc", icon: jsc },
@@ -103,7 +100,7 @@ const changeRouter = (item) => {
     }
 
     .active {
-      background-color: rgba(67, 134, 255, 0.6);
+      background-image: url("../../assets/common/active.png");
     }
   }
 }
