@@ -1,5 +1,5 @@
 <template>
-    <Box :title="attributes.dwmc" @close="emit('close')">
+    <Box :title="attributes.qskmc" @close="emit('close')">
     <JBXX/>
   <div class="buttonlist">
         
