@@ -34,9 +34,8 @@ import {reactive, watch} from 'vue'
 import {useStore} from "vuex";
 
 const store = useStore();
-const props = defineProps(['modelValue', 'checkall'])
+let props = defineProps(['modelValue', 'checkall'])
 const emit = defineEmits(['update:modelValue', 'change'])
-
 const state = reactive({
   checkall: false,
   stqList: {
@@ -85,7 +84,7 @@ const childChange = (val, item) => {
   emit('change', {
     all: props.modelValue,
     active: item,
-    target:val
+     target:val
   })
 }
 
@@ -100,7 +99,6 @@ const checkAll = (arr, bol) => {
   }
   return arr
 }
-
 const close = () => {
   store.commit('setNavIndex', 0)
 }
@@ -113,7 +111,7 @@ const close = () => {
 
   .all {
     position: absolute;
-    top: 3px;
+    top: 11px;
     left: 50%;
     z-index: 22;
 
@@ -128,8 +126,10 @@ const close = () => {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 2px 0;
-
+      padding: 0 15px;
+      background:rgba(255, 255, 255, 0.15);
+      height: 48px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       .check_item {
         display: flex;
         align-items: center;
@@ -146,7 +146,7 @@ const close = () => {
       .flabel {
         font-size: 15px;
         font-weight: normal;
-        color: #333333;
+        color: #fff;
       }
     }
 
@@ -154,15 +154,15 @@ const close = () => {
       display: grid;
       align-items: center;
       grid-template-columns: repeat(3, 1fr);
-      padding: 5px 0;
+      padding: 5px 15px;
 
       .child_item {
         display: flex;
         align-items: center;
-
+        height: 48px;
         .label {
           margin-right: 10px;
-          color: #666666;
+          color: #fff;
           font-size: 14px;
         }
       }

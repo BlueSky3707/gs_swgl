@@ -1,11 +1,9 @@
 <template>
   <div class="leftBox" v-draggable="draggable">
     <div class="title">
-      <div class="titleText" v-if="title && title.length < 16">{{ title }}</div>
-      <el-tooltip :content="title" placement="bottom-start" v-else>
+      <el-tooltip :content="title" placement="bottom-start">
         <div class="titleText">{{ title }}</div>
       </el-tooltip>
-<!--      <img v-if="hideclose == undefined" src="@/assets/common/right.svg" class="back" @click="emit('close')"/>-->
       <img v-if="hideclose == undefined" src="@/assets/common/close.png" class="back" @click="emit('close')"/>
     </div>
     <div class="boxMain">
@@ -15,7 +13,7 @@
 </template>
 
 <script setup>
-const props = defineProps(['title','hideclose','draggable'])
+const props = defineProps(['title', 'hideclose', 'draggable'])
 const emit = defineEmits(['close'])
 </script>
 
@@ -23,55 +21,51 @@ const emit = defineEmits(['close'])
 .leftBox {
   position: fixed;
   left: 16px;
-  top: 60px;
+  top: 100px;
   z-index: 99;
-  border: 1px solid #8DB0F0;
   border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0.8);
+  background-image: url("../../src/assets/common/bgBox.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding: 8px;
+  box-sizing: border-box;
 
   .title {
     width: 100%;
     height: 38px;
-    background: linear-gradient(180deg, #FFFFFF 0%, #DBEAFF 100%);
-    border-radius: 4px 4px 0px 0px;
-    box-sizing: border-box;
-    color: #2173E9;
+    color: #fff;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background-image: url("@/assets/common/title.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: left;
     padding: 0 12px;
-    font-size: 14px!important;
-    position: relative;
+    box-sizing: border-box;
+    font-size: 14px !important;
 
-    &:after{
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      display: block;
-      content: '';
-      width: 100%;
-      height: 1px;
-      background: #8DB0F0;
-    }
-
-    .titleText{
+    .titleText {
       width: 250px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
       cursor: zoom-in;
+      padding-left: 20px;
     }
 
     .back {
       cursor: pointer;
-      width: 13px;
-      height: 13px;
+      width: 16px;
+      height: 16px;
     }
   }
 
   .boxMain {
     min-width: 300px;
     min-height: 50px;
-    background: #fff;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.17);
     border-radius: 0px 0px 4px 4px;
   }

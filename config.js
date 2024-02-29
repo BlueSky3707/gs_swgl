@@ -12,7 +12,7 @@ module.exports = {
         host: '0.0.0.0',
         proxy: {
             "/dbapi": {
-                target: "http://10.61.5.63:8086/rest/",
+                target: "http://localhost:8084/rest/",
                 changeOrigin: true,
                 rewrite: (path) => path.replace("/dbapi", ""),
             },
@@ -29,5 +29,14 @@ module.exports = {
     },
     css: {
         requireModuleExtension: true,
+        preprocessorOptions: {
+            scss: {
+                additionalData: `
+                    $title-color : #21CAFF;
+                    $text-color : #fff;
+                    $sub-text-color : rgba(255,255,255,0.3);
+                `
+            }
+        }
     }
 }

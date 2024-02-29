@@ -4,7 +4,7 @@
 <script setup>
 import "ol/ol.css";
 // import { Style,Icon, Stroke } from 'ol/style'
-import { intMap } from "../mapUtils/map";
+import { intMap2 } from "../mapUtils/map";
 import { onMounted } from "vue";
 import { useStore } from "vuex";
 import { Feature } from "ol";
@@ -14,7 +14,7 @@ import { layers } from "../config/layerConfig";
 import { initLayers } from "../mapUtils/layersManger";
 const store = useStore();
 onMounted(async () => {
-  intMap("mapid");
+  intMap2("mapid");
   let curlayers = layers["yzt"].filter(item=>(item.default));
   initLayers(curlayers, null);
   window.$olMap.on("click", function (evt) {
@@ -46,7 +46,7 @@ onMounted(async () => {
           store.commit("setLayerInfo", feature);
            let bufferlayer = baseLayerUtils.getLayerByid("temp_buff_pointid");
           bufferlayer.getSource().clear();
-          baseLayerUtils.reMoveLayerById("qsdid_buffer");
+          baseLayerUtils.reMoveLayerById("qskxxid_buffer");
            baseLayerUtils.reMoveLayerById("ysqyid_buffer");
             baseLayerUtils.reMoveLayerById("jczid_buffer");
             baseLayerUtils.reMoveLayerById("buffmian");
@@ -55,7 +55,7 @@ onMounted(async () => {
 
         let coordinate = feature.getGeometry().getCoordinates();
         marklayer.getSource().addFeature(feature);
-        if (["qsdid", "ysqyid", "jczid"].indexOf(typeid) > -1) {
+        if (["qskxxid", "ysqyid", "jczid"].indexOf(typeid) > -1) {
           //缓冲分析临时图层
           let bufferlayer = baseLayerUtils.getLayerByid("temp_buff_pointid");
           bufferlayer.getSource().clear();

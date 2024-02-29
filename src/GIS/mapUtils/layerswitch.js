@@ -11,12 +11,12 @@ import store from '@/common/store'
 export const selCityByCode = (pCode) => {
 
   if (pCode == "610000") {
-    window.$olMap.getView().setCenter([108.88, 35.9])
-    window.$olMap.getView().setZoom(6.3)
+    window.$olMap.getView().setCenter([104.17425,36.545649])
+    window.$olMap.getView().setZoom(9)
     return;
   }
   search({
-    layerName: "sx_citygh",
+    layerName: "by_xzqh",
     outFields: "name,code",
     filter: "code ='" + pCode + "'",
     isReturnGeometry: true,
@@ -41,7 +41,7 @@ export const addCity = () => {
     reMoveLayerById("xzqmid");
   }
   search({
-    layerName: "sx_citygh",
+    layerName: "by_xzqh",
     outFields: "name,code",
     isReturnGeometry: true,
     isCache: false,
@@ -54,7 +54,7 @@ export const addCity = () => {
         id: "xzqmid",
         source: vectSourc,
         style: function (feature) {
-          if (!store.state.xzq || store.state.xzq === "陕西省") {
+          if (!store.state.xzq || store.state.xzq === "白银市") {
             return new Style();
           } else if (store.state.xzq !== feature.get("name")) {
             return new Style({
@@ -77,46 +77,6 @@ export const addCity = () => {
       });
       window.$olMap.addLayer(featurelayer);
 
-    }
-  });
-};
-// 
-export const selCityByName = (name) => {
-  let ptmlayer = getLayerByid("tmpid");
-  ptmlayer.getSource().clear()
-
-  if (name == "陕西省") {
-    window.$olMap.getView().setCenter([108.88, 35.9])
-    window.$olMap.getView().setZoom(6.3)
-    return;
-  }
-  search({
-    layerName: "sx_citygh",
-    outFields: "name,code",
-    filter: "name ='" + name + "'",
-    isReturnGeometry: true,
-    isCache: false,
-    spatialRel: "INTERSECTS",
-  }).then((res) => {
-    if (res && res.data && res.data.data.features.length) {
-       if (ptmlayer) {
-      let vectSourc = getSourceByData(res.data.data.features);
-      ptmlayer.setSource(vectSourc);
-      ptmlayer.setStyle(
-        new Style({
-          fill: new Fill({
-            color: [0, 0, 255, 0],
-          }),
-          stroke:new Stroke({
-            color: 'blue',
-            width: 1.5,
-            lineDash:[5]
-          })
-        })
-      );
-      window.$olMap.getView().fit(vectSourc.getFeatures()[0].getGeometry(),
-        { duration: 1000 })
-      }
     }
   });
 };

@@ -3,11 +3,11 @@
 </template>
 <script setup>
 import "ol/ol.css";
-import {intMap} from "../mapUtils/jscmap";
+import {intMap} from "../mapUtils/map";
 import {onMounted} from "vue";
 import * as baseLayerUtils from "../mapUtils/baselayer";
 import { initLayers } from "../mapUtils/layersManger";
-// import {addYjLayer} from "@/GIS//gisUitls/loadYjdw";
+
 import Feature from "ol/Feature";
 import { layers } from "../config/layerConfig";
 
@@ -18,7 +18,6 @@ const store = useStore();
 onMounted(async () => {
   intMap("mapid");
   addEvent();
-  //  initLayers([layers.yzt[0]], null);
   addYjLayer()
 });
 const addEvent = () => {

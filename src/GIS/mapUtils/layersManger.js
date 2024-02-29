@@ -44,11 +44,11 @@ export const initLayers = (confLayers, xzq) => {
       }
       if (item.layerType === 1) {
         //业务图层
-        if (xzq && xzq !== "陕西省") {
+        if (xzq && xzq !== "白银市") {
           const rname = router.currentRoute.value.name;
           let param1 = {
             layerName: item.tableName,
-            cityLayerName:  "sx_citygh",
+            cityLayerName:  "by_xzqh",
             isReturnGeometry: true,
             cityname: "name='" + xzq + "'",
           };
@@ -89,7 +89,7 @@ export const initLayers = (confLayers, xzq) => {
         //统计图层只在初始化时添加
         let param2 = {
           layername: item.tableName,
-          citytablename: "sx_citygh",
+          citytablename: "by_xzqh",
           outFields: "name",
           type: "count(*)",
           filter: item.filter ??"",
@@ -116,7 +116,7 @@ export const changeLayerSj = (layerids) => {
 
 // 图层监听
 export const changeTree = (active, list) => {
-  const rname = router.currentRoute.value.name;
+  const rname = "yzt";
   if (typeof active === "object" && active.layerid) {
     //单个选中
     if (active.active) {
@@ -567,7 +567,7 @@ export const addLayerByGroupData = async (param, layerid, style) => {
 // 设置空图层
 export const setLayerNull = (layerid) => {
   let player = baselayer.getLayerByid(layerid);
-  if (player) {
+  if (player&& player.getSource()) {
     player.getSource().clear();
     return null;
   } else {
@@ -816,7 +816,7 @@ export const startBuffer = (curlayer, point, dis) => {
 // 获取行政区数据
 export const getXzqM = () => {
   let param = {
-    layerName: "sx_citygh",
+    layerName: "by_xzqh",
     outFields: "name,code",
     isReturnGeometry: true,
     isCache: false,

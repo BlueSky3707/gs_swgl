@@ -23,16 +23,17 @@
 
 <script setup>
 import { reMoveLayerById } from '@/GIS/mapUtils/baselayer'
-import model0 from './model/model0'
+import JBXX from './model/JBXX'
 import model1 from './model/model1'
 import model2 from './model/model2'
+import model3 from './model/model3'
 import LSSJ from './model/LSSJ'
 import { reactive,inject  } from "vue";
-const componentList = [model0, model1,model2]
+const componentList = [JBXX, model1,model2,model3]
 
 const emit = defineEmits(['close'])
 const attributes = inject('attributes')
-const navs = ['基本信息', '基本信息2','基本信息3']
+const navs = ['基本信息', '企业信息1','企业信息2','企业信息3']
 let navIndex = $ref(0)
 const state=reactive({
 isHistory:false
@@ -45,50 +46,68 @@ const tabClick=(index)=>{
 
 <style scoped lang="scss">
 .sjfx {
- position: fixed;
+  position: fixed;
   left: 16px;
-  top: 60px;
-  background: #fff;
-  border: 1px solid #8DB0F0;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.17);
-  opacity: 1;
+  top: 100px;
+  z-index: 99;
   border-radius: 4px;
- z-index: 99;
- .buttonlist {
+  background-color: rgba(0, 0, 0, 0.8);
+  background-image: url("../../src/assets/common/bgBox.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding: 8px;
+  box-sizing: border-box;
+
+  .title {
     width: 100%;
+    height: 38px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-image: url("@/assets/common/title.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: left;
+    padding: 0 12px;
     box-sizing: border-box;
-    padding: 12px 15px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 12px;
-    background-color: rgba(248, 251, 255, 1);
+    font-size: 14px !important;
 
-    .buttonbox {
-      width: 128px;
-      height: 32px;
-      margin-left: 0px !important;
+    .titleText {
+      width: 250px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      cursor: zoom-in;
+      padding-left: 20px;
     }
-
   }
   .navs {
     width: 100%;
     height: 36px;
     border-bottom: 1px solid #8DB0F0;
-    background: linear-gradient(180deg, #FFFFFF 0%, #DBEAFF 100%);
-    color: rgba(33, 115, 233, .5);
-    border-radius: 4px 4px 0px 0px;
+     align-items: center;
+    justify-content: space-between;
+    background-image: url("@/assets/common/title.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: left;
+    padding: 0 12px;
+    box-sizing: border-box;
+    font-size: 14px !important;
     display: flex;
     align-items: center;
     position: relative;
 
     .back {
-      position: absolute;
-      right: 20px;
+     
       cursor: pointer;
+      margin: 0 20px;
     }
 
     .item {
-      padding: 0 10px;
+      padding: 0 20px;
       cursor: pointer;
     }
 
@@ -96,5 +115,6 @@ const tabClick=(index)=>{
       color: rgba(33, 115, 233, 1);
     }
   }
-}
+  }
+  
 </style>

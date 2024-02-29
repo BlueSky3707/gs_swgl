@@ -1,8 +1,8 @@
 <template>
   <Box title="专题图层" @close="$store.commit('setNavIndex', 0)">
-    <div style="padding: 15px">
+
       <ZtType @change="change" :checkall="state.checkall" v-model="state.typeList"/>
-    </div>
+  
   </Box>
 </template>
 
@@ -38,7 +38,7 @@ watch(() => props.label, () => {
 })
 
 watch(() => store.state.xzq, () => {
-  if (store.state.xzq == '陕西省') {
+  if (store.state.xzq == '白银市') {
     state.typeList.forEach((e,index) => {
      if(index===0){
       e.active = true
@@ -60,49 +60,23 @@ watch(() => store.state.xzq, () => {
 const state = reactive({
   checkAll: 1,
   typeList: [
-    // {
-    //   name: '大气站',
-    //   layerid: "sx_dqzdid",
-    //   active: true,
-    //   child: [
-    //     {
-    //       filter: "stationattri=0",
-    //       name: '国控',
-    //       active: true
-    //     },
-    //     {
-    //       filter: "stationattri=1",
-    //       name: '省控',
-    //       active: true
-    //     },
-    //     {
-    //       filter: "stationattri=2",
-    //       name: '市控',
-    //       active: true
-    //     },
-    //     {
-    //       filter: "stationattri=9",
-    //       name: '微站',
-    //       active: true
-    //     },
-    //     {
-    //       filter: "stationattri=8",
-    //       name: '小型站',
-    //       active: true
-    //     }
-    //   ]
-    // },
+  
    {
-      layerid: "qsdid",
-      name: '取水点',
+      layerid: "qskxxid",
+      name: '取水口',
       active: true,
     },
+  
     {
+      layerid: "qskjcsbid",
+      name: '水表',
+      active: false,
+    },
+     {
       layerid: "ysqyid",
       name: '用水企业',
       active: false,
     },
-    
     {
       layerid: "jczid",
       name: '监测站',

@@ -11,13 +11,13 @@ export const addYjLayer = () => {
 // 获取应急点位数据
 const getYjData = async() => {
     // 监测站预警
-    let jczlist= [{LAT:34.2, LNG:108.5,name:"ass"},{LAT:34.8, LNG:108.5,name:"css"}]
+    let jczlist= [{LAT:36.49, LNG:104.2,name:"ass"},{LAT:36.6, LNG:104.15,name:"css"}]
 
    if(jczlist&&jczlist.length>0){
     addCssLayer("yj_jczid",jczlist,"LNG", "LAT",'jcz')
    }
     // 水表预警
-   let sblist=[{LAT:35.2, LNG:109.5,name:"abss"}]
+   let sblist=[{LAT:36.55, LNG:104.23,name:"abss"}]
 
    if(sblist&&sblist.length>0){
     addCssLayer("yj_sbid",sblist,"LNG", "LAT",'sb')

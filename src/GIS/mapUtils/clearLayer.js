@@ -7,7 +7,7 @@ import { list as searchlist } from "../mapview/searchConfig";
 import {close} from "./loadYjdw"
 //清空所有图层
 export const clearAllLayer = () => {
-    store.commit("setxzq", "陕西省");
+    store.commit("setxzq", "白银市");
 
     Object.keys(layers).forEach(name => {
         layers[name].forEach(item => {
@@ -19,7 +19,7 @@ export const clearAllLayer = () => {
     
 
     // 清空缓冲图层
-    let bufferlayerids = ["buffmian", "qsdid_buffer", "ysqyid_buffer", "jczid_buffer"]
+    let bufferlayerids = ["buffmian"]
     bufferlayerids.forEach(ite => {
         reMoveLayerById(ite);
     })
@@ -48,8 +48,8 @@ export const clearQt = () => {
     searchlist.map(item => item.active = false)
     let marklayer = getLayerByid('mark')
     marklayer.getSource().clear()
-    window.$olMap.getView().setCenter([108.88, 35.9])
-    window.$olMap.getView().setZoom(6.3)
+    window.$olMap.getView().setCenter([104.17425,36.545649])
+    window.$olMap.getView().setZoom(9)
     let poup = window.$olMap.getOverlayById("popupid")
     if (poup) {
         poup.setPosition(null)

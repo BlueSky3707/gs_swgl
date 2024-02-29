@@ -2,7 +2,7 @@
   <div id="content">
     <MapView ></MapView>
    
-    <MapTools  ></MapTools>
+    <!-- <MapTools  ></MapTools> -->
 
     <MapSearchBox ></MapSearchBox>
 
@@ -11,7 +11,7 @@
 <script setup>
 import MapView from "./mapview/MapView.vue";
 
-import MapTools from "./mapview/MapTools.vue";
+// import MapTools from "./mapview/MapTools.vue";
 import MapHover from "./mapview/MapHover.vue";
 import MapSearchBox from "./mapview/MapSearchBox.vue";
 
@@ -55,7 +55,7 @@ const changeLayer = (xzq) => {
   let r = router.currentRoute.value.name;
   let curlayers=[]
 
-    if(xzq==="陕西省"&&layers[r]){
+    if(xzq==="白银市"&&layers[r]){
        clearAllLayer();
        curlayers = layers[r].filter(item=>(item.default));
       

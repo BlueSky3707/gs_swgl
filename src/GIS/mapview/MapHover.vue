@@ -20,9 +20,7 @@ export default {
         
       ],
       datakeys: {
-        qsdid: "positionname",
-        ysqyid: "name",
-        jczid: "name",
+       
         
       },
    

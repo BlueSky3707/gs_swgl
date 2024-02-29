@@ -16,6 +16,7 @@ const attributes = inject('attributes')
   .jbxx3{
     width: 320px;
     height: 300px;
+
   }
 
 </style>

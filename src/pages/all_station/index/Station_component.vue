@@ -20,9 +20,13 @@ const Station_component = defineAsyncComponent(() => {
   // 一张图
  if(route.path==="/yzt"){
   
-    if (type == 'qsdid') {
-      // 取水点
+    if (type == 'qskxxid') {
+      // 取水口
       return import('../yzt_qsd')
+    }
+    if (type == 'qskjcsbid') {
+      // 水表
+      return import('../yzt_qsksb')
     }
     if (type == 'ysqyid') {
       // 用水企业

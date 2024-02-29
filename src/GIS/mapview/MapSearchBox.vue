@@ -1,10 +1,11 @@
 <template>
+ <div class="box">
   <div class="city">
     <el-select
     
       v-model="store.state.xzq"
       @change="cityChange"
-      placeholder="陕西省"
+      placeholder="白银市"
     >
       <el-option
         v-for="item in options"
@@ -13,25 +14,21 @@
         :value="item.label"
       >
       </el-option>
+        <template #prefix>
+          <img src="@/assets/common/pos.png" style="width: 16px; height: 16px" />
+        </template>
     </el-select>
 
   </div>
-  <div class="search">
-    <el-input
-      v-model="state.inputValue"
-      @clear="clearInput"
-      @focus="foucsInput"
-      placeholder="请输入搜索名称"
-      @input="inputChange"
-      clearable
-    >
-      <template #prepend>
+   <div class="search" id="search">
+      <div class="search_con">
         <img src="@/assets/common/sousuo.svg" class="img" @click="openGlobe" />
-      </template>
-      <template #append>
-        <el-button type="primary" :icon="Search" @click="sousuoFun(1)" />
-      </template>
-    </el-input>
+        <el-input v-model="state.inputValue" style="width: 223px" :boder="false" @clear="clearInput" @focus="foucsInput"
+                  placeholder="请输入搜索名称" @input="inputChange" clearable>
+        </el-input>
+        <img src="@/assets/common/serchbg.png" class="searchIcon" style="width: 36px; height: 36px"
+             @click="sousuoFun(1)" />
+      </div>
     <div v-if="$store.state.navIndex == -1 && !$store.state.layerInf">
       <div
         class="search_wrap"
@@ -113,6 +110,7 @@
       </div>
     </div>
   </div>
+   </div>
 </template>
 <script setup>
 import { citys } from "../config/cityConfig";
@@ -145,7 +143,7 @@ const state = reactive({
 });
 
 onMounted(() => {
-  store.commit("setxzq", "陕西省");
+  store.commit("setxzq", "白银市");
 });
 watch(
   () => route.path,
@@ -294,6 +292,22 @@ const cityChange = (e) => {
 </script>
 
 <style scoped lang="scss">
+.box {
+  &:deep(.el-input__wrapper) {
+    transform: translateY(-1px);
+    border: none !important;
+    box-shadow: none !important;
+    &:hover {
+      border: none !important;
+      box-shadow: none !important;
+    }
+    &:focus {
+      border: none !important;
+      box-shadow: none !important;
+    }
+  }
+}
+
 .search {
   position: fixed;
   left: 16px;
@@ -301,25 +315,32 @@ const cityChange = (e) => {
   z-index: 99;
   width: 300px;
   overflow: hidden;
-  border: 1px solid #8db0f0;
-  background: #fff;
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.17);
-  border-radius: 4px;
   transition: height 0.5s ease;
-
+  background-color: rgba(0, 0, 0, 0.8);
+  .search_con {
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    height: 36px;
+    background-image: url("@/assets/common/search.png");
+    background-position: center;
+    background-size: 100%;
+    background-repeat: no-repeat;
+  }
   .img {
     cursor: pointer;
-    width: 24px;
+    width: 30px;
+    margin: 0 9px;
+  }
+  .searchIcon {
+    position: absolute;
+    top: 0;
+    left: 264px;
   }
 
-  &:deep(.el-input-group__prepend) {
-    padding: 0 10px;
-  }
-
-  &:deep(.el-input-group__append) {
-    background-color: rgba(67, 134, 255, 1);
-    border-color: rgba(67, 134, 255, 1);
-    color: #fff;
+  &:deep(.el-input__inner) {
+    line-height: 34px;
+    height: 34px;
   }
 }
 
@@ -330,9 +351,7 @@ const cityChange = (e) => {
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: center;
-  border: 1px solid #c3d7fc;
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.17);
-  background: #fff;
   font-size: 13px;
   font-family: PingFang SC;
   font-weight: 400;
@@ -368,7 +387,7 @@ const cityChange = (e) => {
       width: 100%;
       margin-bottom: 2px;
       text-align: center;
-      color: #7f8498;
+      color: $title-color;
       font-size: 13px;
     }
   }
@@ -378,16 +397,13 @@ const cityChange = (e) => {
     height: 65px;
     border-radius: 6px;
     cursor: pointer;
-    background-color: #dfedff;
     padding-top: 5px;
     box-sizing: border-box;
 
     .imgCards {
       width: 36px;
       height: 36px;
-      border: 1px #c2c9d6 solid;
       border-radius: 6px;
-      background-color: #ffffff;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -400,7 +416,7 @@ const cityChange = (e) => {
     }
 
     .titles {
-      color: #2173e9;
+      color: #fff;
       text-align: center;
     }
   }
@@ -409,7 +425,6 @@ const cityChange = (e) => {
 .search_list {
   width: 300px;
   padding: 12px;
-  background: #fff;
   box-sizing: border-box;
   height: calc(100vh - 200px);
 
@@ -431,7 +446,6 @@ const cityChange = (e) => {
     .lineS {
       width: 276px;
       height: 2px;
-      background-color: #ebeff1;
     }
 
     .cards {
@@ -459,7 +473,7 @@ const cityChange = (e) => {
 
         .title1 {
           width: 276px;
-          color: #333333;
+          color: #fff;
           font-size: 14px;
         }
 
@@ -487,13 +501,11 @@ const cityChange = (e) => {
 
     .cards:hover {
       cursor: pointer;
-      background-color: #f5f5f5;
     }
 
     .zwsj {
       width: 100%;
       height: 100%;
-      color: #838383;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -525,25 +537,38 @@ const cityChange = (e) => {
 
 .city {
   position: absolute;
-  left: 360px;
+  left: 330px;
   top: 60px;
-  width: 100px;
-
-  background: #ffffff;
-  border: 1px solid #c2c9d6;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.1);
-  opacity: 1;
+  width: 110px;
+  height: 36px;
   border-radius: 4px;
-  box-sizing: border-box;
-   &:deep(.el-input__inner) {
-    padding: 0 11px;
-   }
-   &:deep(.el-input__suffix) {
-   
-        position: absolute;
-    height: 100%;
-    right: 12px;
+  background-image: url("@/assets/common/select.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+  &:deep(.el-select) {
+    height: 36px;
+    line-height: 36px;
+    display: flex;
+    border: none;
+    align-items: center;
+    &:focus {
+      border: none !important;
+      box-shadow: none !important;
     }
-  
+  }
+  &:deep(.el-select .el-input.is-focus .el-input__wrapper) {
+    transform: translateY(-1px);
+    border: none !important;
+    box-shadow: none !important;
+    &:hover {
+      border: none !important;
+      box-shadow: none !important;
+    }
+    &:focus {
+      border: none !important;
+      box-shadow: none !important;
+    }
+  }
 }
 </style>

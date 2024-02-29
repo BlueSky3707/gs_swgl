@@ -8,6 +8,7 @@
   font-family: DINPro;
   src: url("./DINPro-Medium.TTF");
 }
+
 .ellipsis{
   text-overflow: ellipsis;
   overflow: hidden;
@@ -23,10 +24,7 @@
     thead {
       tr {
         th {
-          background: rgba(214, 226, 248, 0.39);
-          color: #2173E9;
-          font-size: 14px;
-          font-weight: 400;
+          color: $title-color;
         }
       }
     }

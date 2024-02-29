@@ -3,11 +3,11 @@ export const layers = {
   
 
     {
-      //取水点
+      //取水口
       default:true,
       layerType: 1,
-      layerId: "qsdid",
-      tableName: "sx_ygjcdw",
+      layerId: "qskxxid",
+      tableName: "by_qskxx",
       renderStyle: {
         scale: [0.8, 0.8],
         img: new URL("/layers/dq_ygjc.png", import.meta.url).href,
@@ -15,12 +15,24 @@ export const layers = {
         
       },
     },
-  
     {
-      //用水企业
+      //水表
+      default:false,
+      layerType: 1,
+      layerId: "qskjcsbid",
+      tableName: "by_qskjcsb",
+      renderStyle: {
+        scale: [0.8, 0.8],
+        img: new URL("/layers/dq_qxz.png", import.meta.url).href,
+        type: 0,
+        
+      },
+    },
+    {
+      //企业信息
       layerType: 1,
       layerId: "ysqyid",
-      tableName: "sx_jcjg",
+      tableName: "by_qyxx",
       renderStyle: {
         scale: [0.8, 0.8],
         img: new URL("/layers/dq_cljcz.png", import.meta.url).href,
@@ -32,7 +44,7 @@ export const layers = {
       //监测站
       layerType: 1,
       layerId: "jczid",
-      tableName: "sx_wxjg",
+      tableName: "by_jczxx",
       renderStyle: {
         scale: [0.8, 0.8],
         img: new URL("/layers/dq_clzlz.png", import.meta.url).href,
