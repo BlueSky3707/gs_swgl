@@ -19,7 +19,7 @@
     </div>
    
    
-    <img src="@/assets/common/back.png" class="back" />
+    <!-- <img src="@/assets/common/back.png" class="back" /> -->
   </div>
 </template>
 
@@ -29,10 +29,9 @@ import jsc from "@/assets/common/gf.png";
 import { watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useStore } from "vuex";
-import { ElMessageBox,ElMessage } from "element-plus";
+
 
 let isIcon = $ref(window.innerWidth > 1650);
-
 window.addEventListener("resize", () => {
   isIcon = window.innerWidth > 1650;
 });
@@ -71,7 +70,7 @@ const changeRouter = (item) => {
   width: 100vw;
   height: 48px;
   z-index: 999;
-  background: #24468b;
+  background: url("../../assets/common/header.svg") no-repeat;
   color: #fff;
   display: flex;
   align-items: center;
