@@ -4,7 +4,7 @@
 <script setup>
 import "ol/ol.css";
 // import { Style,Icon, Stroke } from 'ol/style'
-import { intMap2 } from "../mapUtils/map";
+import { intMap } from "../mapUtils/map";
 import { onMounted } from "vue";
 import { useStore } from "vuex";
 import { Feature } from "ol";
@@ -14,7 +14,7 @@ import { layers } from "../config/layerConfig";
 import { initLayers } from "../mapUtils/layersManger";
 const store = useStore();
 onMounted(async () => {
-  intMap2("mapid");
+  intMap("mapid");
   let curlayers = layers["yzt"].filter(item=>(item.default));
   initLayers(curlayers, null);
   window.$olMap.on("click", function (evt) {
