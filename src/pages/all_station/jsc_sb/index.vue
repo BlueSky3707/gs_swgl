@@ -36,71 +36,24 @@
     <div class="title">
       <span>最新数据</span>
       <div class="timepoint">
-        <span>1111</span>
+       
         <el-icon @click="upDateDw" style="transform: translateY(3px);margin-left: 8px;cursor: pointer" :size="20"
                  color="#8BB5FF">
           <RefreshRight/>
         </el-icon>
       </div>
     </div>
-    <div class="wrw" v-loading="state.loading" element-loading-background="rgba(0,0,0,0.4)">
-      <div class="wrw_item" :style="isCb('PM2.5')">
-        <div class="item_tit">
-          <span class="tit_1">PM₂.₅</span>
-          <span class="tit_2">μg/m³</span>
-        </div>
-        <div class="item_dw">{{  0 }}</div>
-      </div>
-      <div class="wrw_item" :style="isCb('PM10')">
-        <div class="item_tit">
-          <span class="tit_1">PM₁₀</span>
-          <span class="tit_2">μg/m³</span>
-        </div>
-        <div class="item_dw">{{  0 }}</div>
-      </div>
-      <div class="wrw_item" :style="isCb('NO2')">
-        <div class="item_tit">
-          <span class="tit_1">NO₂</span>
-          <span class="tit_2">μg/m³</span>
-        </div>
-        <div class="item_dw">{{  0 }}</div>
-      </div>
-      <div class="wrw_item" :style="isCb('O3')">
-        <div class="item_tit">
-          <span class="tit_1">O₃</span>
-          <span class="tit_2">μg/m³</span>
-        </div>
-        <div class="item_dw">{{  0 }}</div>
-      </div>
-      <div class="wrw_item" :style="isCb('CO')">
-        <div class="item_tit">
-          <span class="tit_1">CO</span>
-          <span class="tit_2">mg/m³</span>
-        </div>
-        <div class="item_dw">{{  0 }}</div>
-      </div>
-      <div class="wrw_item" :style="isCb('SO2')">
-        <div class="item_tit">
-          <span class="tit_1">SO₂</span>
-          <span class="tit_2">μg/m³</span>
-        </div>
-        <div class="item_dw">{{  0 }}</div>
-      </div>
-    </div>
-    <div class="button">
-     
-      <div class="btn_item" @click="showIndex=4">
-        <img src="@/assets/common/zdxx.png"/>
-        站点信息
-      </div>
-    </div>
+    <div
+      class="wrw"
+      id="echartRef"
+      ref="echartRef"
+      v-loading="state.loading"
+      element-loading-background="rgba(0,0,0,0.4)"
+    ></div>
+   
   </JscBox>
 
-  <transition-group name="el-zoom-in-left">
-    
-    
-    <Jbxx v-if="showIndex == 4" @close="showIndex = 0"/>
-  </transition-group>
+
 </template>
 
 <script setup>
@@ -109,10 +62,12 @@ import Jbxx from './jbxx'
 import {inject, onMounted, reactive} from "vue";
 import {RefreshRight} from "@element-plus/icons-vue"
 import {ElMessage} from "element-plus";
-
+import * as echarts from "echarts";
+import markRaws from "@/common/tools/markRaws";
 import {useStore} from 'vuex'
 import * as baseLayerUtils from "@/GIS/mapUtils/baselayer";
-
+let chartInit = $ref(null);
+let echartRef = $ref(null);
 const store = useStore()
 const attributes = inject('attributes')
 const emit = defineEmits(['close'])
@@ -122,7 +77,20 @@ import cbbg from "@/assets/image/cbbg.png";
 const state = reactive({
   loading: true,
   data: {},
-  videoList:[]
+
+   tiles: "报警详情",
+  data: [
+    ["2024-02-05", 116],
+    ["2024-02-06", 260],
+    ["2024-02-07", 135],
+    ["2024-02-08", 300],
+    ["2024-02-09", 73],
+    ["2024-02-10", 280],
+    ["2024-02-11", 73],
+  ],
+  dateList: null,
+  valueList: null,
+  videoList: [],
 })
 
 const upDateDw = () => {
@@ -147,10 +115,16 @@ const getVideoList = ()=>{
 
 const init =()=>{
  
- 
+ initEchart();
 }
 onMounted(() => {
-  init()
+state.dateList = state.data.map(function (item) {
+    return item[0];
+  });
+  state.valueList = state.data.map(function (item) {
+    return item[1];
+  });
+  initEchart();
 })
 const closeBj=()=>{
 

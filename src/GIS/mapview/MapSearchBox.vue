@@ -121,7 +121,7 @@ import { ArrowLeftBold, ArrowRightBold, Search } from "@element-plus/icons-vue";
 import { ElMessage } from "element-plus";
 import { useRouter, useRoute } from "vue-router";
 import { getLayerByid } from "../mapUtils/baselayer";
-import { list,tableMLayerid } from "./searchConfig";
+import { list,tableMLayerid,searchlist } from "./searchConfig";
 import { Feature } from "ol";
 import { Style, Icon, Text, Fill, Stroke } from "ol/style";
 import { Point } from "ol/geom";
@@ -246,6 +246,35 @@ const pageNumChange = (val) => {
 };
 
 const sousuoFun = (pageNum) => {
+  let marklayer = getLayerByid("searchtmpid");
+  marklayer.getSource().clear();
+
+   if (pageNum) {
+    pages.pageNum = pageNum;
+  }
+  let tables = state.list
+    .filter((e) => e.active)
+    .map((e) => e.layerid)
+    .join(",");
+
+    let slist=  searchlist.filter(ite=>{
+        if(tables.includes(ite.table)&&(ite.name.indexOf(state.inputValue)||ite.address.indexOf(state.inputValue))){
+        return ite
+        }
+      })
+      pages.total =slist.length;
+      if(slist.length>10){
+       slist= slist.slice(0, 10);
+      }
+    if (pages.total == 0) {
+      ElMessage({
+        message: "已找到0条相关内容",
+        type: "warning",
+      });
+    }
+    state.resultData = slist;
+}
+const sousuoFun2 = (pageNum) => {
   let marklayer = getLayerByid("searchtmpid");
   marklayer.getSource().clear();
 

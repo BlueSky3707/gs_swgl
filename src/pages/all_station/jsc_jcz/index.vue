@@ -53,17 +53,17 @@
       v-loading="state.loading"
       element-loading-background="rgba(0,0,0,0.4)"
     ></div>
-    <div class="button">
+    <!-- <div class="button">
       <div class="btn_item" @click="showIndex = 4">
         <img src="@/assets/common/zdxx.png" />
         站点信息
       </div>
-    </div>
+    </div> -->
   </JscBox>
 
-  <transition-group name="el-zoom-in-left">
+  <!-- <transition-group name="el-zoom-in-left">
     <Jbxx v-if="showIndex == 4" @close="showIndex = 0" />
-  </transition-group>
+  </transition-group> -->
 </template>
 
 <script setup>

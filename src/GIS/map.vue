@@ -67,11 +67,11 @@ const changeLayer = (xzq) => {
                 if(blayer.get("where")){
                   item.filter= blayer.get("where")
                 }
-                if(blayer.get("where2")){
-                    if(item.layerId==="sx_qwryid"||item.layerId==="sx_swryid"||item.layerId==="sx_wsclcid"){
-                      item.renderStyle.filter=blayer.get("where2")
-                    }
-                }
+                // if(blayer.get("where2")){
+                //     if(item.layerId==="sx_qwryid"||item.layerId==="sx_swryid"||item.layerId==="sx_wsclcid"){
+                //       item.renderStyle.filter=blayer.get("where2")
+                //     }
+                // }
             }
           return item;
           }
