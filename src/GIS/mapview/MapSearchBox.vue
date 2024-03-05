@@ -252,6 +252,7 @@ const sousuoFun = (pageNum) => {
    if (pageNum) {
     pages.pageNum = pageNum;
   }
+  
   let tables = state.list
     .filter((e) => e.active)
     .map((e) => e.layerid)
@@ -259,12 +260,12 @@ const sousuoFun = (pageNum) => {
 
     let slist=  searchlist.filter(ite=>{
         if(tables.includes(ite.table)&&(ite.name.indexOf(state.inputValue)||ite.address.indexOf(state.inputValue))){
-        return ite
+           return ite
         }
       })
       pages.total =slist.length;
       if(slist.length>10){
-       slist= slist.slice(0, 10);
+       slist= slist.slice((pages.pageNum-1)*pages.pageSize, pages.pageNum*pages.pageSize);
       }
     if (pages.total == 0) {
       ElMessage({
