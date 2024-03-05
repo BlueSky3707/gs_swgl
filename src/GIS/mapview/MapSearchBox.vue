@@ -43,7 +43,7 @@
             :key="index"
           >
             <div
-              :class="item.active ? 'active' : 'cards'"
+              :class="!item.active ? 'active' : 'cards'"
               @click="openList(item)"
             >
               <div class="imgCards">
