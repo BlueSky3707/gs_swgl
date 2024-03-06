@@ -1,8 +1,8 @@
 
 
-import img4 from "@/assets/common/4.png"
-import img5 from "@/assets/common/5.png"
-import img6 from "@/assets/common/6.png"
+import img4 from "@/assets/TuLi/用水企业.png"
+import img5 from "@/assets/TuLi/监测站.png"
+import img6 from "@/assets/TuLi/取水点.png"
 // import img8 from "@/assets/common/8.png"
 export const list = [
     

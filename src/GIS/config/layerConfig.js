@@ -1,7 +1,5 @@
 export const layers = {
   yzt: [
-  
-
     {
       //取水口
       default:true,
@@ -9,7 +7,7 @@ export const layers = {
       layerId: "qskxxid",
       tableName: "by_qskxx",
       renderStyle: {
-        scale: [0.8, 0.8],
+        scale: [1, 1],
         img: new URL("/layers/dq_ygjc.png", import.meta.url).href,
         type: 0,
         
@@ -21,7 +19,7 @@ export const layers = {
       layerId: "ysqyid",
       tableName: "by_qyxx",
       renderStyle: {
-        scale: [0.8, 0.8],
+        scale: [1, 1],
         img: new URL("/layers/dq_cljcz.png", import.meta.url).href,
         type: 0,
       
@@ -33,7 +31,7 @@ export const layers = {
       layerId: "jczid",
       tableName: "by_jczxx",
       renderStyle: {
-        scale: [0.8, 0.8],
+        scale: [0.6, 0.6],
         img: new URL("/layers/dq_clzlz.png", import.meta.url).href,
         type: 0,
       

@@ -1,22 +1,26 @@
 <template>
   <div class="tuli2" v-if="!showTuli">
-    <img src="@/assets/TuLi/tuli.png" @click="showTuli = true"/>
+    <img src="@/assets/TuLi/tuli.png" @click="showTuli = true" />
   </div>
   <div class="tuli" v-else>
     <div class="tuli_tit">
       <div>
-        <img class="tit_img" src="@/assets/TuLi/dw.png"/>
+        <img class="tit_img" src="@/assets/TuLi/dw.png" />
         <span>点位图例</span>
       </div>
-      <img class="tit_img" src="@/assets/TuLi/close.png" @click="showTuli = false"/>
+      <img
+        class="tit_img"
+        src="@/assets/TuLi/close.png"
+        @click="showTuli = false"
+      />
     </div>
     <div class="tuli_con">
-      <div class="con_item" v-for="(item,index) in Tuli" :key="index">
-        <div class="con_tit">{{item.name}}</div>
+      <div class="con_item" v-for="(item, index) in Tuli" :key="index">
+        <div class="con_tit">{{ item.name }}</div>
         <div class="list_warp">
-          <div class="list_item" v-for="(v,i) in item.List" :key="i">
-            <img :src="getImageUrl(v.name)"/>
-            <span class="tit">{{v.name}}</span>
+          <div class="list_item" v-for="(v, i) in item.List" :key="i">
+            <img :src="getImageUrl(v.name)" />
+            <span class="tit">{{ v.name }}</span>
           </div>
         </div>
       </div>
@@ -25,51 +29,51 @@
 </template>
 
 <script setup>
-import {Tuli,getImageUrl} from "./tuli"
+import { Tuli, getImageUrl } from "./tuli";
 
-const showTuli = $ref(true)
+const showTuli = $ref(true);
 </script>
 
 <style scoped lang="scss">
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-@mixin flex(){
+@mixin flex() {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.tuli2{
+.tuli2 {
   position: fixed;
   bottom: 20px;
   left: 20px;
   width: 40px;
   height: 40px;
-  background: rgba(8, 13, 36, .8);
+  background: rgba(8, 13, 36, 0.8);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
 }
-.tuli{
+.tuli {
   position: fixed;
   bottom: 20px;
   left: 20px;
   width: 360px;
-height: 120px;
+  height: 230px;
   background-image: url("@/assets/image/tuliBg.png");
-  .tuli_tit{
+  .tuli_tit {
     width: 100%;
     height: 39px;
     padding: 0 12px;
     font-size: 16px;
     font-family: PingFang SC-Bold, PingFang SC;
     font-weight: bold;
-    color: #FFFFFF;
+    color: #ffffff;
     @include flex();
-    .tit_img{
+    .tit_img {
       transform: translateY(2px);
       margin-right: 7px;
       cursor: pointer;
@@ -77,17 +81,17 @@ height: 120px;
   }
   .tuli_con {
     padding: 12px;
-    .con_item{
-      .con_tit{
+    .con_item {
+      .con_tit {
         font-size: 13px;
         font-family: PingFang SC-Regular, PingFang SC;
         font-weight: 400;
-        color: #BFD4FF;
+        color: #bfd4ff;
         margin-bottom: 4px;
       }
-      .list_warp{
+      .list_warp {
         display: grid;
-        grid-template-columns: repeat(3,1fr);
+        grid-template-columns: repeat(3, 1fr);
         align-items: center;
         grid-row-gap: 14px;
         border-top: 1px solid rgba(93, 150, 251, 0.5);
@@ -101,19 +105,18 @@ height: 120px;
         font-size: 13px;
         font-family: PingFang SC-Regular, PingFang SC;
         font-weight: 400;
-        color: #BFD4FF;
+        color: #bfd4ff;
         display: flex;
         align-items: center;
-        img{
+        img {
           width: 22px;
           height: 22px;
         }
-        .tit{
+        .tit {
           margin-left: 8px;
         }
       }
     }
-
   }
 }
 </style>

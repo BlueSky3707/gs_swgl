@@ -50,7 +50,7 @@ var fullExtent = [
 var tileGrid = new TileGrid({
   tileSize: 256,
   origin: origin,
-  extent: fullExtent,
+  //extent: fullExtent,
   resolutions: resolutions,
 });
 // 加载arcgis要素图层

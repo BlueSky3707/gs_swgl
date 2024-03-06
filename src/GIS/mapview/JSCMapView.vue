@@ -1,5 +1,7 @@
 <template>
   <div id="mapid"></div>
+  <img src="../../assets/header/left.png" class="left">
+  <img src="../../assets/header/right.png" class="right">
 </template>
 <script setup>
 import "ol/ol.css";
@@ -70,6 +72,7 @@ const addEvent = () => {
   height: 100%;
   padding: 0px;
   margin: 0px;
+  overflow: hidden;
 }
 
 .ol-scale-line {
@@ -111,5 +114,17 @@ const addEvent = () => {
   right: inherit;
   bottom: 8em;
   left: 0.5em;
+}
+.left{
+  position: fixed;
+  top: 100px;
+  left: 0;
+  z-index: 999;
+}
+.right{
+  position: fixed;
+  top: 100px;
+  right: 0;
+  z-index: 999;
 }
 </style>

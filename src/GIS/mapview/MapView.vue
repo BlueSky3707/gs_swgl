@@ -15,7 +15,7 @@ import { initLayers } from "../mapUtils/layersManger";
 const store = useStore();
 onMounted(async () => {
   intMap("mapid");
-  let curlayers = layers["yzt"].filter(item=>(item.default));
+  let curlayers = layers["yzt"].filter((item) => item.default);
   initLayers(curlayers, null);
   window.$olMap.on("click", function (evt) {
     let features = [];
@@ -38,19 +38,21 @@ onMounted(async () => {
       console.log("获取空间数据信息：");
       console.log(feature);
       let typeid = feature.values_.typeid;
-      if (
-        feature.getGeometry().getType().toLowerCase() === "point" ) {
+      if (feature.getGeometry().getType().toLowerCase() === "point") {
         if (typeid.indexOf("_buffer") > -1) {
           store.commit("setLayerInfo2", feature);
         } else {
           store.commit("setLayerInfo", feature);
-           let bufferlayer = baseLayerUtils.getLayerByid("temp_buff_pointid");
-          bufferlayer.getSource().clear();
+          let bufferlayer = baseLayerUtils.getLayerByid("temp_buff_pointid");
+
+          if (bufferlayer) {
+            bufferlayer.getSource().clear();
+          }
           baseLayerUtils.reMoveLayerById("qskxxid_buffer");
-           baseLayerUtils.reMoveLayerById("ysqyid_buffer");
-            baseLayerUtils.reMoveLayerById("jczid_buffer");
-            baseLayerUtils.reMoveLayerById("buffmian");
-            store.commit("setLayerInfo2", null);
+          baseLayerUtils.reMoveLayerById("ysqyid_buffer");
+          baseLayerUtils.reMoveLayerById("jczid_buffer");
+          baseLayerUtils.reMoveLayerById("buffmian");
+          store.commit("setLayerInfo2", null);
         }
 
         let coordinate = feature.getGeometry().getCoordinates();
@@ -58,16 +60,18 @@ onMounted(async () => {
         if (["qskxxid", "ysqyid", "jczid"].indexOf(typeid) > -1) {
           //缓冲分析临时图层
           let bufferlayer = baseLayerUtils.getLayerByid("temp_buff_pointid");
-          bufferlayer.getSource().clear();
-          bufferlayer.getSource().addFeature(feature);
+          if (bufferlayer) {
+            bufferlayer.getSource().clear();
+            bufferlayer.getSource().addFeature(feature);
+          }
         }
-      
+
         window.$olMap.getView().animate({
           center: coordinate,
           zoom: 12,
           duration: 1000,
         });
-      } 
+      }
     }
   });
 });

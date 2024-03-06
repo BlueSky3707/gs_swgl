@@ -4,7 +4,6 @@ export function getImageUrl(name) {
   return modules[path].default;
 }
 export const Tuli = [
-  
   {
     name:'报警点位',
     List:[
@@ -12,6 +11,19 @@ export const Tuli = [
         name:'监测站报警',
       },{
         name:'水表报警',
+      }
+    ]
+  },
+  {
+    name:'税务图例',
+    List:[
+      {
+        name:'取水点',
+      },{
+        name:'用水企业',
+      },
+      {
+        name:'监测站',
       }
     ]
   }
