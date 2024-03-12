@@ -44,8 +44,8 @@ const emit = defineEmits(['close'])
 
 .box {
   position: fixed;
-  top: 100px;
-  left: 20px;
+  top: 90px;
+  left: 400px;
   padding: 12px;
   min-width: 480px;
   min-height: 300px;

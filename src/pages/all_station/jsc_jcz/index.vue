@@ -123,6 +123,9 @@ const initEchart = () => {
   if (chartInit) {
     chartInit.dispose();
   }
+  if (!echartRef) {
+    return;
+  }
   chartInit = markRaws(echarts.init(echartRef));
   let option = {
     // Make gradient line here

@@ -11,7 +11,7 @@
       <div class="con_item">
         <div class="con_tit">报警类型：</div>
         <div class="con_tit">
-          <img src="@/assets/image/cb.png"/>
+          <img src="@/assets/image/cb.png" />
         </div>
       </div>
       <div class="con_item">
@@ -32,14 +32,16 @@
       </div> -->
     </div>
 
-
     <div class="title">
       <span>最新数据</span>
       <div class="timepoint">
-       
-        <el-icon @click="upDateDw" style="transform: translateY(3px);margin-left: 8px;cursor: pointer" :size="20"
-                 color="#8BB5FF">
-          <RefreshRight/>
+        <el-icon
+          @click="upDateDw"
+          style="transform: translateY(3px); margin-left: 8px; cursor: pointer"
+          :size="20"
+          color="#8BB5FF"
+        >
+          <RefreshRight />
         </el-icon>
       </div>
     </div>
@@ -50,27 +52,23 @@
       v-loading="state.loading"
       element-loading-background="rgba(0,0,0,0.4)"
     ></div>
-   
   </JscBox>
-
-
 </template>
 
 <script setup>
-
-import Jbxx from './jbxx'
-import {inject, onMounted, reactive} from "vue";
-import {RefreshRight} from "@element-plus/icons-vue"
-import {ElMessage} from "element-plus";
+import Jbxx from "./jbxx";
+import { inject, onMounted, reactive } from "vue";
+import { RefreshRight } from "@element-plus/icons-vue";
+import { ElMessage } from "element-plus";
 import * as echarts from "echarts";
 import markRaws from "@/common/tools/markRaws";
-import {useStore} from 'vuex'
+import { useStore } from "vuex";
 import * as baseLayerUtils from "@/GIS/mapUtils/baselayer";
 let chartInit = $ref(null);
 let echartRef = $ref(null);
-const store = useStore()
-const attributes = inject('attributes')
-const emit = defineEmits(['close'])
+const store = useStore();
+const attributes = inject("attributes");
+const emit = defineEmits(["close"]);
 console.log(attributes);
 import cbbg from "@/assets/image/cbbg.png";
 
@@ -78,7 +76,7 @@ const state = reactive({
   loading: true,
   data: {},
 
-   tiles: "报警详情",
+  tiles: "报警详情",
   data: [
     ["2024-02-05", 116],
     ["2024-02-06", 260],
@@ -91,48 +89,43 @@ const state = reactive({
   dateList: null,
   valueList: null,
   videoList: [],
-})
+});
 
 const upDateDw = () => {
-  state.loading = true
+  state.loading = true;
   setTimeout(() => {
-    init()
-    state.loading = false
-  }, 500)
-}
+    init();
+    state.loading = false;
+  }, 500);
+};
 
-let showIndex = $ref(0)
-const isCb = wrw =>{
- 
-    return {}
-  
-}
+let showIndex = $ref(0);
+const isCb = (wrw) => {
+  return {};
+};
 
+const getVideoList = () => {};
 
-const getVideoList = ()=>{
- 
-}
-
-const init =()=>{
- 
- initEchart();
-}
+const init = () => {
+  initEchart();
+};
 onMounted(() => {
-state.dateList = state.data.map(function (item) {
+  state.dateList = state.data.map(function (item) {
     return item[0];
   });
   state.valueList = state.data.map(function (item) {
     return item[1];
   });
   initEchart();
-})
-const closeBj=()=>{
-
-}
+});
+const closeBj = () => {};
 const initEchart = () => {
   state.loading = true;
   if (chartInit) {
     chartInit.dispose();
+  }
+  if (!echartRef) {
+    return;
   }
   chartInit = markRaws(echarts.init(echartRef));
   let option = {
@@ -186,7 +179,7 @@ const initEchart = () => {
         type: "line",
         showSymbol: false,
         data: state.valueList,
-        areaStyle: {}
+        areaStyle: {},
       },
     ],
   };
@@ -197,5 +190,5 @@ const initEchart = () => {
 </script>
 
 <style scoped lang="scss">
-@import '../index/common.scss';
+@import "../index/common.scss";
 </style>

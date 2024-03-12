@@ -2,12 +2,13 @@
   <div id="gis-content">
    
     <JSCMapView ></JSCMapView>
-    
+    <MapTj></MapTj>
   </div>
 </template>
 <script setup>
 
 import JSCMapView from "./mapview/JSCMapView.vue";
+import MapTj from "./mapview/MapTj.vue";
 
 </script>
 <style scoped>

@@ -78,7 +78,7 @@ import dayjs from "dayjs";
 import * as echarts from "echarts";
 import markRaws from "@/common/tools/markRaws";
 const state = reactive({
-  openType: false, // 列表显示
+  openType: true, // 列表显示
    data: [
     ["2024-02-05", 116],
     ["2024-02-06", 129],

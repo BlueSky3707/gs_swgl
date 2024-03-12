@@ -12,17 +12,17 @@ module.exports = {
         host: '0.0.0.0',
         proxy: {
             "/dbapi": {
-                target: "http://10.61.5.84:8088/rest/",
+                target: "http://114.116.91.200:8085/rest",
                 changeOrigin: true,
                 rewrite: (path) => path.replace("/dbapi", ""),
             },
             "/sapi": {
-                target: "http://10.61.5.84:9001",
+                target: "http://114.116.91.200:8085",
                 changeOrigin: true,
                 rewrite: (path) => path.replace("/sapi", ""),
             },
             "/ngin84gis": {
-                target: "http://10.61.5.84:8401",
+                target: "hhttp://114.116.91.200:8401",
                 changeOrigin: true,
                 rewrite: (path) => path.replace("/ngin84gis", ""),
             },
