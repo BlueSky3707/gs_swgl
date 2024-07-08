@@ -114,6 +114,7 @@ const close = () => {
     top: 11px;
     left: 50%;
     z-index: 22;
+    display: none;
 
     &:deep(.el-checkbox__input) {
       position: absolute;

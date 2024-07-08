@@ -22,7 +22,6 @@ import { clearAllLayerInRouter } from "./clearLayer";
 
 import { getFeaturesByLayerid } from "../mapUtils/gisMatch";
 
-
 import { getSourceByDataLngLat3 } from "./vectorSourceUtils";
 let xzqlist = null;
 
@@ -40,7 +39,7 @@ export const initLayers = (confLayers, xzq) => {
       if (item.filter) {
         param.filter = "(" + item.filter + ")";
       } else {
-        param.filter = ""
+        param.filter = "";
       }
       if (item.layerType === 1) {
         //业务图层
@@ -48,7 +47,7 @@ export const initLayers = (confLayers, xzq) => {
           const rname = router.currentRoute.value.name;
           let param1 = {
             layerName: item.tableName,
-            cityLayerName:  "by_xzqh",
+            cityLayerName: "by_xzqh",
             isReturnGeometry: true,
             cityname: "name='" + xzq + "'",
           };
@@ -63,9 +62,11 @@ export const initLayers = (confLayers, xzq) => {
           if (player && item.filter) {
             player.set("where", item.filter);
           }
-          if (player &&//多字段前端过滤
-            item.renderStyle.filter) {
-            player.set("where2", item.renderStyle.filter)
+          if (
+            player && //多字段前端过滤
+            item.renderStyle.filter
+          ) {
+            player.set("where2", item.renderStyle.filter);
           }
         } else {
           let player = await addLayerBySearch(
@@ -76,23 +77,23 @@ export const initLayers = (confLayers, xzq) => {
           if (player && item.filter) {
             player.set("where", item.filter);
           }
-          if (player &&
-            item.renderStyle.filter) {
-            player.set("where2", item.renderStyle.filter)
+          if (player && item.renderStyle.filter) {
+            player.set("where2", item.renderStyle.filter);
           }
         }
-      }else if (item.layerType === 4) {//其他接口生成业务图层
-        addLayerByQt(item,xzq)
-      }else if (item.layerType === 2) {
+      } else if (item.layerType === 4) {
+        //其他接口生成业务图层
+        addLayerByQt(item, xzq);
+      } else if (item.layerType === 2) {
         addClusterLayerBySearch(param, item.layerId, item.renderStyle);
-      }  else {
+      } else {
         //统计图层只在初始化时添加
         let param2 = {
           layername: item.tableName,
           citytablename: "by_xzqh",
           outFields: "name",
           type: "count(*)",
-          filter: item.filter ??"",
+          filter: item.filter ?? "",
         };
         addLayerByGroupData(param2, item.layerId, item.renderStyle);
       }
@@ -105,9 +106,10 @@ export const changeLayerSj = (layerids) => {
   const rname = router.currentRoute.value.name;
   let curlayers = [];
   layerids.split(",").forEach((layerid) => {
-    let las = JSON.parse(JSON.stringify(layers[rname].filter((item) => item.layerId === layerid)));
+    let las = JSON.parse(
+      JSON.stringify(layers[rname].filter((item) => item.layerId === layerid))
+    );
     if (las.length > 0) {
-     
       curlayers.push(las[0]);
     }
   });
@@ -123,8 +125,8 @@ export const changeTree = (active, list) => {
       //选中
       let allLayers = [];
 
-        allLayers = layers[rname];
-      
+      allLayers = layers[rname];
+
       let curlayers = JSON.parse(
         JSON.stringify(
           allLayers.filter((item) => item.layerId === active.layerid)
@@ -140,39 +142,37 @@ export const changeTree = (active, list) => {
         });
         if (listfilter.length !== active.child.length) {
           let where = listfilter.join(" ohoxr ");
-          if (active.layerid === "sx_qwryid" || active.layerid === "sx_swryid" || active.layerid === "sx_wsclcid") {
-            curlayers[0].renderStyle.filter = where
-        
+          if (
+            active.layerid === "sx_qwryid" ||
+            active.layerid === "sx_swryid" ||
+            active.layerid === "sx_wsclcid"
+          ) {
+            curlayers[0].renderStyle.filter = where;
           } else {
             if (curlayers[0].filter) {
-              curlayers[0].filter = curlayers[0].filter + " anhoxd " + "(" + where + ")";
+              curlayers[0].filter =
+                curlayers[0].filter + " anhoxd " + "(" + where + ")";
             } else {
-              curlayers[0].filter = where
+              curlayers[0].filter = where;
             }
           }
         }
       }
 
-   
-      initLayers(
-       [curlayers[0]],
-        store.state.xzq
-      );
+      initLayers([curlayers[0]], store.state.xzq);
     } else {
       //移除
-    
-        reMoveLayers([active.layerid]);
-       
-      
+
+      reMoveLayers([active.layerid]);
     }
   } else if (typeof active === "boolean") {
     //全选全不选
     if (active) {
       //全选
       let allLayers = [];
-   
-        allLayers = layers[rname];
-      
+
+      allLayers = layers[rname];
+
       let curlayers = [];
       list.forEach((ite) => {
         if (ite.layerid) {
@@ -182,23 +182,16 @@ export const changeTree = (active, list) => {
             )
           );
           if (curlayer.length > 0) {
-
             curlayers.push(curlayer[0]);
           }
         }
       });
-      initLayers(
-        curlayers,
-         store.state.xzq
-      );
+      initLayers(curlayers, store.state.xzq);
     } else {
       //全不选
       list.forEach((item) => {
         if (item.layerid) {
-         
-            reMoveLayers([item.layerid]);
-           
-          
+          reMoveLayers([item.layerid]);
         }
       });
     }
@@ -211,19 +204,18 @@ export const reMoveLayers = (layerids) => {
 };
 // 矢量创建图层
 export const createVectLayerByFeatures = async (layerid, style, datas) => {
-  let features =[]
-  if(layerid==="sx_wlnajid"){
-
-    features= getSourceByDataLngLat3(datas,"CAS_LON","CAS_LAT");
-  }else{
-    features= createFeaturesByDatas(datas);
+  let features = [];
+  if (layerid === "sx_wlnajid") {
+    features = getSourceByDataLngLat3(datas, "CAS_LON", "CAS_LAT");
+  } else {
+    features = createFeaturesByDatas(datas);
   }
-   
+
   features = await getFeaturesByLayerid(layerid, features, style);
   let featurelayer = new VectorLayer({
     id: layerid,
     opacity: style.opacity ?? 1,
-    minZoom: style.minZoom ??0,
+    minZoom: style.minZoom ?? 0,
     maxZoom: style.maxZoom ?? 20,
     source: new VectorSource({
       features: features,
@@ -248,7 +240,7 @@ export const createVectLayerBypFeatures = async (layerid, style, pfeatures) => {
   let featurelayer = new VectorLayer({
     id: layerid,
     opacity: style.opacity ?? 1,
-    minZoom: style.minZoom ??0,
+    minZoom: style.minZoom ?? 0,
     maxZoom: style.maxZoom ?? 20,
     source: new VectorSource({
       features: features,
@@ -278,10 +270,10 @@ const setStyleByFeature = (feature, style) => {
     //阶段渲染
     let simg =
       style.imgs[
-      getJdImg(
-        Object.keys(style.imgs),
-        Number(feature.get("attributes")[style.field])
-      )
+        getJdImg(
+          Object.keys(style.imgs),
+          Number(feature.get("attributes")[style.field])
+        )
       ];
     img = simg ?? style.imgs[Object.keys(style.imgs)[0]];
   } else {
@@ -314,7 +306,7 @@ const setStyleByFeature = (feature, style) => {
         fill: new Fill({ color: "black" }),
         offsetY: -15,
         padding: [40, 40, 40, 40],
-        text: feature.get("attributes")[style.field]?? "0" + "",
+        text: feature.get("attributes")[style.field] ?? "0" + "",
       }),
     });
     if (style.field2) {
@@ -322,11 +314,9 @@ const setStyleByFeature = (feature, style) => {
       let text2 = "";
       fields.forEach((ite, ind) => {
         if (ind === 0) {
-          text2 += feature.get("attributes")[ite]?? "-";
+          text2 += feature.get("attributes")[ite] ?? "-";
         } else {
-          text2 +=
-            "-" +
-            (feature.get("attributes")[ite]??"-");
+          text2 += "-" + (feature.get("attributes")[ite] ?? "-");
         }
       });
       p.setText(
@@ -367,20 +357,20 @@ const setStyleByFeaturePoygon = (feature, style, layerid) => {
     if (style.fillcolors) {
       let sfillcolor =
         style.sfillcolors[
-        getJdImg(
-          Object.keys(style.sfillcolors),
-          feature.get("attributes")[style.field]
-        )
+          getJdImg(
+            Object.keys(style.sfillcolors),
+            feature.get("attributes")[style.field]
+          )
         ];
       fillcolor = sfillcolor ? sfillcolor : "red";
     }
     if (style.strokecolors) {
       let sstrokecolor =
         style.strokecolors[
-        getJdImg(
-          Object.keys(style.strokecolors),
-          feature.get("attributes")[style.field]
-        )
+          getJdImg(
+            Object.keys(style.strokecolors),
+            feature.get("attributes")[style.field]
+          )
         ];
       strokecolor = sstrokecolor ? sstrokecolor : "#b9d83c";
     }
@@ -436,14 +426,14 @@ export const createVectLayerByGeoJson = (layerid, style, datas) => {
     style: function (feature) {
       var p = new Style({
         image: new Icon({
-          src: style.img?? new URL("/mark.png", import.meta.url).href,
+          src: style.img ?? new URL("/mark.png", import.meta.url).href,
           scale: style.scale ?? [0.8, 0.8],
         }),
         fill: new Fill({
           color: style.fillcolor ?? "red",
         }),
         stroke: new Stroke({
-          color: style.strokecolor ??"#b9d83c",
+          color: style.strokecolor ?? "#b9d83c",
           width: style.strokewidth ?? 3,
         }),
       });
@@ -463,8 +453,8 @@ export const getJdImg = (imgs, value) => {
   imgs = imgs.sort(function (a, b) {
     let a0 = Number(a.split("-")[0]);
     let b0 = Number(b.split("-")[0]);
-    return a0 - b0
-  })
+    return a0 - b0;
+  });
   var select = imgs[0];
   imgs.forEach((item, index) => {
     if (item.indexOf("-") > -1) {
@@ -486,10 +476,7 @@ export const getJdImg = (imgs, value) => {
   return select;
 };
 // 其他接口加载业务图层
-export const addLayerByQt=async(item,xzq)=>{
-
-
-}
+export const addLayerByQt = async (item, xzq) => {};
 
 //图层查询
 export const addLayerBySearch = (param, layerid, style) => {
@@ -550,7 +537,6 @@ export const addLayerByNameOrCodeSearch = (param, layerid, style) => {
 };
 //统计
 export const addLayerByGroupData = async (param, layerid, style) => {
-
   if (!xzqlist) {
     xzqlist = await getXzqM();
   }
@@ -567,7 +553,7 @@ export const addLayerByGroupData = async (param, layerid, style) => {
 // 设置空图层
 export const setLayerNull = (layerid) => {
   let player = baselayer.getLayerByid(layerid);
-  if (player&& player.getSource()) {
+  if (player && player.getSource()) {
     player.getSource().clear();
     return null;
   } else {
@@ -626,10 +612,10 @@ export const createStaticVectLayerByDatas = (
         //阶段渲染
         let colori =
           style.colors[
-          getJdImg(
-            Object.keys(style.colors),
-            Number(feature.get("attributes")[style.field])
-          )
+            getJdImg(
+              Object.keys(style.colors),
+              Number(feature.get("attributes")[style.field])
+            )
           ];
         color = colori ?? [223, 184, 80, 1];
       } else {
@@ -663,7 +649,6 @@ export const createStaticVectLayerByDatas = (
         //       scale: style.scales[getJdImg(Object.keys(style.scales), Number(feature.get("attributes")[style.field2]))],
         //     })
         //     })
-
       } else {
         var p = new Style({
           image: new CircleStyle({
@@ -683,9 +668,7 @@ export const createStaticVectLayerByDatas = (
             }),
             offsetY: -6,
             padding: [40, 40, 40, 40],
-            text:
-              feature.get("attributes")[style.field ?? "count"] +
-              "",
+            text: feature.get("attributes")[style.field ?? "count"] + "",
           }),
         });
         var p2 = new Style({
@@ -736,10 +719,10 @@ export const createClusterLayerByFeatures = (layerid, style, datas) => {
           style.radiusAll && style.radiusAll.length > 0
             ? getRadius(size, style.radiusAll)
             : size < 20
-              ? 10
-              : size < 50
-                ? 20
-                : 30;
+            ? 10
+            : size < 50
+            ? 20
+            : 30;
         return new Style({
           image: new CircleStyle({
             radius: radius,
@@ -758,7 +741,8 @@ export const createClusterLayerByFeatures = (layerid, style, datas) => {
         return new Style({
           image: new Icon({
             scale: style.scale ?? [1, 1],
-            src: style.img?? new URL("/layers/sx_gyyq.png", import.meta.url).href,
+            src:
+              style.img ?? new URL("/layers/sx_gyyq.png", import.meta.url).href,
           }),
         });
       }
@@ -795,7 +779,7 @@ export const startBuffer = (curlayer, point, dis) => {
       strokewidth: 1,
       fillcolor: [118, 217, 118, 1],
       opacity: 0.5,
-      zIndex:8
+      zIndex: 8,
     },
     [buffered]
   );
@@ -808,7 +792,6 @@ export const startBuffer = (curlayer, point, dis) => {
   };
   if (curlayer.filter) {
     param.filter = curlayer.filter;
-
   }
   return addLayerByBufferSearch(param, curlayer.layerId, curlayer.renderStyle);
 };

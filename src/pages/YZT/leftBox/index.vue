@@ -60,15 +60,14 @@ watch(() => props.label, () => {
 const state = reactive({
   checkAll: 1,
   typeList: [
-  
+  {
+      layerid: "byswj_qyxx_vid",
+      name: '用水企业',
+      active: true,
+    },
    {
       layerid: "qskxxid",
       name: '取水口',
-      active: true,
-    },
-     {
-      layerid: "byswj_qyxx_vid",
-      name: '用水企业',
       active: false,
     },
     {
@@ -80,6 +79,9 @@ const state = reactive({
 })
 const change = (e) => {
   const {active, all} = JSON.parse(JSON.stringify(e))
+  console.log(e)
+  console.log(active)
+  console.log(all)
   changeTree(active, all);
 }
 </script>

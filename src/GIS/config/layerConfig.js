@@ -2,7 +2,7 @@ export const layers = {
   yzt: [
     {
       //取水口
-      default:true,
+
       layerType: 1,
       layerId: "qskxxid",
       tableName: "by_qskxx",
@@ -15,6 +15,7 @@ export const layers = {
     },
     {
       //企业信息
+      default:true,
       layerType: 1,
       layerId: "byswj_qyxx_vid",
       tableName: "byswj_qyxx_v",
