@@ -8,7 +8,7 @@ export const list = [
     
     {title: '取水口', imgs: img6, active: false, layerid: 'by_qskxx', router: '/yzt'},
     // {title: '水表', imgs: img8, active: false, layerid: 'by_qskjcsb', router: '/yzt'},  
-    {title: '用水企业', imgs:img4 , active: false, layerid: 'by_qyxx', router: '/yzt'},
+    {title: '用水企业', imgs:img4 , active: false, layerid: 'byswj_qyxx_vid', router: '/yzt'},
     {title: '监测站', imgs: img5, active: false, layerid: 'by_jczxx', router: '/yzt'},
     
 ]
@@ -17,7 +17,7 @@ export const tableMLayerid={
 
     by_qskxx: {title: '取水口',layerid:"qskxxid" },
     // by_qskjcsb: {title: '水表',layerid:"qskjcsbid" },
-    by_qyxx:{title: '用水企业',layerid:"ysqyid" },
+    byswj_qyxx_v:{title: '用水企业',layerid:"byswj_qyxx_vid" },
     by_jczxx:{title: '监测站',layerid:"jczid" },
 
 }
@@ -38,10 +38,10 @@ export const searchlist=[
 {table:"by_jczxx",name:"靖远县沣泰渠水利监测站",address:"甘肃省白银市靖远县糜滩乡下滩河湾",geometry:"POINT(104.59257142084579 36.53661825310091)"},
 
 
-{table:"by_qyxx",name:"白银昌元化工有限公司",address:"银山路111号",geometry:"POINT(104.186741 36.568739)"},
-{table:"by_qyxx",name:"白银铜城热力公司",address:"长安路1号",geometry:"POINT(104.147013 36.540068)"},
-{table:"by_qyxx",name:"甘肃宏达铝型材有限公司",address:"万盛路附近",geometry:"POINT(104.12284 36.54614)"},
-{table:"by_qyxx",name:"中材甘肃水泥有限责任公司",address:"新建西路88号",geometry:"POINT(104.127882 36.59161)"},
-{table:"by_qyxx",name:"白银矿冶职业学院",address:"南环路556号",geometry:"POINT(104.134312 36.52622)"}
+{table:"byswj_qyxx_v",name:"白银昌元化工有限公司",address:"银山路111号",geometry:"POINT(104.186741 36.568739)"},
+{table:"byswj_qyxx_v",name:"白银铜城热力公司",address:"长安路1号",geometry:"POINT(104.147013 36.540068)"},
+{table:"byswj_qyxx_v",name:"甘肃宏达铝型材有限公司",address:"万盛路附近",geometry:"POINT(104.12284 36.54614)"},
+{table:"byswj_qyxx_v",name:"中材甘肃水泥有限责任公司",address:"新建西路88号",geometry:"POINT(104.127882 36.59161)"},
+{table:"byswj_qyxx_v",name:"白银矿冶职业学院",address:"南环路556号",geometry:"POINT(104.134312 36.52622)"}
 
 ]

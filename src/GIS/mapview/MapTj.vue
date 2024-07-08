@@ -116,6 +116,7 @@ const initEchart1 = () => {
             show: true,
             fontSize: 40,
             fontWeight: "bold",
+             color: "#FFFFFF",
           },
         },
         labelLine: {

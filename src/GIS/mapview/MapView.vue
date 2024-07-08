@@ -57,7 +57,7 @@ onMounted(async () => {
 
         let coordinate = feature.getGeometry().getCoordinates();
         marklayer.getSource().addFeature(feature);
-        if (["qskxxid", "ysqyid", "jczid"].indexOf(typeid) > -1) {
+        if (["qskxxid", "byswj_qyxx_vid", "jczid"].indexOf(typeid) > -1) {
           //缓冲分析临时图层
           let bufferlayer = baseLayerUtils.getLayerByid("temp_buff_pointid");
           if (bufferlayer) {

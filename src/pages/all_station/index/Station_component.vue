@@ -29,7 +29,7 @@ const Station_component = defineAsyncComponent(() => {
       // 水表
       return import("../yzt_qsksb");
     }
-    if (type == "ysqyid") {
+    if (type == "byswj_qyxx_vid") {
       // 用水企业
       return import("../yzt_ysqy");
     }

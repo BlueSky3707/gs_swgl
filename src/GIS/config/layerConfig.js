@@ -16,8 +16,8 @@ export const layers = {
     {
       //企业信息
       layerType: 1,
-      layerId: "ysqyid",
-      tableName: "by_qyxx",
+      layerId: "byswj_qyxx_vid",
+      tableName: "byswj_qyxx_v",
       renderStyle: {
         scale: [1, 1],
         img: new URL("/layers/dq_cljcz.png", import.meta.url).href,

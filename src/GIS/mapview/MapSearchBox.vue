@@ -346,7 +346,8 @@ const cityChange = (e) => {
   width: 300px;
   overflow: hidden;
   transition: height 0.5s ease;
-  background-color: rgba(0, 0, 0, 0.8);
+  //background-color: rgba(0, 0, 0, 0.8);
+  background: rgba(94, 134, 213, 0.1);
   .search_con {
     display: flex;
     align-items: center;

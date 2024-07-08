@@ -15,7 +15,7 @@ export const Tuli = [
     ]
   },
   {
-    name:'税务图例',
+    name:'图例',
     List:[
       {
         name:'取水点',
