@@ -37,38 +37,26 @@
 
 <script setup>
 import { RefreshRight } from "@element-plus/icons";
-import { inject, onMounted, onUnmounted, reactive} from "vue";
+import { inject, onMounted, onUnmounted, reactive,watch } from "vue";
 import dayjs from "dayjs";
 import * as echarts from "echarts";
 import * as postgis from "@/GIS/api/postgis";
 import markRaws from "@/common/tools/markRaws";
 const emit = defineEmits(["close"]);
 // const attributes = inject("attributes");
-const {madeno} = defineProps(["madeno"]);
+const { madeno } = defineProps(["madeno"]);
 let chartInit = $ref(null);
 let echartRef = $ref(null);
-console.log(madeno);
+watch(
+  () => madeno,
+  () => {
+    timeformate();
+    queryChange();
+  }
+);
 const state = reactive({
   loading: false,
-  data: [
-    ["2024-02-05", 116],
-    ["2024-02-06", 129],
-    ["2024-02-07", 135],
-    ["2024-02-08", 86],
-    ["2024-02-09", 73],
-    ["2024-02-10", 85],
-    ["2024-02-11", 73],
-    ["2024-02-12", 68],
-    ["2024-02-13", 92],
-    ["2024-02-14", 130],
-    ["2024-02-15", 245],
-    ["2024-02-16", 92],
-    ["2024-02-17", 130],
-    ["2024-02-18", 137],
-    ["2024-02-19", 120],
-    ["2024-02-20", 130],
-    ["2024-02-21", 145],
-  ],
+
   dateList: null,
   valueList: null,
   time: [],
@@ -76,7 +64,7 @@ const state = reactive({
 
 onMounted(() => {
   timeformate();
-  queryChange()
+  queryChange();
 });
 const queryChange = async () => {
   await initData();
@@ -99,11 +87,12 @@ const initData = async () => {
       "' and date_trunc('day', time) >= '" +
       state.time[0] +
       "' and date_trunc('day', time) <'" +
-      state.time[1]+"'",
+      state.time[1] +
+      "'",
     isReturnGeometry: false,
     isCache: false,
     spatialRel: "INTERSECTS",
-    orderByFields:"order by time"
+    orderByFields: "order by time",
   };
   let pdata = await postgis.search(param);
   if (pdata?.data?.data?.features) {
@@ -111,7 +100,7 @@ const initData = async () => {
       return dayjs(item.attributes.time).format("YYYY-MM-DD:HH");
     });
     state.valueList = pdata.data.data.features.map(function (item) {
-      return item.attributes.todaytraffic??0;
+      return item.attributes.todaytraffic ?? 0;
     });
   } else {
     state.dateList = [];

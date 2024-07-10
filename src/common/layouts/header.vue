@@ -1,10 +1,10 @@
 <template>
   <div class="header">
-    <img
+     <img
       class="logClass"
       src="@/assets/common/swlogs.png"
       style="cursor: pointer"
-    />
+    /> 
     <div class="leftNavs">
       <div
         v-for="item in leftNavs"
@@ -32,6 +32,7 @@ import { useStore } from "vuex";
 const leftNavs = [
   { title: "驾驶舱", router: "/jsc", icon: jsc },
   { title: "一张图", router: "/yzt", icon: kq },
+  { title: "后台管理", url: "http://localhost:80/", icon: kq },
 ];
 const rightNavs = [];
 
