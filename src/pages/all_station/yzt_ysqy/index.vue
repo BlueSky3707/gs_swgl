@@ -14,11 +14,11 @@
     </keep-alive>
      <div class="buttonlist">
         
-        <el-button class="buttonbox"  @click="state.isHistory=true">历史数据</el-button>
+        <!-- <el-button class="buttonbox"  @click="state.isHistory=true">历史数据</el-button> -->
        
       </div>
   </div>
- <LSSJ v-if="state.isHistory" @close="state.isHistory=false"/>
+ <!-- <LSSJ v-if="state.isHistory" @close="state.isHistory=false"/> -->
 </template>
 
 <script setup>
@@ -29,15 +29,15 @@ import model2 from './model/model2'
 import model3 from './model/model3'
 import LSSJ from './model/LSSJ'
 import { reactive,inject  } from "vue";
-const componentList = [JBXX, model1,model2,model3]
+const componentList = [JBXX, model2]//model1,,model3
 
 const emit = defineEmits(['close'])
 const attributes = inject('attributes')
-const navs = ['基本信息', '产能管理','水表管理','定额管理']
+const navs = ['基本信息','水表管理'] //'产能管理',,'定额管理'
 let navIndex = $ref(0)
-const state=reactive({
-isHistory:false
-})
+// const state=reactive({
+// isHistory:false
+// })
 const tabClick=(index)=>{
   navIndex = index
 

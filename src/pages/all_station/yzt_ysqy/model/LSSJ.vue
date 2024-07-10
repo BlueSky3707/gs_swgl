@@ -16,10 +16,10 @@
         </el-col>
 
         <el-col :span="5">
-          <el-button type="primary" style="width: 90px" @click="initEchart()"
+          <el-button type="primary" style="width: 90px" @click="queryChange()"
             >查询</el-button
           >
-          <el-button @click="initEchart()">
+          <el-button @click="queryChange()">
             <el-icon style="vertical-align: middle">
               <refreshRight />
             </el-icon>
@@ -37,15 +37,17 @@
 
 <script setup>
 import { RefreshRight } from "@element-plus/icons";
-import { inject, onMounted, onUnmounted, reactive } from "vue";
+import { inject, onMounted, onUnmounted, reactive} from "vue";
 import dayjs from "dayjs";
 import * as echarts from "echarts";
+import * as postgis from "@/GIS/api/postgis";
 import markRaws from "@/common/tools/markRaws";
 const emit = defineEmits(["close"]);
-const attributes = inject("attributes");
+// const attributes = inject("attributes");
+const {madeno} = defineProps(["madeno"]);
 let chartInit = $ref(null);
 let echartRef = $ref(null);
-console.log(attributes);
+console.log(madeno);
 const state = reactive({
   loading: false,
   data: [
@@ -73,16 +75,13 @@ const state = reactive({
 });
 
 onMounted(() => {
-  state.dateList = state.data.map(function (item) {
-    return item[0];
-  });
-  state.valueList = state.data.map(function (item) {
-    return item[1];
-  });
   timeformate();
-  initEchart();
+  queryChange()
 });
-
+const queryChange = async () => {
+  await initData();
+  initEchart();
+};
 const timeformate = () => {
   state.time = [
     dayjs().subtract(1, "week").format("YYYY-MM-DD"),
@@ -91,6 +90,34 @@ const timeformate = () => {
 };
 onUnmounted(() => {});
 
+const initData = async () => {
+  let param = {
+    layerName: "byswj_sblssj",
+    filter:
+      "madeno='" +
+      madeno +
+      "' and date_trunc('day', time) >= '" +
+      state.time[0] +
+      "' and date_trunc('day', time) <'" +
+      state.time[1]+"'",
+    isReturnGeometry: false,
+    isCache: false,
+    spatialRel: "INTERSECTS",
+    orderByFields:"order by time"
+  };
+  let pdata = await postgis.search(param);
+  if (pdata?.data?.data?.features) {
+    state.dateList = pdata.data.data.features.map(function (item) {
+      return dayjs(item.attributes.time).format("YYYY-MM-DD:HH");
+    });
+    state.valueList = pdata.data.data.features.map(function (item) {
+      return item.attributes.todaytraffic??0;
+    });
+  } else {
+    state.dateList = [];
+    state.valueList = [];
+  }
+};
 //历史监测数据
 const initEchart = () => {
   state.loading = true;
@@ -149,7 +176,7 @@ const initEchart = () => {
         type: "line",
         showSymbol: false,
         data: state.valueList,
-        areaStyle: {}
+        areaStyle: {},
       },
     ],
   };
