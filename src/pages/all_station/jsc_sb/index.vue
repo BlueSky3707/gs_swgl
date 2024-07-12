@@ -1,17 +1,22 @@
 <template>
-  <JscBox :title="attributes.name" v-if="showIndex == 0" @close="emit('close')">
+  <JscBox
+    :title="attributes.metername"
+    v-if="showIndex == 0"
+    @close="emit('close')"
+  >
     <div class="title">
       <span>报警信息</span>
     </div>
     <div class="bj_content">
       <div class="con_item">
         <div class="con_tit">报警时间：</div>
-        <div class="con_txt">1111</div>
+        <div class="con_txt">{{ getBjTime() }}</div>
       </div>
       <div class="con_item">
         <div class="con_tit">报警类型：</div>
         <div class="con_tit">
-          <img src="@/assets/image/cb.png" />
+          <span>无数据</span>
+          <!-- <img src="@/assets/image/cb.png" /> -->
         </div>
       </div>
       <div class="con_item">
@@ -20,12 +25,12 @@
           <div class="con_txt">监测站数据传输异常</div>
         </div>
       </div>
-      <div class="con_item">
+      <!-- <div class="con_item">
         <div class="con_tit">报警通知：</div>
         <div class="con_tit">
           <div class="con_txt">已发送通知，通知人数为12。</div>
         </div>
-      </div>
+      </div> -->
       <!-- <div class="gbbj" @click="closeBj">
         <img src="@/assets/water/gbbj.png"/>
         关闭报警
@@ -63,7 +68,9 @@ import { ElMessage } from "element-plus";
 import * as echarts from "echarts";
 import markRaws from "@/common/tools/markRaws";
 import { useStore } from "vuex";
+import * as dayjs from "dayjs";
 import * as baseLayerUtils from "@/GIS/mapUtils/baselayer";
+import { search } from "@/GIS/api/postgis";
 let chartInit = $ref(null);
 let echartRef = $ref(null);
 const store = useStore();
@@ -71,10 +78,12 @@ const attributes = inject("attributes");
 const emit = defineEmits(["close"]);
 console.log(attributes);
 import cbbg from "@/assets/image/cbbg.png";
-
+const getBjTime = () => {
+  return dayjs(attributes.zytime).format("YYYY-MM-DD");
+};
 const state = reactive({
   loading: true,
-  data: {},
+
 
   tiles: "报警详情",
   data: [
@@ -109,13 +118,29 @@ const getVideoList = () => {};
 const init = () => {
   initEchart();
 };
-onMounted(() => {
-  state.dateList = state.data.map(function (item) {
-    return item[0];
-  });
-  state.valueList = state.data.map(function (item) {
-    return item[1];
-  });
+onMounted(async () => {
+  let param = {
+    layerName: "byswj_sblssj",
+    filter:
+      "madeno='" +
+      attributes.madeno +
+      "' and metername= '" +
+      attributes.metername +
+      "'",
+    isReturnGeometry: false,
+    isCache: false,
+    spatialRel: "INTERSECTS",
+    orderByFields: "order by time",
+  };
+  state.dateList = [];
+  state.valueList = [];
+  let res = await search(param);
+  if (res.data.data.features && res.data.data.features.length > 0) {
+    res.data.data.features.map((ite) => {
+      state.dateList.push(dayjs(ite.attributes.time).format("YYYY-MM-DD HH"));
+      state.valueList.push(ite.attributes.todaytraffic);
+    });
+  }
   initEchart();
 });
 const closeBj = () => {};

@@ -1,10 +1,10 @@
 <template>
   <div class="header">
-     <!-- <img
+     <img
       class="logClass"
       src="@/assets/common/swlogs.png"
       style="cursor: pointer"
-    />  -->
+    /> 
     <div class="leftNavs">
       <div
         v-for="item in leftNavs"
