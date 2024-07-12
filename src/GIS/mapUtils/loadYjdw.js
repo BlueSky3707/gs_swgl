@@ -3,7 +3,7 @@ import { removeOverlaysById } from "@/GIS/mapUtils/baselayer";
 import { layers } from "../config/layerConfig";
 import { initLayers } from "../mapUtils/layersManger";
 import { search } from "@/GIS/api/postgis";
-import * as dayjs from "dayjs";
+import  dayjs from "dayjs";
 // let yjInterval = null;
 // 预警点位图层
 export const addYjLayer = () => {

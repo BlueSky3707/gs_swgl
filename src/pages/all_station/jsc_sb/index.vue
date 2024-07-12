@@ -68,7 +68,7 @@ import { ElMessage } from "element-plus";
 import * as echarts from "echarts";
 import markRaws from "@/common/tools/markRaws";
 import { useStore } from "vuex";
-import * as dayjs from "dayjs";
+import  dayjs from "dayjs";
 import * as baseLayerUtils from "@/GIS/mapUtils/baselayer";
 import { search } from "@/GIS/api/postgis";
 let chartInit = $ref(null);
