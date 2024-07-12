@@ -35,7 +35,7 @@
         <div class="topCards topCard_left_2">
           <div class="span1">本月报警次数</div>
           <div class="span2">
-            <span class="span2_1">{{ state.monthcount  }}</span>
+            <span class="span2_1">{{ state.monthcount }}</span>
             <span class="span2_2">次</span>
           </div>
         </div>
@@ -47,7 +47,7 @@
       <!-- 表头 -->
       <div class="table">
         <div style="text-align: center">序号</div>
-         <div>编号</div>
+        <div>编号</div>
         <div>报警名称</div>
         <div>报警时间</div>
         <div>报警内容</div>
@@ -59,10 +59,13 @@
           :key="index"
           class="list_row"
           :class="index % 2 == 0 ? 'bjColor' : ''"
+          @click="clickRow(item)"
         >
           <div class="row_span1">{{ index + 1 }}</div>
           <div class="row_span2" :title="item.madeno">{{ item.madeno }}</div>
-          <div class="row_span2" :title="item.metername">{{ item.metername }}</div>
+          <div class="row_span2" :title="item.metername">
+            {{ item.metername }}
+          </div>
           <div class="row_span3" :title="item.zytime">{{ item.zytime }}</div>
           <div class="row_span4" :title="item.nr">{{ item.nr }}</div>
           <!--          <div class="row_span5">-->
@@ -77,19 +80,22 @@
 <script setup>
 import { onMounted, reactive } from "vue";
 import dayjs from "dayjs";
+import Feature from "ol/Feature";
+import Point from "ol/geom/Point";
 import * as echarts from "echarts";
 import { search } from "@/GIS/api/postgis";
+import * as baseLayerUtils from "@/GIS/mapUtils/baselayer";
 import markRaws from "@/common/tools/markRaws";
 const state = reactive({
   openType: true, // 列表显示
-  monthcount:0,
-  curcount:0,
+  monthcount: 0,
+  curcount: 0,
   dateList: null,
   valueList: null,
   // 列表数据
   tableList: [],
 });
-onMounted(async() => {
+onMounted(async () => {
   //  state.dateList = state.data.map(function (item) {
   //   return item[0];
   // });
@@ -101,34 +107,33 @@ onMounted(async() => {
     isReturnGeometry: false,
     spatialRel: "INTERSECTS",
     isCache: false,
-    filter: "zytime = '" + dayjs().format("YYYY-MM-DD") + "'"
+    filter: "zytime = '" + dayjs().format("YYYY-MM-DD") + "'",
   };
-  let res = await search(param)
+  let res = await search(param);
   if (res.data.data.features && res.data.data.features.length > 0) {
-    state.tableList  = res.data.data.features.map(ite => {
-      ite.attributes.nr="数据异常"
-      ite.attributes.zytime=dayjs(ite.attributes.zytime).format("YYYY-MM-DD")
-        return ite.attributes
-    })
-    state.curcount=res.data.data.features.length
-  }else{
-    state.tableList =[]
-     state.curcount=0
+    state.tableList = res.data.data.features.map((ite) => {
+      ite.attributes.nr = "数据异常";
+      ite.attributes.zytime = dayjs(ite.attributes.zytime).format("YYYY-MM-DD");
+      return ite.attributes;
+    });
+    state.curcount = res.data.data.features.length;
+  } else {
+    state.tableList = [];
+    state.curcount = 0;
   }
-  
 
-   let param2 = {
+  let param2 = {
     layerName: "byswgl_yjjl_month_v",
     isReturnGeometry: false,
     spatialRel: "INTERSECTS",
     isCache: false,
-    filter: "zytime = '" + dayjs().format("YYYY-MM-01") + "'"
+    filter: "zytime = '" + dayjs().format("YYYY-MM-01") + "'",
   };
-  let res2 = await search(param2)
-   if (res2.data.data.features && res2.data.data.features.length > 0) {
-    state.monthcount=res2.data.data.features[0]?.attributes.count
-  }else{
-     state.monthcount=0
+  let res2 = await search(param2);
+  if (res2.data.data.features && res2.data.data.features.length > 0) {
+    state.monthcount = res2.data.data.features[0]?.attributes.count;
+  } else {
+    state.monthcount = 0;
   }
 });
 //历史监测数据
@@ -189,7 +194,7 @@ const initEchart = () => {
         type: "line",
         showSymbol: false,
         data: state.valueList,
-        areaStyle: {}
+        areaStyle: {},
       },
     ],
   };
@@ -208,7 +213,19 @@ const closeList = () => {
 
 // 列表 点击
 const clickRow = (item) => {
-  console.log(item);
+  let marklayer = baseLayerUtils.getLayerByid("mark");
+  marklayer.getSource().clear();
+  marklayer.getSource().addFeature(
+    new Feature({
+      attributes: item,
+      geometry: new Point([Number(item.ns), Number(item.we)]),
+    })
+  );
+  window.$olMap.getView().animate({
+    center: [Number(item.ns), Number(item.we)],
+    zoom: 15,
+    duration: 1000,
+  });
 };
 </script>
 
@@ -412,7 +429,6 @@ const clickRow = (item) => {
         text-align: center;
         color: #e3c7af;
       }
-
 
       .row_span4 {
         color: #ff6621;
