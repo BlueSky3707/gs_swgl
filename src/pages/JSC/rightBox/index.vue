@@ -25,7 +25,7 @@
         <div class="topCards topCard_left_1">
           <div class="span1">当前报警站点数量</div>
           <div class="span2">
-            <span class="span2_1">{{ 3 }}</span>
+            <span class="span2_1">{{ state.curcount }}</span>
             <span class="span2_2">个</span>
           </div>
         </div>
@@ -35,7 +35,7 @@
         <div class="topCards topCard_left_2">
           <div class="span1">本月报警次数</div>
           <div class="span2">
-            <span class="span2_1">{{ 9 }}</span>
+            <span class="span2_1">{{ state.monthcount  }}</span>
             <span class="span2_2">次</span>
           </div>
         </div>
@@ -47,6 +47,7 @@
       <!-- 表头 -->
       <div class="table">
         <div style="text-align: center">序号</div>
+         <div>编号</div>
         <div>报警名称</div>
         <div>报警时间</div>
         <div>报警内容</div>
@@ -60,8 +61,9 @@
           :class="index % 2 == 0 ? 'bjColor' : ''"
         >
           <div class="row_span1">{{ index + 1 }}</div>
-          <div class="row_span2" :title="item.name">{{ item.name }}</div>
-          <div class="row_span3" :title="item.time">{{ item.time }}</div>
+          <div class="row_span2" :title="item.madeno">{{ item.madeno }}</div>
+          <div class="row_span2" :title="item.metername">{{ item.metername }}</div>
+          <div class="row_span3" :title="item.zytime">{{ item.zytime }}</div>
           <div class="row_span4" :title="item.nr">{{ item.nr }}</div>
           <!--          <div class="row_span5">-->
           <!--            <img src="@/assets/image/row.png" @click="clickRow(item)">-->
@@ -76,44 +78,58 @@
 import { onMounted, reactive } from "vue";
 import dayjs from "dayjs";
 import * as echarts from "echarts";
+import { search } from "@/GIS/api/postgis";
 import markRaws from "@/common/tools/markRaws";
 const state = reactive({
   openType: true, // 列表显示
-   data: [
-    ["2024-02-05", 116],
-    ["2024-02-06", 129],
-    ["2024-02-07", 135],
-    ["2024-02-08", 86],
-    ["2024-02-09", 73],
-    ["2024-02-10", 85],
-    ["2024-02-11", 73],
-    ["2024-02-12", 68],
-    ["2024-02-13", 92],
-
-  ],
+  monthcount:0,
+  curcount:0,
   dateList: null,
   valueList: null,
   // 列表数据
   tableList: [],
 });
-onMounted(() => {
-   state.dateList = state.data.map(function (item) {
-    return item[0];
-  });
-  state.valueList = state.data.map(function (item) {
-    return item[1];
-  });
-  state.tableList = [
-    { name: "监测站A", time: "2024-02-28", nr: "数据异常" },
-    { name: "监测站B", time: "2024-02-27", nr: "数据异常" },
-    { name: "监测站C", time: "2024-02-27", nr: "数据异常" },
-    { name: "监测站A", time: "2024-02-01", nr: "数据异常" },
-    { name: "监测站B", time: "2024-02-10", nr: "数据异常" },
-    { name: "监测站C", time: "2024-02-09", nr: "数据异常" },
-    { name: "监测站A", time: "2024-02-08", nr: "数据异常" },
-    { name: "监测站B", time: "2024-02-07", nr: "数据异常" },
-    { name: "监测站C", time: "2024-02-03", nr: "数据异常" },
-  ];
+onMounted(async() => {
+  //  state.dateList = state.data.map(function (item) {
+  //   return item[0];
+  // });
+  // state.valueList = state.data.map(function (item) {
+  //   return item[1];
+  // });
+  let param = {
+    layerName: "byswgl_yjjl",
+    isReturnGeometry: false,
+    spatialRel: "INTERSECTS",
+    isCache: false,
+    filter: "zytime = '" + dayjs().format("YYYY-MM-DD") + "'"
+  };
+  let res = await search(param)
+  if (res.data.data.features && res.data.data.features.length > 0) {
+    state.tableList  = res.data.data.features.map(ite => {
+      ite.attributes.nr="数据异常"
+      ite.attributes.zytime=dayjs(ite.attributes.zytime).format("YYYY-MM-DD")
+        return ite.attributes
+    })
+    state.curcount=res.data.data.features.length
+  }else{
+    state.tableList =[]
+     state.curcount=0
+  }
+  
+
+   let param2 = {
+    layerName: "byswgl_yjjl_month_v",
+    isReturnGeometry: false,
+    spatialRel: "INTERSECTS",
+    isCache: false,
+    filter: "zytime = '" + dayjs().format("YYYY-MM-01") + "'"
+  };
+  let res2 = await search(param2)
+   if (res2.data.data.features && res2.data.data.features.length > 0) {
+    state.monthcount=res2.data.data.features[0]?.attributes.count
+  }else{
+     state.monthcount=0
+  }
 });
 //历史监测数据
 const initEchart = () => {
@@ -356,7 +372,7 @@ const clickRow = (item) => {
       border-bottom: 1px solid rgba(255, 152, 62, 0.7);
       padding-bottom: 4px;
       display: grid;
-      grid-template-columns: 40px 90px 90px 1fr;
+      grid-template-columns: 40px 90px 90px 90px 1fr;
       grid-column-gap: 5px;
 
       div {
@@ -366,7 +382,7 @@ const clickRow = (item) => {
 
     .list {
       width: 100%;
-      height: 67vh;
+      height: 63vh;
       margin-top: 3px;
       overflow-y: auto;
 
@@ -377,7 +393,7 @@ const clickRow = (item) => {
         font-size: 13px;
         display: grid;
         align-items: center;
-        grid-template-columns: 40px 90px 90px 1fr 40px;
+        grid-template-columns: 40px 90px 90px 90px 1fr;
         grid-column-gap: 5px;
 
         div {
@@ -397,11 +413,6 @@ const clickRow = (item) => {
         color: #e3c7af;
       }
 
-      .row_span2 {
-      }
-
-      .row_span3 {
-      }
 
       .row_span4 {
         color: #ff6621;
