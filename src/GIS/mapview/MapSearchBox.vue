@@ -2,7 +2,7 @@
  <div class="box">
   <div class="city">
     <el-select
-    
+    style="width:120px"
       v-model="store.state.xzq"
       @change="cityChange"
       placeholder="白银市"
@@ -121,7 +121,7 @@ import { ArrowLeftBold, ArrowRightBold, Search } from "@element-plus/icons-vue";
 import { ElMessage } from "element-plus";
 import { useRouter, useRoute } from "vue-router";
 import { getLayerByid } from "../mapUtils/baselayer";
-import { list,tableMLayerid,searchlist } from "./searchConfig";
+import { list,tableMLayerid } from "./searchConfig";
 import { Feature } from "ol";
 import { Style, Icon, Text, Fill, Stroke } from "ol/style";
 import { Point } from "ol/geom";
@@ -245,7 +245,7 @@ const pageNumChange = (val) => {
   sousuoFun();
 };
 
-const sousuoFun = (pageNum) => {
+const sousuoFun3 = (pageNum) => {
   let marklayer = getLayerByid("searchtmpid");
   marklayer.getSource().clear();
 
@@ -275,7 +275,7 @@ const sousuoFun = (pageNum) => {
     }
     state.resultData = slist;
 }
-const sousuoFun2 = (pageNum) => {
+const sousuoFun = (pageNum) => {
   let marklayer = getLayerByid("searchtmpid");
   marklayer.getSource().clear();
 
@@ -570,7 +570,7 @@ const cityChange = (e) => {
   position: absolute;
   left: 330px;
   top: 60px;
-  width: 110px;
+  width: 120px;
   height: 36px;
   border-radius: 4px;
   background-image: url("@/assets/common/select.png");

@@ -2,7 +2,7 @@
   <div class="max">
     <div class="rows">
       <div class="rows_left">名称</div>
-      <div>{{ attributes.metername }}</div>
+      <div>{{ attributes.metername||attributes.name }}</div>
     </div>
     <div class="rows">
       <div class="rows_left">地址</div>

@@ -43,7 +43,7 @@ onMounted(() => {
   state.tableData = [];
   let param = {
     layerName: "byswj_sbxx",
-    filter: "metername='" + attributes.metername + "'",
+    filter: "metername='" + (attributes.metername??attributes.name) + "'",
     isReturnGeometry: false,
     isCache: false,
     spatialRel: "INTERSECTS",

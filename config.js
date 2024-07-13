@@ -17,7 +17,7 @@ module.exports = {
                 rewrite: (path) => path.replace("/dbapi", ""),
             },
             "/sapi": {
-                target: "http://114.116.91.200:8085",
+                target: "http://114.116.91.200:9000",
                 changeOrigin: true,
                 rewrite: (path) => path.replace("/sapi", ""),
             },
