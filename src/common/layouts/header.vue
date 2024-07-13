@@ -25,6 +25,7 @@
 <script setup>
 import kq from "@/assets/common/kq.png";
 import jsc from "@/assets/common/gf.png";
+import fs from "@/assets/common/fs.png";
 import { watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useStore } from "vuex";
@@ -32,7 +33,7 @@ import { useStore } from "vuex";
 const leftNavs = [
   { title: "驾驶舱", router: "/jsc", icon: jsc },
   { title: "一张图", router: "/yzt", icon: kq },
-  { title: "后台管理", url: "http://localhost:80/", icon: kq },
+  { title: "后台管理", url: "http://localhost:80/", icon: fs },
 ];
 const rightNavs = [];
 
