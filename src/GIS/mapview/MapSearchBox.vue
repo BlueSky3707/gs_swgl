@@ -188,8 +188,8 @@ const cardClick = async(item) => {
   marklayer.setStyle((feature) => {
     return new Style({
       image: new Icon({
-        src: new URL("/layers/dingwei.png", import.meta.url).href,
-        scale: [1.5, 1.5],
+        src: new URL("/layers/mark.png", import.meta.url).href,
+        scale: [0.8, 0.8],
       }),
       text: new Text({
         textAlign: "center",
@@ -207,7 +207,7 @@ const cardClick = async(item) => {
     });
   });
   window.$olMap.getView().setCenter(point);
-  window.$olMap.getView().setZoom(13);
+  window.$olMap.getView().setZoom(12.5);
 };
 // 分页变化
 const initPage = () => {

@@ -64,6 +64,8 @@ const close = () => {
   store.commit("setLayerInfo", null);
   let marklayer = baseLayerUtils.getLayerByid("mark");
   marklayer.getSource().clear();
+  marklayer = baseLayerUtils.getLayerByid("searchtmpid");
+  marklayer.getSource().clear();
 };
 // 传递参数
 provide("attributes", store.state.layerInf?.values_?.attributes);

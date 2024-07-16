@@ -68,7 +68,7 @@ onMounted(async () => {
 
         window.$olMap.getView().animate({
           center: coordinate,
-          zoom: 12,
+          zoom: 12.6,
           duration: 1000,
         });
       }

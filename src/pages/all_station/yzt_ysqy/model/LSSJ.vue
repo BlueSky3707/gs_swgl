@@ -37,7 +37,7 @@
 
 <script setup>
 import { RefreshRight } from "@element-plus/icons";
-import { inject, onMounted, onUnmounted, reactive,watch } from "vue";
+import { inject, onMounted, onUnmounted, reactive, watch } from "vue";
 import dayjs from "dayjs";
 import * as echarts from "echarts";
 import * as postgis from "@/GIS/api/postgis";
@@ -164,6 +164,11 @@ const initEchart = () => {
       {
         type: "line",
         showSymbol: false,
+        tooltip: {
+          valueFormatter: function (value) {
+            return value + "(立方米)";
+          },
+        },
         data: state.valueList,
         areaStyle: {},
       },
