@@ -49,6 +49,7 @@ onMounted(() => {
     spatialRel: "INTERSECTS",
   };
   postgis.search(param).then((res) => {
+    console.log(res)
     if (res.data.data.features && res.data.data.features.length > 0) {
       state.tableData = res.data.data.features.map((it) => {
         it.attributes.state = it.attributes.state == "1" ? "在用" : "停用";

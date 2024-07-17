@@ -2,7 +2,7 @@
   <div id="content">
     <MapView ></MapView>
    
-    <!-- <MapTools  ></MapTools> -->
+    <OnlineData ></OnlineData>
 
     <MapSearchBox ></MapSearchBox>
 
@@ -10,8 +10,7 @@
 </template>
 <script setup>
 import MapView from "./mapview/MapView.vue";
-
-// import MapTools from "./mapview/MapTools.vue";
+ import OnlineData from "./mapview/OnlineData.vue";
 import MapHover from "./mapview/MapHover.vue";
 import MapSearchBox from "./mapview/MapSearchBox.vue";
 
