@@ -102,13 +102,12 @@ onMounted(async () => {
     isReturnGeometry: false,
     spatialRel: "INTERSECTS",
     isCache: false,
-    filter: "time = '" + dayjs().add(-1,'day').format("YYYY-MM-DD") + "'" + " and todaytraffic > 0",
+    filter: "to_char(time, 'YYYY-MM-DD') = '" + dayjs().add(-1,'day').format("YYYY-MM-DD") + "'" ,
   };
-
   let res = await search(param);
   if (res.data.data.features && res.data.data.features.length > 0) {
     state.tableList = res.data.data.features.map((ite) => {
-      ite.attributes.zytime = dayjs(ite.attributes.zytime).format("YYYY-MM-DD");
+      ite.attributes.zytime = dayjs(ite.attributes.zytime).format("YYYY-MM-DD HH:mm:ss");
       return ite.attributes;
     });
     state.curcount = res.data.data.features.length;

@@ -33,7 +33,7 @@ import { useStore } from "vuex";
 const leftNavs = [
   { title: "驾驶舱", router: "/jsc", icon: jsc },
   { title: "一张图", router: "/yzt", icon: kq },
-  { title: "后台管理", url: "http://localhost:80/", icon: fs },
+  { title: "后台管理", url: "http://114.116.91.200:8411", icon: fs },
 ];
 const rightNavs = [];
 

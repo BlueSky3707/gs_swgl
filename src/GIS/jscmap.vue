@@ -2,7 +2,7 @@
   <div id="gis-content">
    
     <JSCMapView ></JSCMapView>
-    <MapTj></MapTj>
+    <!-- <MapTj></MapTj> -->
   </div>
 </template>
 <script setup>

@@ -1,13 +1,14 @@
 <template>
-  <!-- 图例 -->
-  <Tuli/>
-  <!-- 报警列表 -->
-  <RightBox/>
+    <RightBox />
+    <LightBox />
 
 </template>
 
 <script setup>
-import Tuli from './Tuli'
-import RightBox from './rightBox'
-
+import Tuli from "./Tuli";
+import LightBox from "./lBox";
+import RightBox from "./rBox";
 </script>
+<style scoped lang="scss">
+
+</style>
