@@ -1,20 +1,33 @@
 <template>
-           <div class="right-body">
-                <div class="right-top public-bg">
-                    <div class="public-title">水质污染TOP5</div>
-                    <div class="title-nav">
-                     
-                    </div>
-                </div>
-                <div class="right-con public-bg">
-                    <div class="public-title">水质类别占比</div>
-                    <div class="title-nav" id="huaxing"></div>
-                </div>
-                <div class="right-bottom public-bg">
-                    <div class="public-title">主要地区水流量</div>
-                    <div class="title-nav" id="zhexian"></div>
-                </div>
-            </div>
+  <div class="right-body">
+    <div class="right-top public-bg">
+      <div class="public-title">水质污染TOP5</div>
+      <div class="title-nav">
+        <div class="tile-img">
+          <div class="type_img">
+            <img class="loc_img" src="/layers/dq_cljcz.png" alt="" />
+            <span class="texsp">200</span>
+          </div>
+          <div class="type_img">
+            <img class="loc_img" src="/layers/dq_ygjc.png" alt="" />
+            <span class="texsp">200</span>
+          </div>
+          <div class="type_img">
+            <img class="loc_img" src="/layers/dq_clzlz.png" alt="" />
+            <span class="texsp">200</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="right-con public-bg">
+      <div class="public-title">水质类别占比</div>
+      <div class="title-nav" id="huaxing"></div>
+    </div>
+    <div class="right-bottom public-bg">
+      <div class="public-title">主要地区水流量</div>
+      <div class="title-nav" id="zhexian"></div>
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -170,52 +183,75 @@ const clickRow = (item) => {
 </script>
 
 <style scoped lang="scss">
-.public-bg{
-    background: rgba(12,26,63,0.3);
+.public-bg {
+  background: rgba(12, 26, 63, 0.3);
 }
-.public-title{
-    width: calc(100% - 20px);
-    height: 30px;
-    position: relative;
-    top: 0;
-    left: 5px;
-    color: white;
-    padding-left: 16px;
-    line-height: 30px;
-    font-size: 13px;
+.public-title {
+  width: calc(100% - 20px);
+  height: 30px;
+  position: relative;
+  top: 0;
+  left: 5px;
+  color: white;
+  padding-left: 16px;
+  line-height: 30px;
+  font-size: 13px;
 }
-.public-title:before{
-    width: 4px;
-    height: 20px;
-    top: 5px;
-    position: absolute;
-    content: "";
-    background: #2997e4;
-    border-radius: 2px;
-    left: 5px;
+.public-title:before {
+  width: 4px;
+  height: 20px;
+  top: 5px;
+  position: absolute;
+  content: "";
+  background: #2997e4;
+  border-radius: 2px;
+  left: 5px;
 }
-.right-body{
-    width: 22%;
-    right: 0px;
-    margin:0 0.3%;
-    top: 75px;
-    height: calc(100% - 75px);
-    position:absolute;
-}
-
-.right-body .right-top{
-    width: 100%;
-    height: 32%;
+.right-body {
+  overflow: hidden;
+  width: 22%;
+  right: 0px;
+  margin: 0 0.3%;
+  top: 75px;
+  height: calc(100% - 75px);
+  position: absolute;
 }
 
-.right-body .right-con{
-    width: 100%;
-    height: 25%;
-    margin-top: 2%;
+.right-body .right-top {
+  width: 100%;
+  height: 12%;
 }
-.right-body .right-bottom{
-    width: 100%;
-    height: 39%;
-    margin-top: 2%;
+.tile-img {
+  display: flex;
+  padding-left: 10px;
+  width: 100%;
+  height: 80px;
+  text-align: center;
+  line-height: 85px;
+  padding-top: 5px;
+}
+.type_img {
+  width: 130px;
+  height: 75px;
+}
+.type_img .loc_img {
+  width: 30px;
+  height: 30px;
+}
+.texsp {
+  position: relative;
+  top: -8px;
+  padding-left: 10px;
+}
+
+.right-body .right-con {
+  width: 100%;
+  height: 45%;
+  margin-top: 2%;
+}
+.right-body .right-bottom {
+  width: 100%;
+  height: 39%;
+  margin-top: 2%;
 }
 </style>
