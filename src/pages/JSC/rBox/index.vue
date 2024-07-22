@@ -23,8 +23,10 @@
       </div>
     </div>
     <div class="right-con public-bg">
-      <div class="public-title">水质类别占比</div>
-      <div class="title-nav" id="huaxing"></div>
+      <div class="public-title">不同时段行业类型占比</div>
+      <div class="title-nav" id="huaxing">
+        <model2></model2>
+      </div>
     </div>
     <div class="right-bottom public-bg">
       <div class="public-title">预警列表</div>
@@ -37,6 +39,7 @@
 <script setup>
 import { onMounted, reactive } from "vue";
 import model3 from "./components/model3.vue";
+import model2 from "./components/model2.vue";
 const state = reactive({});
 onMounted(async () => {});
 </script>
@@ -113,12 +116,12 @@ onMounted(async () => {});
 }
 .right-body .right-con {
   width: 100%;
-  height: 45%;
+  height: 28%;
   margin-top: 2%;
 }
 .right-body .right-bottom {
   width: 100%;
-  height: 39%;
+  height: 56%;
   margin-top: 2%;
 }
 </style>

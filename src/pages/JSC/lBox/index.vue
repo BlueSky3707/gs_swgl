@@ -1,12 +1,12 @@
 <template>
   <div class="left-body">
     <div class="left-top public-bg">
-      <div class="public-title">重点水质量检测区</div>
+      <div class="public-title">白银市用水统计</div>
       <div class="top-body">
         <div class="top-left">
           <div class="top-left-title">
-            <h6>注水量</h6>
-            <span><b>1756</b>m3/h</span>
+            <h6>当天用水量</h6>
+            <span><b>1756</b>m3</span>
             <img
               src="/layers/pictre.png"
             />
@@ -14,8 +14,8 @@
         </div>
         <div class="top-right">
           <div class="top-left-title">
-            <h6>泄水量</h6>
-            <span><b>3520</b>m3/h</span>
+            <h6>累计用水量</h6>
+            <span><b>3520</b>m3</span>
              <img
               src="/layers/pictre.png"
             />
