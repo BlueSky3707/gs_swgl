@@ -19,6 +19,7 @@
     "proj4": "^2.9.0",
     "vue": "3.2.47",
     "vue-router": "4.1.1",
+    "vue3-seamless-scroll": "^2.0.1",
     "vuex": "^4.0.2"
   },
   "devDependencies": {
