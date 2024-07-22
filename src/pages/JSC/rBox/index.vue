@@ -2,7 +2,25 @@
   <div class="right-body">
     <div class="right-top public-bg">
       <div class="public-title">水质污染TOP5</div>
-      <div class="title-nav"></div>
+      <div class="title-nav">
+        <div class="tile-img">
+          <div class="type_img">
+            <img class="loc_img" src="/layers/dq_cljcz.png" alt="" />
+            <span class="texsp">200</span>
+            <div class="texttile">用水企业数量</div>
+          </div>
+          <div class="type_img">
+            <img class="loc_img" src="/layers/dq_ygjc.png" alt="" />
+            <span class="texsp">200</span>
+             <div class="texttile">取水口数量</div>
+          </div>
+          <div class="type_img">
+            <img class="loc_img" src="/layers/dq_clzlz.png" alt="" />
+            <span class="texsp">200</span>
+            <div class="texttile">监测点数量</div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="right-con public-bg">
       <div class="public-title">水质类别占比</div>
@@ -49,6 +67,7 @@ onMounted(async () => {});
   left: 5px;
 }
 .right-body {
+  overflow: hidden;
   width: 22%;
   right: 0px;
   margin: 0 0.3%;
@@ -59,12 +78,42 @@ onMounted(async () => {});
 
 .right-body .right-top {
   width: 100%;
-  height: 32%;
+  height: 12%;
 }
+.tile-img {
+  display: flex;
+  padding-left: 10px;
+  width: 100%;
+  height: 55px;
+  text-align: center;
+  line-height: 55px;
 
+}
+.type_img {
+  width: 130px;
+  height: 55px;
+}
+.type_img .loc_img {
+  width: 30px;
+  height: 30px;
+}
+.texsp {
+  position: relative;
+  top: -8px;
+  padding-left: 10px;
+}
+.texttile{
+  position: relative;
+  top: -10px;
+  width: 130px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  padding-left: 10px;
+}
 .right-body .right-con {
   width: 100%;
-  height: 25%;
+  height: 45%;
   margin-top: 2%;
 }
 .right-body .right-bottom {

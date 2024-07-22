@@ -7,14 +7,18 @@
           <div class="top-left-title">
             <h6>注水量</h6>
             <span><b>1756</b>m3/h</span>
-            <img src="image/pictre.png" />
+            <img
+              src="/layers/pictre.png"
+            />
           </div>
         </div>
         <div class="top-right">
           <div class="top-left-title">
             <h6>泄水量</h6>
             <span><b>3520</b>m3/h</span>
-            <img src="image/pictre.png" />
+             <img
+              src="/layers/pictre.png"
+            />
           </div>
         </div>
       </div>
@@ -27,7 +31,6 @@
     </div>
     <div class="left-bottom public-bg">
       <div class="public-title">企业用水排名</div>
-      <!-- <div class="title-nav" id="wuran"></div> -->
       <model3 />
     </div>
   </div>
