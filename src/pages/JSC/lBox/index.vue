@@ -8,7 +8,7 @@
             <h6>注水量</h6>
             <span><b>1756</b>m3/h</span>
             <img
-              src="image/pictre.png"
+              src="/layers/pictre.png"
             />
           </div>
         </div>
@@ -16,8 +16,8 @@
           <div class="top-left-title">
             <h6>泄水量</h6>
             <span><b>3520</b>m3/h</span>
-            <img
-              src="image/pictre.png"
+             <img
+              src="/layers/pictre.png"
             />
           </div>
         </div>

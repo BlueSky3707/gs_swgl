@@ -7,14 +7,17 @@
           <div class="type_img">
             <img class="loc_img" src="/layers/dq_cljcz.png" alt="" />
             <span class="texsp">200</span>
+            <div class="texttile">用水企业数量</div>
           </div>
           <div class="type_img">
             <img class="loc_img" src="/layers/dq_ygjc.png" alt="" />
             <span class="texsp">200</span>
+             <div class="texttile">取水口数量</div>
           </div>
           <div class="type_img">
             <img class="loc_img" src="/layers/dq_clzlz.png" alt="" />
             <span class="texsp">200</span>
+            <div class="texttile">监测点数量</div>
           </div>
         </div>
       </div>
@@ -225,14 +228,14 @@ const clickRow = (item) => {
   display: flex;
   padding-left: 10px;
   width: 100%;
-  height: 80px;
+  height: 55px;
   text-align: center;
-  line-height: 85px;
-  padding-top: 5px;
+  line-height: 55px;
+
 }
 .type_img {
   width: 130px;
-  height: 75px;
+  height: 55px;
 }
 .type_img .loc_img {
   width: 30px;
@@ -243,7 +246,15 @@ const clickRow = (item) => {
   top: -8px;
   padding-left: 10px;
 }
-
+.texttile{
+  position: relative;
+  top: -10px;
+  width: 130px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  padding-left: 10px;
+}
 .right-body .right-con {
   width: 100%;
   height: 45%;
