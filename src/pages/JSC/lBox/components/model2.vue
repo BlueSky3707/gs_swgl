@@ -40,11 +40,11 @@ const initEchart = () => {
       top: "5%",
       left: "center",
       textStyle: {
-        color: "#3398DB",
+        color: "white",
       },
       data: ["工业用水", "生活用水", "农田灌溉", "制水供水"],
     },
-
+   
     tooltip: {
       // trigger: "axis",
       // formatter: function (params) {
@@ -54,7 +54,7 @@ const initEchart = () => {
       //   return str
       // },
     },
-     grid: {
+    grid: {
       top: "20%",
       left: "5%",
       right: "5%",
@@ -68,7 +68,7 @@ const initEchart = () => {
       axisLabel: {
         show: true,
         textStyle: {
-          color: "#3398DB",
+          color: "white",
         },
       },
       data: ["白银区", "平川区", "靖远县", "景泰县", "会宁县"],
@@ -79,7 +79,7 @@ const initEchart = () => {
       axisLabel: {
         show: true,
         textStyle: {
-          color: "#3398DB",
+          color: "white",
         },
       },
     },
@@ -92,20 +92,25 @@ const initEchart = () => {
         stack: "total",
         barWidth: 15,
         data: ss[0],
+        itemStyle: {color: '#c06556'}
       },
-      {
-        name: "生活用水",
-        type: "bar",
-        stack: "total",
-        barWidth: 15,
-        data: ss[1],
-      },
+      
       {
         name: "农田灌溉",
         type: "bar",
         stack: "total",
         barWidth: 15,
+        data: ss[1],
+         itemStyle: {color: '#1eeef3'}
+      },
+
+      {
+        name: "生活用水",
+        type: "bar",
+        stack: "total",
+        barWidth: 15,
         data: ss[2],
+         itemStyle: {color: '#eca751'}
       },
       {
         name: "制水供水",
@@ -113,6 +118,7 @@ const initEchart = () => {
         stack: "total",
         barWidth: 15,
         data: ss[3],
+         itemStyle: {color: '#2b7bec'}
       },
     ],
   };

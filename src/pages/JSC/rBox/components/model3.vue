@@ -112,7 +112,7 @@ const clickRow = (item) => {
 .bjlbList {
       width: 100%;
 
-  height:calc(39vh - 70px);
+  height:calc(56vh - 70px);
   /* border: 1px solid rgba(255, 152, 62, 0.8); */
   
  
@@ -120,7 +120,7 @@ const clickRow = (item) => {
     width: 100%;
     padding: 16px 8px 0px 8px;
     box-sizing: border-box;
-   height:calc(39vh - 70px);
+   height:calc(56vh - 70px);
      .table {
       width: 100%;
       height: 30px;
@@ -139,7 +139,7 @@ const clickRow = (item) => {
 
     .list {
       width: 100%;
-       height:calc(39vh - 120px);
+       height:calc(56vh - 120px);
       overflow: hidden;
       .list_row {
         width: 100%;

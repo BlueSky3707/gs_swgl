@@ -21,7 +21,7 @@
     <!-- 顶部块new URL("/layers/mark.png", import.meta.url).href -->
     <div class="topCard">
       <div class="topCard_title">
-        <img src="/public/layers/dq_cljcz.png" />
+        <img src="/layers/dq_cljcz.png" />
         <div class="topCards topCard_left_1">
           <div class="span1"> {{dayjs().format('YYYY-MM-DD HH:mm:ss')}}时上传电表数 :{{ state.curcount }}</div>
           <!-- <div class="span2">
@@ -107,7 +107,7 @@ onMounted(async () => {
   let res = await search(param);
   if (res.data.data.features && res.data.data.features.length > 0) {
     state.tableList = res.data.data.features.map((ite) => {
-      ite.attributes.zytime = dayjs(ite.attributes.zytime).format("YYYY-MM-DD HH:mm:ss");
+      ite.attributes.zytime = new dayjs(ite.attributes.time).format("YYYY-MM-DD HH:mm:ss");
       return ite.attributes;
     });
     state.curcount = res.data.data.features.length;
