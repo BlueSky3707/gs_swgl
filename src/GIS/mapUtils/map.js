@@ -54,7 +54,7 @@ export const intMap = (mapid) => {
     view: new View({
       projection: proj.get("EPSG:4326"),
       center: [104.5553, 36.5064], //白银中心點
-      zoom: 9,
+      zoom: 8.3,
       minZoom: 7,
       maxZoom: 18,
       resolutions: resolutions,

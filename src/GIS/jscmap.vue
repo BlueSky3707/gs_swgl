@@ -21,5 +21,6 @@ import MapTj from "./mapview/MapTj.vue";
   left: 22vw;
   padding: 0px;
   margin: 0px;
+  /* background: #0d325f; */
 }
 </style>
