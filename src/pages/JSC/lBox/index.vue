@@ -15,7 +15,7 @@
         <div class="top-right">
           <div class="top-left-title">
             <h6>累计用水量</h6>
-            <span><b>3520</b>m3</span>
+            <span><b>35200</b>m3</span>
              <img
               src="/layers/pictre.png"
             />
