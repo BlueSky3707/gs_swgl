@@ -46,7 +46,11 @@ onMounted(async () => {});
 
 <style scoped lang="scss">
 .public-bg {
-  background: rgba(12, 26, 63, 0.3);
+  /* background: rgba(12, 26, 63, 0.3); */
+      background-image: url("@/assets/image/leftkuang.png");
+  background-size: 100% 100%; /* 背景图片覆盖整个容器 */
+  background-position: center; /* 背景图片居中 */
+  background-repeat: no-repeat; /* 背景图片不重复 */
 }
 .public-title {
   width: calc(100% - 20px);

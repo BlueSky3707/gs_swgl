@@ -67,13 +67,18 @@ const addEvent = () => {
 };
 </script>
 <style>
+#app{
+
+    background-image: url("@/assets/image/star.png");
+}
 #mapid {
   width: 100%;
   height: 100%;
   padding: 0px;
   margin: 0px;
   overflow: hidden;
-  background: #0d325f;
+
+  /* background: #0d325f; */
 }
 
 .ol-scale-line {
