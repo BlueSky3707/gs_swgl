@@ -1,22 +1,22 @@
 <template>
   <div class="right-body">
     <div class="right-top public-bg">
-      <div class="public-title">水质污染TOP5</div>
+      <div class="public-title">用水类别统计</div>
       <div class="title-nav">
         <div class="tile-img">
           <div class="type_img">
             <img class="loc_img" src="/layers/dq_cljcz.png" alt="" />
-            <span class="texsp">200</span>
+            <span class="texsp">203</span>
             <div class="texttile">用水企业数量</div>
           </div>
           <div class="type_img">
             <img class="loc_img" src="/layers/dq_ygjc.png" alt="" />
-            <span class="texsp">200</span>
+            <span class="texsp">26</span>
              <div class="texttile">取水口数量</div>
           </div>
           <div class="type_img">
             <img class="loc_img" src="/layers/dq_clzlz.png" alt="" />
-            <span class="texsp">200</span>
+            <span class="texsp">12</span>
             <div class="texttile">监测点数量</div>
           </div>
         </div>
