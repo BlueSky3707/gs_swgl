@@ -1,13 +1,15 @@
 <template>
     <RightBox />
+    <JscMap/>
     <LightBox />
 
 </template>
 
 <script setup>
-import Tuli from "./Tuli";
+
 import LightBox from "./lBox";
 import RightBox from "./rBox";
+import JscMap from "@/GIS/jscmap.vue"
 </script>
 <style scoped lang="scss">
 

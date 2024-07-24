@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="left-con public-bg">
-      <div class="public-title">区县行业用水统计</div>
+      <div class="public-title">区县各行业用水统计</div>
       <div class="title-nav" id="leida">
          <model2 />
       </div>
@@ -46,7 +46,12 @@ onMounted(async () => {});
 
 <style scoped lang="scss">
 .public-bg {
-  background: rgba(12, 26, 63, 0.3);
+  /* background: rgba(12, 26, 63, 0.3); */
+    background-image: url("@/assets/image/leftkuang.png");
+  background-size: 100% 100%; /* 背景图片覆盖整个容器 */
+  background-position: center; /* 背景图片居中 */
+  background-repeat: no-repeat; /* 背景图片不重复 */
+
 }
 .public-title {
   width: calc(100% - 20px);
@@ -132,7 +137,7 @@ onMounted(async () => {});
 }
 .left-body .left-bottom {
   width: 100%;
-  height: 32%;
+  height: 31.5vh;
   margin-top: 1.6%;
 }
 </style>

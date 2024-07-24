@@ -13,14 +13,14 @@ import MapTj from "./mapview/MapTj.vue";
 </script>
 <style scoped>
 #gis-content {
-  width: 100%;
-  height: 100%;
+  width: 56vw;
+  height: calc(100% - 48px);
   overflow: hidden;
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 48px;
+  left: 22vw;
   padding: 0px;
   margin: 0px;
-  background: #0d325f;
+  /* background: #0d325f; */
 }
 </style>

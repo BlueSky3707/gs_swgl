@@ -139,7 +139,7 @@ const clickRow = (item) => {
 
     .list {
       width: 100%;
-       height:calc(56vh - 120px);
+       height:calc(56vh - 144px);
       overflow: hidden;
       .list_row {
         width: 100%;
