@@ -120,7 +120,7 @@ const init = () => {
 };
 onMounted(async () => {
   let param = {
-    layerName: "byswj_sblssj",
+    layerName: "byswj_sblssj_view",
     filter:
       "madeno='" +
       attributes.madeno +

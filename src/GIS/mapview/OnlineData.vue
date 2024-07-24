@@ -50,7 +50,7 @@
         <div>编号</div>
         <div>企业名称</div>
         <div>接收时间</div>
-        <div>当日用水量(立方米)</div>
+        <div>当日用水量/m³</div>
       </div>
       <!-- 表数据 -->
       <div class="list">

@@ -13,7 +13,7 @@ import MapTj from "./mapview/MapTj.vue";
 </script>
 <style scoped>
 #gis-content {
-  width: 56vw;
+  width: 55vw;
   height: calc(100% - 48px);
   overflow: hidden;
   position: absolute;

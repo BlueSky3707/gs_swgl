@@ -80,7 +80,7 @@ onUnmounted(() => {});
 
 const initData = async () => {
   let param = {
-    layerName: "byswj_sblssj",
+    layerName: "byswj_sblssj_view",
     filter:
       "madeno='" +
       madeno +
