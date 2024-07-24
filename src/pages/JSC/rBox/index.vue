@@ -63,6 +63,7 @@ onMounted(async () => {});
   padding-left: 16px;
   line-height: 30px;
   font-size: 13px;
+  padding-top: 4px;
 }
 .public-title:before {
   width: 4px;
@@ -73,6 +74,7 @@ onMounted(async () => {});
   background: #2997e4;
   border-radius: 2px;
   left: 5px;
+  display: none;
 }
 .right-body {
   overflow: hidden;
