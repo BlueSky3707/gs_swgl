@@ -46,8 +46,8 @@ onMounted(async () => {});
 
 <style scoped lang="scss">
 .public-bg {
-  /* background: rgba(12, 26, 63, 0.3); */
-    background-image: url("@/assets/image/leftkuang.png");
+  //  background: rgba(12, 26, 63, 0.3); 
+     background-image: url("@/assets/image/leftkuang.png");
   background-size: 100% 100%; /* 背景图片覆盖整个容器 */
   background-position: center; /* 背景图片居中 */
   background-repeat: no-repeat; /* 背景图片不重复 */
@@ -63,6 +63,7 @@ onMounted(async () => {});
   padding-left: 16px;
   line-height: 30px;
   font-size: 13px;
+  padding-top: 5px;
 }
 .public-title:before {
   width: 4px;
@@ -73,6 +74,7 @@ onMounted(async () => {});
   background: #2997e4;
   border-radius: 2px;
   left: 5px;
+  display: none;
 }
 
 .left-body {
@@ -128,7 +130,7 @@ onMounted(async () => {});
 }
 .left-body .left-con {
   width: 100%;
-  height: 38%;
+  height: 40%;
   margin-top: 1.6%;
 }
 .title-nav {
@@ -137,7 +139,7 @@ onMounted(async () => {});
 }
 .left-body .left-bottom {
   width: 100%;
-  height: 31.5vh;
+  height: 29vh;
   margin-top: 1.6%;
 }
 </style>

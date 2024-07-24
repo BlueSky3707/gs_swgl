@@ -1,5 +1,6 @@
 <template>
-  <div class="box">
+  <div class="box"> 
+    
     <div class="bian"></div>
 
     <div class="title">
