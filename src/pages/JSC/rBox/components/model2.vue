@@ -120,6 +120,13 @@ const initEchart = () => {
     tooltip: {
       trigger: "item",
     },
+     grid: {
+      top: "20%",
+      left: "5%",
+      right: "5%",
+      bottom: "5%",
+      containLabel: true,
+    },
     series: [
       {
         name: "本月",
@@ -155,7 +162,7 @@ const initEchart = () => {
             },
           },
         },
-        center: ["15%", "50%"],
+        center: ["20%", "50%"],
         data: getEchart(tempData, getData.by),
       },
       {
@@ -229,7 +236,7 @@ const initEchart = () => {
             },
           },
         },
-        center: ["85%", "50%"],
+        center: ["80%", "50%"],
         data: getEchart(tempData, getData.nd),
       },
     ],

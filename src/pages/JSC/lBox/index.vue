@@ -137,7 +137,7 @@ onMounted(async () => {});
 }
 .left-body .left-bottom {
   width: 100%;
-  height: 32%;
+  height: 31.5vh;
   margin-top: 1.6%;
 }
 </style>

@@ -42,7 +42,7 @@ const initEchart = () => {
     
     grid: {
       top: "9%",
-      left: "2%",
+      left: "5%",
       right: "13%",
       bottom: "2%",
       containLabel: true,
